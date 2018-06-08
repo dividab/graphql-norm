@@ -1,6 +1,6 @@
 {
   "name": "gql-cache",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A library for creating and operating on a normalized graphql cache",
   "main": "lib/index.js",
   "types": "lib/index",
@@ -21,7 +21,6 @@
     "graphql-tag": "^2.9.2",
     "rimraf": "^2.6.2"
   },
-  "dependencies": {},
   "scripts": {
     "build": "rimraf lib && tsc -p src",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
