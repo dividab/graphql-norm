@@ -17,6 +17,10 @@
   },
   "scripts": {
     "lint": "tslint --config ./tslint.json -- './packages/*/src/**/*.ts{,x}'",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "verify": "yarn lint && yarn build && yarn test",
+    "publish-npm": "yarn verify && lerna publish",
     "precommit": "lint-staged"
   },
   "lint-staged": {

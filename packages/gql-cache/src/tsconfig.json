@@ -1,8 +1,8 @@
 {
-  "extends": "../../base-tsconfig.json",
+  "extends": "../../../base-tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "../lib",
     "sourceMap": true,
     "declaration": true,
     "target": "es5",

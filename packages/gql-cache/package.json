@@ -2,7 +2,8 @@
   "name": "gql-cache",
   "version": "0.1.0",
   "description": "A library for creating and operating on a normalized graphql cache",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dividab/gql-cache.git"
@@ -17,10 +18,12 @@
   "devDependencies": {
     "@types/graphql": "^0.13.0",
     "graphql": "^0.13.0",
-    "graphql-tag": "^2.9.2"
+    "graphql-tag": "^2.9.2",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {},
   "scripts": {
+    "build": "rimraf lib && tsc -p src",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec"
   }
