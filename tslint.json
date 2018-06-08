@@ -1,0 +1,133 @@
+{
+  "rulesDirectory": ["./node_modules/tslint-immutable/rules"],
+  "rules": {
+    "quotemark": false,
+    "adjacent-overload-signatures": false,
+    "member-access": false,
+    "member-ordering": [false],
+    // "no-any": true,
+    "no-internal-module": true,
+    "no-namespace": true,
+    "no-reference": true,
+    "no-var-requires": true,
+    "only-arrow-functions": [false],
+    // "typedef": [
+    //     true,
+    //     "call-signature",
+    //     "parameter",
+    //     "property-declaration"
+    // ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "ban": false,
+    "curly": true,
+    "forin": true,
+    "label-position": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-console": [false],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-invalid-this": true,
+    "no-null-keyword": false,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
+    "no-switch-case-fall-through": true,
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    // "no-unused-new": true,
+    // "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "radix": true,
+    "switch-default": true,
+    "triple-equals": true,
+    "use-isnan": true,
+    "eofline": true,
+    "indent": [true, "spaces"],
+    "linebreak-style": [false],
+    "max-file-line-count": [true, 500],
+    // "max-line-length": [
+    //     true,
+    //     160
+    // ],
+    "no-default-export": true,
+    "no-mergeable-namespace": true,
+    "no-require-imports": true,
+    //"trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "align": [false, "statements"],
+    "arrow-parens": false,
+    "class-name": true,
+    "file-header": [false],
+    "interface-name": [false],
+    "jsdoc-format": false,
+    "new-parens": true,
+    "no-angle-bracket-type-assertion": true,
+    "no-consecutive-blank-lines": [false],
+    "no-parameter-properties": true,
+    "object-literal-key-quotes": [false],
+    "object-literal-shorthand": false,
+    "one-line": [
+      true,
+      "check-catch",
+      "check-finally",
+      "check-else",
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "one-variable-per-declaration": [true],
+    "semicolon": [true, "always"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      // "check-module",
+      "check-separator",
+      "check-type",
+      "check-typecast"
+    ],
+    // From tslint-immutable
+    "no-class": false,
+    // Need to use statements to add values to Map
+    //    "no-expression-statement": true,
+    // Neec to use new for built-in types like Map, Set, RegEx etc.
+    //    "no-new": true,
+    // "no-this": true,
+    // "no-mixed-interface": true,
+    "readonly-keyword": [true, "ignore-class"],
+    "no-semicolon-interface": false,
+    "import-containment": [
+      false,
+      {
+        "containmentPath": "src/client/containers",
+        "allowedExternalFileNames": ["index", "types", "bootstrap"],
+        "disallowedInternalFileNames": ["index"]
+      }
+    ]
+  }
+}

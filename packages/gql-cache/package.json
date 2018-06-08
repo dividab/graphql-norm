@@ -1,0 +1,27 @@
+{
+  "name": "gql-cache",
+  "version": "0.1.0",
+  "description": "A library for creating and operating on a normalized graphql cache",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dividab/gql-cache.git"
+  },
+  "keywords": [
+    "graphql",
+    "cache",
+    "normalization"
+  ],
+  "author": "Jonas Kello <jonas.kello@divid.se>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/graphql": "^0.13.0",
+    "graphql": "^0.13.0",
+    "graphql-tag": "^2.9.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
+    "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec"
+  }
+}
