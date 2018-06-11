@@ -28,7 +28,7 @@ Here is a small example:
 
 Example GraphQL query:
 
-`````gql
+```gql
 query TestQuery {
   posts {
     id
@@ -50,7 +50,7 @@ query TestQuery {
     }
   }
 }
-``´
+```
 
 Response for the above query (as a denormalized tree):
 
@@ -78,9 +78,9 @@ data: {
         }
       ]
     }
-  ]
+  ];
 }
-````
+```
 
 Normalized cache map for the above response tree:
 
@@ -124,4 +124,7 @@ The denormalize() function takes a GraphQL query with associated variables, and 
 [license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier
-`````
+
+```
+
+```
