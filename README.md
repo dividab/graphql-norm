@@ -8,11 +8,11 @@ A library for creating and operating on a normalized GraphQL cache
 
 ## Introduction
 
-When working with GraphQL, caching on the client side can be very important in order to acheive good performance. One of the most popular approaches is to use a normalized cache. Frameworks such as [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) do a good job of providing a normalized cache without exposing the client application to the details of normalization or denormalization. For some applications, abtracting away the cache like this is a good fit. For other applications you may want more control over the cache. Using the gql-cache library you will have full control over the cache and you can make the cache a first class citizen in your appliction.
+When working with GraphQL, caching on the client side can be very important in order to achieve good performance. One of the most popular approaches is to use a normalized cache. Frameworks such as [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) do a good job of providing a normalized cache without exposing the client application to the details of normalization or denormalization. For some applications, abtracting away the cache like this is a good fit. For other applications you may want more control over the cache. Using the gql-cache library you will have full control over the cache and you can make the cache a first class citizen in your appliction.
 
 ## Why use it?
 
-Since gql-cache is a library rather than a framework, it just provides functions for normalization and denormalization that your application can call when it so chooses. This enables some scenarios that are hard to do with the framework approaches that abstract away the cache. For example, your application has full control over the storage and upate of the cache (the cache is just a plain JS object). So you can store the cache in Redux and update it with Actions, or store it somehwere else and use a different update mechnaism. It is entirely up to your application. Also, for performance critical applications, your application is free to make optimizations based on assumptions that are specific to your application. Such optimization can be hard to acheive in frameworks that have to cater to many different kind of applications. So for some applications this library-based approach might be better than the aformentioned framework approaches, but of course it comes with the tradeoff that your applciation will have to know more about the cahce and do more work itself. You can of course write your own components to abstract the cache in any way you want in your application.
+Since gql-cache is a library rather than a framework, it just provides functions for normalization and denormalization that your application can call when it so chooses. This enables some scenarios that are hard to do with the framework approaches that abstract away the cache. For example, your application has full control over the storage and upate of the cache (the cache is just a plain JS object). So you can store the cache in Redux and update it with Actions, or store it somehwere else and use a different update mechnaism. It is entirely up to your application. Also, for performance critical applications, your application is free to make optimizations based on assumptions that are specific to your application. Such optimization can be hard to achieve in frameworks that have to cater to many different kind of applications. So for some applications this library-based approach might be better than the aformentioned framework approaches, but of course it comes with the tradeoff that your applciation will have to know more about the cahce and do more work itself. You can of course write your own components to abstract the cache in any way you want in your application.
 
 ## How to install
 
@@ -84,7 +84,6 @@ The normalize() function takes a GraphQL query with associated variables, and a 
 ### denormalize()
 
 The denormalize() function takes a GraphQL query with associated variables, and a cache object (as returned by normalize()). From those inputs it produces a GraphQL JSON response.
-
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
