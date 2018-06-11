@@ -24,37 +24,48 @@ npm install gql-cache --save
 
 In order to understand this library, it is important to understand the process of normalization and denormalization. A basic description of normalization (in the context of graphql-cache) is that it takes a tree and flattens it to a map where each object will be assigned an unique ID which is used as the key in the map. Any references that an object holds to other objects will be exhanged to an ID instead of an object reference. The process of denormalizaton goes the other way around, starting with a map and producing a tree. The popular [normalizr](https://www.npmjs.com/package/normalizr) library does a good job of explaining this. In fact, gql-cache is very similar to normalizr, but it was specifically designed to work with GraphQL so it does not require hand-coded normalization schemas. Instead it uses GraphQL queries to determine how to normalize and denormalize the data.
 
+# How to use
+
 Here is a small example:
 
-Example GraphQL query:
+```js
+import { normalize, denormalize, mergeCache } from "gql-cache";
+import { request } from "graphql-request";
 
-```gql
-query TestQuery {
-  posts {
-    id
-    __typename
-    title
-    author {
+// Our cache is a simple JS object
+let cache = {};
+
+// Define our GraphQL query
+const query = gql`
+  query TestQuery {
+    posts {
       id
       __typename
-      name
-    }
-    comments {
-      id
-      __typename
-      commenter {
+      title
+      author {
         id
         __typename
         name
       }
+      comments {
+        id
+        __typename
+        commenter {
+          id
+          __typename
+          name
+        }
+      }
     }
   }
-}
-```
+`;
 
-Response for the above query (as a denormalized tree):
+// Make a request to fetch the data
+const response = request(query);
 
-```js
+/*
+The response now looks like this:
+
 data: {
   posts: [
     {
@@ -80,11 +91,15 @@ data: {
     }
   ];
 }
-```
 
-Normalized cache map for the above response tree:
+*/
 
-```js
+// Normalize the response
+const normalizedResponse = normalize(query, resopnse);
+
+/*
+The normalized data now looks like this:
+
 {
   ROOT_QUERY: {
     posts: ["Post;123"]
@@ -104,9 +119,19 @@ Normalized cache map for the above response tree:
   },
   "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
 }
-```
 
-As we can see in the normalized cahce above, an ID was assigned to each object and they reference each other using these IDs.
+As we can see in the normalized response above, an ID was assigned to each object and they reference each other using these IDs.
+
+*/
+
+// Merge into the cache
+cache = mergeCache(cache, normalizedResponse);
+
+// Later when we want to read a query from the cache
+const cachedResponse = denormalize(query, cache);
+
+// cachedResponse now has the response for the query and we can return it without a server request
+```
 
 ### API
 
