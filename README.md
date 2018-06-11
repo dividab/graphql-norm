@@ -140,9 +140,22 @@ const cachedResponse = denormalize(query, cache);
 
 The normalize() function takes a GraphQL query with associated variables, and a GraphQL JSON response. From those inputs it produces a normalized cache which is returned as a plain JS object.
 
+```ts
+normalize(
+  query: GraphQL.DocumentNode,
+  variables: { [key: string]: any } | undefined,
+  response: {data: any },
+  getObjectId: (entity: any) => string
+): { [key: string]: any }
+```
+
 ### denormalize()
 
 The denormalize() function takes a GraphQL query with associated variables, and a cache object (as returned by normalize()). From those inputs it produces a GraphQL JSON response.
+
+### merge()
+
+When you normalize the response of a query you probably want to merge the resulting cache object into a another, large cache object that is held by your application. Since a cache is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience function to do the merging of caches.
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
