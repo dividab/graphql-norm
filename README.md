@@ -20,60 +20,93 @@ Since gql-cache is a library rather than a framework, it just provides functions
 npm install gql-cache --save
 ```
 
-## Normalization
+## Normalization and denormalization
 
-In order to understand this library, it is important to understand the process of normalization and denormalization. The popular [normalizr](https://www.npmjs.com/package/normalizr) library does a good job of explaining this. In fact, gql-cache is very similar to the normalizr library, but it was specifically designed to work with GrqphQL so it does not require the you to provide normalizaiton schemas as it instead uses the GraphQL queries to determine the structure of the data.
+In order to understand this library, it is important to understand the process of normalization and denormalization. A basic description of normalization (in the context of graphql-cache) is that it takes a tree and flattens it to a map where each object will be assigned an unique ID which is used as the key in the map. Any references that an object holds to other objects will be exhanged to an ID instead of an object reference. The process of denormalizaton goes the other way around, starting with a map and producing a tree. The popular [normalizr](https://www.npmjs.com/package/normalizr) library does a good job of explaining this. In fact, gql-cache is very similar to normalizr, but it was specifically designed to work with GrqphQL so it does not require hand-coded normalization schemas. Instead it uses GraphQL queries to determine how to normalize and denormalize the data.
 
-A basic description of normalization is that it takes a tree and flattens it to a map. The process of denormalizaton is goes the other way around, starting with a map and producing a tree. Here is a small example:
+Here is a small example:
 
-This is a tree of (denormalized) data:
+Example GraphQL query:
 
-```js
-{
-  "id": "123",
-  "author": {
-    "id": "1",
-    "name": "Paul"
-  },
-  "title": "My awesome blog post",
-  "comments": [
-    {
-      "id": "324",
-      "commenter": {
-        "id": "2",
-        "name": "Nicole"
-      }
+`````gql
+query TestQuery {
+  posts {
+    id
+    __typename
+    title
+    author {
+      id
+      __typename
+      name
     }
-  ]
-}
-```
-
-The same data in normalized form would look something like this:
-
-```js
-{
-  result: "123",
-  entities: {
-    "articles": {
-      "123": {
-        id: "123",
-        author: "1",
-        title: "My awesome blog post",
-        comments: [ "324" ]
+    comments {
+      id
+      __typename
+      commenter {
+        id
+        __typename
+        name
       }
-    },
-    "users": {
-      "1": { "id": "1", "name": "Paul" },
-      "2": { "id": "2", "name": "Nicole" }
-    },
-    "comments": {
-      "324": { id: "324", "commenter": "2" }
     }
   }
 }
+``´
+
+Response for the above query (as a denormalized tree):
+
+```js
+data: {
+  posts: [
+    {
+      id: "123",
+      __typename: "Post",
+      author: {
+        id: "1",
+        __typename: "Author",
+        name: "Paul"
+      },
+      title: "My awesome blog post",
+      comments: [
+        {
+          id: "324",
+          __typename: "Comment",
+          commenter: {
+            id: "2",
+            __typename: "Author",
+            name: "Nicole"
+          }
+        }
+      ]
+    }
+  ]
+}
+````
+
+Normalized cache map for the above response tree:
+
+```js
+{
+  ROOT_QUERY: {
+    posts: ["Post;123"]
+  },
+  "Post;123": {
+    id: "123",
+    __typename: "Post",
+    author: "Author;1",
+    title: "My awesome blog post",
+    comments: ["Comment;324"]
+  },
+  "Author;1": { id: "1", __typename: "Author", name: "Paul" },
+  "Comment;324": {
+    id: "324",
+    __typename: "Comment",
+    commenter: "Author;2"
+  },
+  "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
+}
 ```
 
-As we can see, an ID was assigned to each object and they reference each other using these IDs.
+As we can see in the normalized cahce above, an ID was assigned to each object and they reference each other using these IDs.
 
 ### API
 
@@ -91,3 +124,4 @@ The denormalize() function takes a GraphQL query with associated variables, and 
 [license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier
+`````
