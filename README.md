@@ -124,7 +124,3 @@ The denormalize() function takes a GraphQL query with associated variables, and 
 [license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier
-
-```
-
-```
