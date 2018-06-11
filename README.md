@@ -120,7 +120,8 @@ The normalized data now looks like this:
   "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
 }
 
-As we can see in the normalized response above, an ID was assigned to each object and they reference each other using these IDs.
+As we can see in the normalized response above, an ID was assigned to each object.
+References between objects are now using these IDs.
 
 */
 
