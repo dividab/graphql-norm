@@ -24,6 +24,16 @@
   "scripts": {
     "build": "rimraf lib && tsc -p src",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
-    "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec"
+    "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec",
+    "coverage": "nyc yarn test",
+    "report": "nyc report --reporter=html"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
   }
 }
