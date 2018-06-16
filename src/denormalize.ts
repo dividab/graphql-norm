@@ -14,12 +14,7 @@ import {
   getDocumentDefinitions,
   fieldNameWithArguments
 } from "./functions";
-import {
-  EntityCache,
-  StaleEntities,
-  EntityId,
-  Mutable
-} from "../cache/entity-cache";
+import { EntityCache, StaleEntities, EntityId, Mutable } from "./entity-cache";
 
 type MutableResponseObject = Mutable<ResponseObject>;
 type MutableResponseObjectArray = Array<MutableResponseObject>;

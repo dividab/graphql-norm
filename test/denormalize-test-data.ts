@@ -1,8 +1,8 @@
 // tslint:disable:max-file-line-count
-import { GraphQLResponse, Variables } from "../../src/normalization/types";
+import { GraphQLResponse, Variables } from "../src/types";
 import gql from "graphql-tag";
 import * as GraphQL from "graphql";
-import { EntityCache, StaleEntities } from "../../src/cache/entity-cache";
+import { EntityCache, StaleEntities } from "../src/entity-cache";
 
 export interface OneTest {
   readonly name: string;

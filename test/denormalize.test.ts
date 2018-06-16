@@ -1,8 +1,8 @@
 import * as test from "tape";
-import { denormalize } from "../../src/normalization/denormalize";
+import { denormalize } from "../src/denormalize";
 import * as TestData from "./shared-test-data";
 import * as TestDataDenormalization from "./denormalize-test-data";
-import { onlySkip } from "../test-data-utils";
+import { onlySkip } from "./test-data-utils";
 
 test("denormalize() with shared test data", t => {
   onlySkip(TestData.tests).forEach(item => {

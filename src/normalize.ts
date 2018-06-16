@@ -19,7 +19,7 @@ import {
   MutableDeep,
   EntityId,
   EntityFieldValue
-} from "../cache/entity-cache";
+} from "./entity-cache";
 
 type ParentEntity = MutableDeep<Entity>;
 type MutableEntityCache = MutableDeep<EntityCache>;

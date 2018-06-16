@@ -1,5 +1,5 @@
 {
-  "extends": "../../../base-tsconfig.json",
+  "extends": "../base-tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./lib",
@@ -11,7 +11,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {},
-    "lib": ["dom", "es2015", "es2016", "es2017", "esnext.asynciterable"]
+    "lib": ["es2015", "esnext.asynciterable"]
   },
   "include": ["**/*"]
 }

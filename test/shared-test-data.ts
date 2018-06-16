@@ -3,10 +3,10 @@ import {
   GraphQLResponse,
   // Entities,
   Variables
-} from "../../src/normalization/types";
+} from "../src/types";
 import gql from "graphql-tag";
 import * as GraphQL from "graphql";
-import { EntityCache } from "../../src/cache/entity-cache";
+import { EntityCache } from "../src/entity-cache";
 
 export interface OneTest {
   readonly name: string;

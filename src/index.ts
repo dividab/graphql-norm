@@ -1,5 +1,5 @@
 // entity-cache
-export { mergeEntityCache, getNormalizedEntity } from "./cache/entity-cache";
+export { mergeEntityCache, getNormalizedEntity } from "./entity-cache";
 export {
   EntityCache,
   Entity,
@@ -10,10 +10,10 @@ export {
   StaleEntities,
   StaleEntity,
   updateStaleEntities
-} from "./cache/entity-cache";
+} from "./entity-cache";
 
 // normalization
-export { denormalize } from "./normalization/denormalize";
-export { normalize } from "./normalization/normalize";
-export { defaultGetObjectId } from "./normalization/functions";
-export { RootFields, GetObjectId } from "./normalization/types";
+export { denormalize } from "./denormalize";
+export { normalize } from "./normalize";
+export { defaultGetObjectId } from "./functions";
+export { RootFields, GetObjectId } from "./types";
