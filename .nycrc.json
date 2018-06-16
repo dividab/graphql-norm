@@ -1,7 +1,7 @@
 {
   "all": true,
   "include": ["src/*"],
-  "exclude": ["src/index.ts", "**/*.d.ts"],
+  "exclude": ["**/*.d.ts", "src/index.ts", "src/types.ts"],
   "extension": [".ts"],
   "reporter": ["html", "lcov", "text"],
   "sourceMap": true,
