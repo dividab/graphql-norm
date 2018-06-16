@@ -57,6 +57,10 @@
     ],
     "exclude": [
       "**/*.test.ts"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
     ]
   }
 }
