@@ -1,6 +1,7 @@
 # gql-cache
 
 [![npm version][version-image]][version-url]
+[![travis build][travis-image]][travis-url]
 [![code style: prettier][prettier-image]][prettier-url]
 [![MIT license][license-image]][license-url]
 
@@ -172,6 +173,8 @@ When you normalize the response of a query you probably want to merge the result
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
+[travis-image]: https://travis-ci.org/dividab/gql-cache.svg?branch=master&style=flat
+[travis-url]: https://travis-ci.org/dividab/gql-cache
 [license-image]: https://img.shields.io/github/license/dividab/gql-cache.svg?style=flat
 [license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
