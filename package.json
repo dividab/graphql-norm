@@ -50,17 +50,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "exclude": [
-      "**/*.test.ts"
-    ],
-    "reporter": [
-      "text",
-      "lcov"
-    ]
   }
 }
