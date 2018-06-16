@@ -11,7 +11,8 @@ export type EntityFieldValue =
   | number
   | EntityFieldValueArray;
 
-export interface EntityFieldValueArray extends ReadonlyArray<EntityFieldValue> {}
+export interface EntityFieldValueArray
+  extends ReadonlyArray<EntityFieldValue> {}
 
 export interface Entity {
   readonly [field: string]:

@@ -4,5 +4,4 @@ thumbs.db
 node_modules/
 coverage/
 .nyc_output
-
-packages/*/lib/
+lib/
