@@ -4,7 +4,7 @@
 [![code style: prettier][prettier-image]][prettier-url]
 [![MIT license][license-image]][license-url]
 
-A library for creating and operating on a normalized GraphQL cache
+A library for normalizing and denormalizing GraphQL responses
 
 ## Introduction
 
@@ -126,7 +126,7 @@ References between objects are now using these IDs.
 */
 
 // Merge into the cache
-cache = mergeCache(cache, normalizedResponse);
+cache = merge(cache, normalizedResponse);
 
 // Later when we want to read a query from the cache
 const cachedResponse = denormalize(query, cache);
