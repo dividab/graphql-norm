@@ -32,6 +32,12 @@ export interface StaleEntity {
 export type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
 export type MutableDeep<T> = { -readonly [P in keyof T]: MutableDeep<T[P]> }; // Remove readonly deep
 
+/**
+ * Fetches an entity from the cache, taking as type parameter the entity
+ * has when denormalized, but returning the type it will have as a normalized entity.
+ * @param key The cache key
+ * @param cache The cache
+ */
 export function getNormalizedEntity<TDenormalized>(
   key: string,
   cache: EntityCache
@@ -39,6 +45,11 @@ export function getNormalizedEntity<TDenormalized>(
   return cache[key] as any;
 }
 
+/**
+ * An optimized function to merge two cache objects (as returned from normalize)
+ * @param entities The first cache
+ * @param newEntities The second cache
+ */
 export function mergeEntityCache(
   entities: EntityCache,
   newEntities: EntityCache
