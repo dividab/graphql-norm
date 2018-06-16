@@ -37,11 +37,11 @@
     "build": "rimraf lib && tsc -p src",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec",
-    "verify": "yarn lint && yarn build && yarn test",
+    "verify": "yarn lint && yarn build && yarn coverage",
     "publish-npm": "yarn verify && lerna publish",
     "precommit": "lint-staged",
-    "coverage": "nyc yarn test",
-    "report": "nyc report --reporter=html"
+    "coverage": "rimraf coverage .nyc_output && nyc yarn test",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "lint-staged": {
     "*.{ts,tsx}": "tslint",
