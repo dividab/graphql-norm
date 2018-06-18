@@ -15,10 +15,7 @@ export interface EntityFieldValueArray
   extends ReadonlyArray<EntityFieldValue> {}
 
 export interface Entity {
-  readonly [field: string]:
-    | null
-    | EntityFieldValue
-    | ReadonlyArray<EntityFieldValue>;
+  readonly [field: string]: null | EntityFieldValue;
 }
 
 export interface StaleEntities {
