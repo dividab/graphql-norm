@@ -34,7 +34,7 @@
     "typescript": "^2.9.1"
   },
   "scripts": {
-    "lint": "tslint --config ./tslint.json -- './packages/*/src/**/*.ts{,x}'",
+    "lint": "tslint --config ./tslint.json -- './{src,test}/**/*.ts{,x}'",
     "build": "rimraf lib && tsc -p src",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalization/denormalize-tests.ts\" | tap-spec",
