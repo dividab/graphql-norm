@@ -16,4 +16,4 @@ export {
 export { denormalize } from "./denormalize";
 export { normalize } from "./normalize";
 export { defaultGetObjectId } from "./functions";
-export { RootFields, GetObjectId } from "./types";
+export { RootFields, GetObjectId, DenormalizationResult } from "./types";
