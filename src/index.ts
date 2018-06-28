@@ -1,19 +1,31 @@
-// entity-cache
-export { mergeEntityCache, getNormalizedEntity } from "./entity-cache";
+// Exported functions
+export { normalize } from "./normalize";
+export { denormalize } from "./denormalize";
 export {
-  EntityCache,
-  Entity,
-  EntityFieldValue,
-  EntityId,
-  NormalizedEntity,
-  NormalizedEntityField,
-  StaleEntities,
-  StaleEntity,
+  mergeEntityCache,
+  getNormalizedEntity,
   updateStaleEntities
 } from "./entity-cache";
-
-// normalization
-export { denormalize } from "./denormalize";
-export { normalize } from "./normalize";
 export { defaultGetObjectId } from "./functions";
-export { RootFields, GetObjectId, DenormalizationResult } from "./types";
+
+// Exported types used in signature of exported functions
+export {
+  GetObjectId, // ref: normalize(), defaultGetObjectId()
+  DenormalizationResult, // used in: denormalize()
+  RootFields // ref: GraphQLResponse
+} from "./types";
+
+// TODO: Needs to be exported:
+// Variables // ref: normalize(), denormalize()
+// GraphQLResponse // ref: normalize()
+
+export {
+  EntityCache, // ref: normalize(), denormalize(), mergeEntityCache(), getNormalizedEntity(), updateStaleEntities()
+  Entity, // ref: EntityCache
+  EntityFieldValue, // ref: Entity
+  EntityId, // ref: EntityFieldValue
+  StaleEntities, // ref: denormalize(), updateStaleEntities()
+  StaleEntity, // ref: StaleEntities
+  NormalizedEntity, // ref: getNormalizedEntity()
+  NormalizedEntityField // ref: NormalizedEntityField
+} from "./entity-cache";
