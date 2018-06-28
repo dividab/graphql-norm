@@ -35,6 +35,13 @@ type StackWorkItem = [
   ResponseObjectOrArray
 ];
 
+/**
+ * Normalizes a graphql response.
+ * @param query The graphql query document
+ * @param variables The graphql query variables
+ * @param response The graphql response
+ * @param getObjectId Function to get cache key from an object
+ */
 export function normalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
