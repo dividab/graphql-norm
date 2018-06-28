@@ -11,10 +11,10 @@ export { defaultGetObjectId } from "./functions";
 // Exported types used in signature of exported functions
 export {
   GetObjectId, // ref: normalize(), defaultGetObjectId()
-  DenormalizationResult, // used in: denormalize()
-  RootFields, // ref: GraphQLResponse
   Variables, // ref: normalize(), denormalize()
-  GraphQLResponse // ref: normalize()
+  DenormalizationResult, // used in: denormalize()
+  GraphQLResponse, // ref: normalize()
+  RootFields // ref: GraphQLResponse
 } from "./types";
 
 export {
