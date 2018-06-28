@@ -7,13 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Add missing exports for types `Variables`, `GraphQLResponse`.
+
 ## [0.1.2] - 2018-06-27
 
-- Export DenormalizationResult, see PR [#4](https://github.com/dividab/gql-cache/pull/4).
+### Added
+
+- Export `DenormalizationResult`, see PR [#4](https://github.com/dividab/gql-cache/pull/4).
+
+### Fixed
 
 - Remove redundant typing, see PR [#1](https://github.com/dividab/gql-cache/pull/1). Thanks to [@Jontem](https://github.com/Jontem) for this fix!
 
 ## [0.1.1] - 2018-06-08
+
+### Added
 
 - Initial version.
 

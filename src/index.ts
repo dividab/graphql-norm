@@ -12,12 +12,10 @@ export { defaultGetObjectId } from "./functions";
 export {
   GetObjectId, // ref: normalize(), defaultGetObjectId()
   DenormalizationResult, // used in: denormalize()
-  RootFields // ref: GraphQLResponse
+  RootFields, // ref: GraphQLResponse
+  Variables, // ref: normalize(), denormalize()
+  GraphQLResponse // ref: normalize()
 } from "./types";
-
-// TODO: Needs to be exported:
-// Variables // ref: normalize(), denormalize()
-// GraphQLResponse // ref: normalize()
 
 export {
   EntityCache, // ref: normalize(), denormalize(), mergeEntityCache(), getNormalizedEntity(), updateStaleEntities()
