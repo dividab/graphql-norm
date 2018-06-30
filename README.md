@@ -23,26 +23,19 @@ npm install gql-cache --save
 Here is a small example:
 
 ```js
-import { normalize, denormalize, mergeCache } from "gql-cache";
+import { normalize, denormalize, merge } from "gql-cache";
 import { request } from "graphql-request";
 
-// Our cache is a simple JS object
+// Our cache is a plain JS object
 let cache = {};
 
-// Define our GraphQL query
-const query = `
-  query TestQuery {
-    # Your query goes here
-  }
-`;
-
 // Make a request to fetch the data
-const response = request(query);
+const response = request("{ ...Your graphql query here... }");
 
 // Normalize the response
-const normalizedResponse = normalize(query, resopnse);
+const normalizedResponse = normalize(query, response);
 
-// Merge into the cache
+// Merge the normalized response into the cache
 cache = merge(cache, normalizedResponse);
 
 // Later when we want to read a query from the cache
