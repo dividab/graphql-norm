@@ -76,16 +76,6 @@ export function updateStaleEntities(
   newEntities: EntityCache,
   staleEntities: StaleEntities
 ): StaleEntities {
-  // interface MutableStaleEntity {
-  //   // tslint:disable-next-line:readonly-keyword
-  //   [field: string]: StaleVariables | null | undefined;
-  // }
-  // interface MutableStaleEntities {
-  //   // tslint:disable-next-line:readonly-keyword
-  //   [key: string]: MutableStaleEntity | undefined;
-  // }
-
-  // type MutableStaleEntity = Mutable<StaleEntity>;
   type MutableStaleEntities = MutableDeep<StaleEntities>;
 
   const newStaleEntities: MutableStaleEntities = { ...staleEntities };
