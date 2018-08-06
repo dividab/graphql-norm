@@ -9,7 +9,10 @@ export type EntityFieldValue =
   | string
   | boolean
   | number
-  | EntityFieldValueArray;
+  | EntityFieldValueArray
+  | null;
+
+export type NonNullEntityFieldValue = NonNullable<EntityFieldValue>;
 
 export interface EntityFieldValueArray
   extends ReadonlyArray<EntityFieldValue> {}
