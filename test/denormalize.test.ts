@@ -1,4 +1,4 @@
-/* import * as test from "tape";
+import * as test from "tape";
 import { denormalize } from "../src/denormalize";
 import * as TestData from "./shared-test-data";
 import * as TestDataDenormalization from "./denormalize-test-data";
@@ -36,4 +36,3 @@ test("denormalize() with specialized test data", t => {
     });
   });
 });
- */
