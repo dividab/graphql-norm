@@ -1,263 +1,69 @@
+import * as fs from "fs";
 // tslint:disable:max-file-line-count
-import {
-  GraphQLResponse,
-  // Entities,
-  Variables
-} from "../src/types";
-import gql from "graphql-tag";
-import * as GraphQL from "graphql";
-import { EntityCache } from "../src/entity-cache";
+// import gql from "graphql-tag";
+import { OneTest } from "./shared-tests/one-test";
+// import { fstat } from "fs";
 
-export interface OneTest {
-  readonly name: string;
-  readonly only?: boolean;
-  readonly skip?: boolean;
-  readonly query: GraphQL.DocumentNode;
-  readonly variables?: Variables;
-  readonly response: GraphQLResponse;
-  readonly entities: EntityCache;
-}
+// const standardResponse = {
+//   data: {
+//     posts: [
+//       {
+//         id: "123",
+//         __typename: "Post",
+//         author: {
+//           id: "1",
+//           __typename: "Author",
+//           name: "Paul"
+//         },
+//         title: "My awesome blog post",
+//         comments: [
+//           {
+//             id: "324",
+//             __typename: "Comment",
+//             commenter: {
+//               id: "2",
+//               __typename: "Author",
+//               name: "Nicole"
+//             }
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// };
 
-const standardResponse = {
-  data: {
-    posts: [
-      {
-        id: "123",
-        __typename: "Post",
-        author: {
-          id: "1",
-          __typename: "Author",
-          name: "Paul"
-        },
-        title: "My awesome blog post",
-        comments: [
-          {
-            id: "324",
-            __typename: "Comment",
-            commenter: {
-              id: "2",
-              __typename: "Author",
-              name: "Nicole"
-            }
-          }
-        ]
-      }
-    ]
-  }
-};
+// const standardEntities = {
+//   ROOT_QUERY: {
+//     posts: ["Post;123"]
+//   },
+//   "Post;123": {
+//     id: "123",
+//     __typename: "Post",
+//     author: "Author;1",
+//     title: "My awesome blog post",
+//     comments: ["Comment;324"]
+//   },
+//   "Author;1": { id: "1", __typename: "Author", name: "Paul" },
+//   "Comment;324": {
+//     id: "324",
+//     __typename: "Comment",
+//     commenter: "Author;2"
+//   },
+//   "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
+// };
 
-const standardEntities = {
-  ROOT_QUERY: {
-    posts: ["Post;123"]
-  },
-  "Post;123": {
-    id: "123",
-    __typename: "Post",
-    author: "Author;1",
-    title: "My awesome blog post",
-    comments: ["Comment;324"]
-  },
-  "Author;1": { id: "1", __typename: "Author", name: "Paul" },
-  "Comment;324": {
-    id: "324",
-    __typename: "Comment",
-    commenter: "Author;2"
-  },
-  "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
-};
+const testBasePath = __dirname + "/shared-tests/";
+const importedTests = fs
+  .readdirSync(testBasePath)
+  .filter(f => f.match(/\.test\.ts$/i))
+  .map(f => require(testBasePath + f))
+  .map(importedModule => importedModule.test as OneTest);
 
-/*
-export const tests2: ReadonlyArray<OneTest> = [
-  {
-    name: "simple",
-    query: gql`
-      query TestQuery {
-        posts {
-          id
-          __typename
-          author {
-            id
-            __typename
-            name
-          }
-          title
-          comments {
-            id
-            __typename
-            commenter {
-              id
-              __typename
-              name
-            }
-          }
-        }
-      }
-    `,
-    response: {
-      data: {
-        posts: [
-          {
-            id: "123",
-            __typename: "Post",
-            author: {
-              id: "1",
-              __typename: "Author",
-              name: "Paul"
-            },
-            title: "My awesome blog post",
-            comments: [
-              {
-                id: "324",
-                __typename: "Comment",
-                commenter: {
-                  id: "2",
-                  __typename: "Author",
-                  name: "Nicole"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    },
-    entities: {
-      ROOT_QUERY: {
-        posts: ["Post;123"]
-      },
-      "Post;123": {
-        id: "123",
-        __typename: "Post",
-        title: "My awesome blog post",
-        comments: ["Comment;324"],
-        author: "Author;1"
-      },
-      "Comment;324": {
-        id: "324",
-        __typename: "Comment",
-        commenter: "Author;2"
-      },
-      "Author;2": { id: "2", __typename: "Author", name: "Nicole" },
-      "Author;1": { id: "1", __typename: "Author", name: "Paul" }
-    }
-  } as OneTest
-];
-*/
+export const tests = importedTests;
 
-export const tests: ReadonlyArray<OneTest> = [
-  {
-    name: "simple",
-    query: gql`
-      query TestQuery {
-        posts {
-          id
-          __typename
-          author {
-            id
-            __typename
-            name
-          }
-          title
-          comments {
-            id
-            __typename
-            commenter {
-              id
-              __typename
-              name
-            }
-          }
-        }
-      }
-    `,
-    response: standardResponse,
-    entities: standardEntities
-  } as OneTest,
-  {
-    name: "with alias",
-    query: gql`
-      query TestQuery {
-        posts {
-          id
-          __typename
-          olle: author {
-            id
-            __typename
-            name
-          }
-          title
-          comments {
-            id
-            __typename
-            commenter {
-              id
-              __typename
-              name
-            }
-          }
-        }
-      }
-    `,
-    response: {
-      data: {
-        posts: [
-          {
-            id: "123",
-            __typename: "Post",
-            olle: {
-              id: "1",
-              __typename: "Author",
-              name: "Paul"
-            },
-            title: "My awesome blog post",
-            comments: [
-              {
-                id: "324",
-                __typename: "Comment",
-                commenter: {
-                  id: "2",
-                  __typename: "Author",
-                  name: "Nicole"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    },
-    entities: standardEntities
-  } as OneTest,
-  {
-    name: "with inline fragments",
-    query: gql`
-      query TestQuery {
-        posts {
-          id
-          __typename
-          ... on Post {
-            author {
-              ... on Author {
-                id
-                __typename
-                name
-              }
-            }
-          }
-          title
-          comments {
-            id
-            __typename
-            commenter {
-              id
-              __typename
-              name
-            }
-          }
-        }
-      }
-    `,
-    response: standardResponse,
-    entities: standardEntities
-  } as OneTest,
+/* export const tests: ReadonlyArray<OneTest> = [
+
+
   {
     name: "with named fragments",
     query: gql`
@@ -1005,3 +811,4 @@ export const tests: ReadonlyArray<OneTest> = [
     }
   } as OneTest
 ];
+ */
