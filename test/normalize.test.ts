@@ -1,7 +1,7 @@
 import * as test from "tape";
 import { normalize } from "../src/normalize";
-import { tests } from "shared-test-data";
-import { onlySkip } from "test-data-utils";
+import { tests } from "./shared-test-data";
+import { onlySkip } from "./test-data-utils";
 
 test("normalize() with shared test data", t => {
   onlySkip(tests).forEach(item => {
