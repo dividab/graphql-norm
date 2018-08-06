@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import * as GraphQL from "graphql";
 import { EntityCache, StaleEntities } from "../src/entity-cache";
 
-export interface OneTest {
+export interface DenormalizeOneTest {
   readonly name: string;
   readonly only?: boolean;
   readonly skip?: boolean;
@@ -17,7 +17,7 @@ export interface OneTest {
   readonly staleEntities: StaleEntities;
 }
 
-export const tests: ReadonlyArray<OneTest> = [
+export const tests: ReadonlyArray<DenormalizeOneTest> = [
   {
     name: "with partial false",
     query: gql`
@@ -183,7 +183,7 @@ export const tests: ReadonlyArray<OneTest> = [
       },
       "Author;1": { id: "1", __typename: "Author", name: "Paul" }
     }
-  } as OneTest,
+  } as DenormalizeOneTest,
   {
     name: "with stale true",
     query: gql`
@@ -248,5 +248,5 @@ export const tests: ReadonlyArray<OneTest> = [
       },
       "Author;1": { id: "1", __typename: "Author", name: "Paul" }
     }
-  } as OneTest
+  } as DenormalizeOneTest
 ];
