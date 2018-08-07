@@ -4,7 +4,8 @@ import {
   FragmentMap,
   FieldNodeWithSelectionSet,
   GetObjectId,
-  Variables
+  Variables,
+  GetObjectToIdResult
 } from "./types";
 
 export function getDocumentDefinitions(
@@ -121,13 +122,15 @@ function resolveValueNode(
 export const defaultGetObjectId: GetObjectId = (object: {
   readonly id: string;
   readonly __typename?: string;
-}): string | undefined => {
+}): GetObjectToIdResult => {
   if (object.__typename === undefined) {
     throw new Error("Required field __typename is missing");
   }
 
   if (object.id === undefined) {
-    return undefined;
+    return {
+      resolved: false
+    };
   }
-  return `${object.__typename};${object.id}`;
+  return { resolved: true, id: `${object.__typename};${object.id}` };
 };
