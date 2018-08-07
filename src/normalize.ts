@@ -32,7 +32,8 @@ type ParentArray = Array<EntityFieldValue>;
 type StackWorkItem = [
   FieldNodeWithSelectionSet,
   ParentEntityOrArray | undefined /*parentEntity*/,
-  ResponseObjectOrArray
+  ResponseObjectOrArray,
+  ReadonlyArray<string>
 ];
 
 /**
@@ -56,7 +57,7 @@ export function normalize(
   const entities: MutableEntityCache = {};
 
   // Seed stack with undefined parent and "fake" getObjectId
-  stack.push([rootFieldNode, {}, response.data]);
+  stack.push([rootFieldNode, {}, response.data, ["ROOT_QUERY"]]);
   let getObjectIdToUse: GetObjectId = _ => "ROOT_QUERY";
 
   // The stack has work items, depending on the work item we have four different cases to handle:
@@ -69,8 +70,11 @@ export function normalize(
     const [
       fieldNode,
       parentEntityOrArray,
-      responseObjectOrArray
+      responseObjectOrArray,
+      path
     ] = stack.pop()!;
+
+    console.log(path);
 
     const expandedSelections = expandFragments(
       fieldNode.selectionSet.selections,
@@ -98,28 +102,38 @@ export function normalize(
           responseObject[
             (field.alias && field.alias.value) || field.name.value
           ];
+        const entityFieldName =
+          field.arguments && field.arguments.length > 0
+            ? fieldNameWithArguments(field, variables)
+            : field.name.value;
         if (responseFieldValue !== null && field.selectionSet) {
           // Put a work-item on the stack to normalize this field and set it on the entity
           stack.push([
             field as FieldNodeWithSelectionSet,
             entity,
-            responseFieldValue
+            responseFieldValue,
+            path.concat(entityFieldName)
           ]);
         } else {
           // This field is a primitive (not a array of entities or a single entity)
-          const entityFieldName =
-            field.arguments && field.arguments.length > 0
-              ? fieldNameWithArguments(field, variables)
-              : field.name.value;
+
           entity[entityFieldName] = responseFieldValue;
         }
       }
     } else {
       const responseArray = responseObjectOrArray as ResponseArray;
       entityIdOrNewParentArray = [];
-      for (const responseArrayItem of responseArray) {
-        stack.push([fieldNode, entityIdOrNewParentArray, responseArrayItem]);
+      for (let i = 0; i < responseArray.length; i++) {
+        stack.push([
+          fieldNode,
+          entityIdOrNewParentArray,
+          responseArray[i],
+          path.concat(i.toString())
+        ]);
       }
+      /* for (const responseArrayItem of responseArray) {
+        stack.push([fieldNode, entityIdOrNewParentArray, responseArrayItem, ]);
+      } */
     }
 
     // Add to the parent, either field or an array

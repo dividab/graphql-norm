@@ -4,7 +4,7 @@ import { OneTest } from "./one-test";
 const fallbackId1 = 'ROOT_QUERY.posts.0.comments({"a":{"b":"1","c":"asd"}}).0';
 const fallbackId2 = 'ROOT_QUERY.posts.0.comments({"a":{"b":"1","c":"asd"}}).1';
 export const test: OneTest = {
-  only: true,
+  // only: true,
   name: "with missing id",
   query: gql`
     query TestQuery {

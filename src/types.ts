@@ -64,4 +64,5 @@ export type GetObjectId = (
     readonly id?: string;
     readonly __typename?: string;
   }
-) => string;
+) => // path: ReadonlyArray<string>
+string;
