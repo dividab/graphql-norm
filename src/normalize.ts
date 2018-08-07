@@ -74,7 +74,7 @@ export function normalize(
       path
     ] = stack.pop()!;
 
-    console.log(path);
+    // console.log(path);
 
     const expandedSelections = expandFragments(
       fieldNode.selectionSet.selections,
@@ -88,7 +88,7 @@ export function normalize(
     if (!Array.isArray(responseObjectOrArray)) {
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
-      entityIdOrNewParentArray = getObjectIdToUse(responseObject);
+      entityIdOrNewParentArray = getObjectIdToUse(responseObject, path);
       // Get or create entity
       let entity = entities[entityIdOrNewParentArray];
       if (!entity) {
