@@ -91,7 +91,7 @@ export function normalize(
     if (!Array.isArray(responseObjectOrArray)) {
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
-      const objectToIdResult = getObjectIdToUse(responseObject, path);
+      const objectToIdResult = getObjectIdToUse(responseObject);
       entityIdOrNewParentArray = objectToIdResult.resolved
         ? objectToIdResult.id
         : path.join(".");
