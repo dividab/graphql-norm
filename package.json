@@ -16,8 +16,10 @@
   "author": "Jonas Kello <jonas.kello@divid.se>",
   "license": "MIT",
   "devDependencies": {
+    "@types/benchmark": "^1.0.31",
     "@types/graphql": "^0.13.0",
     "@types/tape": "^4.2.32",
+    "benchmark": "^2.1.4",
     "coveralls": "^3.0.1",
     "graphql": "^0.13.0",
     "graphql-tag": "^2.9.2",
@@ -36,6 +38,7 @@
   "scripts": {
     "lint": "tslint --config ./tslint.json -- './{src,test}/**/*.ts{,x}'",
     "build": "rimraf lib && tsc -p src",
+    "performance": "ts-node performance-test/performance-test.ts",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "verify": "yarn lint && yarn build && yarn coverage",
