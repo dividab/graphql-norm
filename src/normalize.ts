@@ -88,7 +88,8 @@ export function normalize(
     if (!Array.isArray(responseObjectOrArray)) {
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
-      entityIdOrNewParentArray = getObjectIdToUse(responseObject, path);
+      entityIdOrNewParentArray =
+        getObjectIdToUse(responseObject, path) || path.join(".");
       // Get or create entity
       let entity = entities[entityIdOrNewParentArray];
       if (!entity) {

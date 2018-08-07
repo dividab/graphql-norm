@@ -118,19 +118,16 @@ function resolveValueNode(
   }
 }
 
-export const defaultGetObjectId: GetObjectId = (
-  object: {
-    readonly id: string;
-    readonly __typename?: string;
-  },
-  path: ReadonlyArray<string>
-): string => {
+export const defaultGetObjectId: GetObjectId = (object: {
+  readonly id: string;
+  readonly __typename?: string;
+}): string | undefined => {
   if (object.__typename === undefined) {
     throw new Error("Required field __typename is missing");
   }
 
   if (object.id === undefined) {
-    return path.join(".");
+    return undefined;
   }
   return `${object.__typename};${object.id}`;
 };
