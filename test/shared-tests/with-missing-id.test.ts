@@ -18,7 +18,6 @@ export const test: OneTest = {
         }
         title
         comments(a: { b: 1, c: "asd" }) {
-          id
           __typename
           commenter {
             id
