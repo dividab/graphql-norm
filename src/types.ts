@@ -31,12 +31,6 @@ export type ResponseObjectFieldValue =
 export interface ResponseObjectArray
   extends ReadonlyArray<ResponseObjectFieldValue> {}
 
-// interface JSONObject {
-//   readonly [x: string]: JSONValue;
-// }
-// type JSONValue = string | number | boolean | JSONObject | JSONArray;
-// interface JSONArray extends Array<JSONValue> {}
-
 export interface RootFields {
   readonly [rootField: string]: any;
 }
@@ -59,9 +53,11 @@ export interface FieldNodeWithSelectionSet extends GraphQL.FieldNode {
   readonly selectionSet: GraphQL.SelectionSetNode;
 }
 
+export type GetObjectToIdResult = string | undefined;
+
 export type GetObjectId = (
   object: {
     readonly id?: string;
     readonly __typename?: string;
   }
-) => string;
+) => GetObjectToIdResult;
