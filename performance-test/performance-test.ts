@@ -29,15 +29,13 @@ normalizeSuite
     // tslint:disable-next-line:no-invalid-this
     console.log("normalization");
     for (const b of this) {
-      const name: string = b.name;
-      const stats: BenchMark.Stats = b.stats;
-      console.log(name, stats.mean * 1000 + "ms");
+      console.log(b.toString());
     }
 
     console.log();
     console.log();
   })
-  .run({ async: true });
+  .run(/* { async: true } */);
 
 const denormalizeSuit = new BenchMark.Suite();
 denormalizeSuit
@@ -61,12 +59,10 @@ denormalizeSuit
     // tslint:disable-next-line:no-invalid-this
     console.log("denormalization");
     for (const b of this) {
-      const name: string = b.name;
-      const stats: BenchMark.Stats = b.stats;
-      console.log(name, stats.mean * 1000 + "ms");
+      console.log(b.toString());
     }
 
     console.log();
     console.log();
   })
-  .run({ async: true });
+  .run(/* { async: true } */);
