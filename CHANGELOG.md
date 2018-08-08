@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-08-08
+
+### Added
+- Support for fallback id when `GetObjectToId` returns undefined. `GetObjectToId` can now return `string | undefined`
+
 ## [0.1.3] - 2018-06-28
 
 ### Fixed
