@@ -21,43 +21,16 @@ normalizeSuite
     const { query, variables, response } = WithVariablesSimpleNestedList.test;
     normalize(query, variables, response);
   }) */
-  .add("BigAmountOfData", function() {
+  .add("Normalize BigAmountOfData", function() {
     const { query, variables, response } = BigAmountOfData.test;
     normalize(query, variables, response);
   })
-  .on("complete", function(this: any) {
-    // tslint:disable-next-line:no-invalid-this
-    console.log("normalization");
-    for (const b of this) {
-      console.log(b.toString());
-    }
-
-    console.log();
-    console.log();
-  })
-  .run(/* { async: true } */);
-
-const denormalizeSuit = new BenchMark.Suite();
-denormalizeSuit
-  /*   .add("Array of string test", function() {
-    const { query, variables, entities } = ArrayOfStringTest.test;
-    denormalize(query, variables, entities);
-  })
-  .add("NamedFragmentsTest", function() {
-    const { query, variables, entities } = NamedFragmentsTest.test;
-    denormalize(query, variables, entities);
-  })
-  .add("WithVariablesSimpleNestedList", function() {
-    const { query, variables, entities } = WithVariablesSimpleNestedList.test;
-    denormalize(query, variables, entities);
-  }) */
-  .add("BigAmountOfData", function() {
+  .add("Denormalize BigAmountOfData", function() {
     const { query, variables, entities } = BigAmountOfData.test;
     denormalize(query, variables, entities);
   })
   .on("complete", function(this: any) {
     // tslint:disable-next-line:no-invalid-this
-    console.log("denormalization");
     for (const b of this) {
       console.log(b.toString());
     }
