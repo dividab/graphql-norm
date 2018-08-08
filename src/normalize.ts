@@ -77,8 +77,6 @@ export function normalize(
       path
     ] = stack.pop()!;
 
-    // console.log(path);
-
     const expandedSelections = expandFragments(
       fieldNode.selectionSet.selections,
       fragmentMap
@@ -137,9 +135,6 @@ export function normalize(
           path + "." + i.toString()
         ]);
       }
-      /* for (const responseArrayItem of responseArray) {
-        stack.push([fieldNode, entityIdOrNewParentArray, responseArrayItem, ]);
-      } */
     }
 
     // Add to the parent, either field or an array
