@@ -58,10 +58,7 @@ export function normalize(
 
   // Seed stack with undefined parent and "fake" getObjectId
   stack.push([rootFieldNode, {}, response.data, "ROOT_QUERY"]);
-  let getObjectIdToUse: GetObjectId = _ => ({
-    resolved: true,
-    id: "ROOT_QUERY"
-  });
+  let getObjectIdToUse: GetObjectId = _ => "ROOT_QUERY";
 
   // The stack has work items, depending on the work item we have four different cases to handle:
   // field + responseObject + parentEntity = normalize(responseObject) => [ID, workitems] and parentEntity[field] = ID
@@ -90,9 +87,8 @@ export function normalize(
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
       const objectToIdResult = getObjectIdToUse(responseObject);
-      entityIdOrNewParentArray = objectToIdResult.resolved
-        ? objectToIdResult.id
-        : path;
+      entityIdOrNewParentArray =
+        objectToIdResult !== undefined ? objectToIdResult : path;
       // Get or create entity
       let entity = entities[entityIdOrNewParentArray];
       if (!entity) {

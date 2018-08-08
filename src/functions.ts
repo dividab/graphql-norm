@@ -127,10 +127,7 @@ export const defaultGetObjectId: GetObjectId = (object: {
     throw new Error("Required field __typename is missing");
   }
 
-  if (object.id === undefined) {
-    return {
-      resolved: false
-    };
-  }
-  return { resolved: true, id: `${object.__typename};${object.id}` };
+  return object.id === undefined
+    ? undefined
+    : `${object.__typename};${object.id}`;
 };

@@ -59,7 +59,9 @@ export interface FieldNodeWithSelectionSet extends GraphQL.FieldNode {
   readonly selectionSet: GraphQL.SelectionSetNode;
 }
 
-export type GetObjectToIdResult =
+export type GetObjectToIdResult = string | undefined;
+
+/* export type GetObjectToIdResult =
   | GetObjectToIdResolved
   | GetObjectToIdUnResolved;
 
@@ -70,7 +72,7 @@ export interface GetObjectToIdResolved {
 
 export interface GetObjectToIdUnResolved {
   readonly resolved: false;
-}
+} */
 
 export type GetObjectId = (
   object: {
