@@ -33,7 +33,7 @@ type StackWorkItem = [
   FieldNodeWithSelectionSet,
   ParentEntityOrArray | undefined /*parentEntity*/,
   ResponseObjectOrArray,
-  ReadonlyArray<string>
+  string
 ];
 
 /**
@@ -57,7 +57,7 @@ export function normalize(
   const entities: MutableEntityCache = {};
 
   // Seed stack with undefined parent and "fake" getObjectId
-  stack.push([rootFieldNode, {}, response.data, ["ROOT_QUERY"]]);
+  stack.push([rootFieldNode, {}, response.data, "ROOT_QUERY"]);
   let getObjectIdToUse: GetObjectId = _ => ({
     resolved: true,
     id: "ROOT_QUERY"
@@ -94,7 +94,7 @@ export function normalize(
       const objectToIdResult = getObjectIdToUse(responseObject);
       entityIdOrNewParentArray = objectToIdResult.resolved
         ? objectToIdResult.id
-        : path.join(".");
+        : path;
       // Get or create entity
       let entity = entities[entityIdOrNewParentArray];
       if (!entity) {
@@ -118,7 +118,7 @@ export function normalize(
             field as FieldNodeWithSelectionSet,
             entity,
             responseFieldValue,
-            path.concat(entityFieldName)
+            path + "." + entityFieldName
           ]);
         } else {
           // This field is a primitive (not a array of entities or a single entity)
@@ -134,7 +134,7 @@ export function normalize(
           fieldNode,
           entityIdOrNewParentArray,
           responseArray[i],
-          path.concat(i.toString())
+          path + "." + i.toString()
         ]);
       }
       /* for (const responseArrayItem of responseArray) {
