@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-08-17
+
+### Added
+- The `graphql` and `@types/graphql` packages are now a regular dependencies. See [#12](https://github.com/dividab/gql-cache/issues/12).
+
 ## [0.2.0] - 2018-08-08
 
 ### Added
