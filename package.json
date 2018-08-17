@@ -33,7 +33,7 @@
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3",
     "ts-node": "^6.1.0",
-    "tslint": "^5.1.0",
+    "tslint": "^5.11.0",
     "tslint-immutable": "^4.5.0",
     "typescript": "^2.9.1"
   },
