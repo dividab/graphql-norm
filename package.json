@@ -44,7 +44,7 @@
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "verify": "yarn lint && yarn build && yarn coverage",
-    "publish-npm": "yarn verify && yarn publish && git push --tags",
+    "publish-npm": "yarn verify && yarn publish && git push --follow-tags",
     "precommit": "lint-staged",
     "coverage": "rimraf coverage .nyc_output && nyc yarn test",
     "report-coverage": "cat ./coverage/lcov.info | coveralls"
