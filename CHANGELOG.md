@@ -7,14 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-08-23
+
+### Added
+
+- Support for `@skip` and `@include` directives. See [#14](https://github.com/dividab/gql-cache/issues/14).
+
 ## [0.3.0] - 2018-08-17
 
 ### Added
+
 - The `graphql` and `@types/graphql` packages are now a regular dependencies. See [#12](https://github.com/dividab/gql-cache/issues/12).
 
 ## [0.2.0] - 2018-08-08
 
 ### Added
+
 - Support for fallback id when `GetObjectToId` returns undefined. `GetObjectToId` can now return `string | undefined`
 
 ## [0.1.3] - 2018-06-28
@@ -39,7 +47,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Initial version.
 
-[unreleased]: https://github.com/dividab/tsconfig-paths/compare/0.2.0...master
+[unreleased]: https://github.com/dividab/tsconfig-paths/compare/0.4.0...master
+[0.4.0]: https://github.com/dividab/tsconfig-paths/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/dividab/tsconfig-paths/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/dividab/tsconfig-paths/compare/0.1.3...0.2.0
 [0.1.3]: https://github.com/dividab/tsconfig-paths/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/dividab/tsconfig-paths/compare/0.1.1...0.1.2
