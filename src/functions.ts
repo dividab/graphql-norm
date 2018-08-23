@@ -131,3 +131,42 @@ export const defaultGetObjectId: GetObjectId = (object: {
     ? undefined
     : `${object.__typename};${object.id}`;
 };
+
+/**
+ * Evaluates  @skip and @include directives on field
+ * and returns true if the node should be included.
+ */
+export function shouldIncludeField(
+  directives: ReadonlyArray<GraphQL.DirectiveNode>,
+  variables: Variables = {}
+): boolean {
+  let finalInclude = true;
+  for (const directive of directives) {
+    let directiveInclude = true;
+    if (directive.name.value === "skip" || directive.name.value === "include") {
+      if (directive.arguments) {
+        for (const arg of directive.arguments) {
+          if (arg.name.value === "if") {
+            let argValue: boolean;
+            if (arg.value.kind === "BooleanValue") {
+              argValue = arg.value.value;
+            } else if (arg.value.kind === "Variable") {
+              argValue = variables && variables[arg.value.name.value];
+            } else {
+              throw new Error(
+                `Unhandled variable kind ${
+                  arg.value.kind
+                } for if argument to skip/include directive`
+              );
+            }
+            let argInclude =
+              directive.name.value === "include" ? argValue : !argValue;
+            directiveInclude = directiveInclude && argInclude;
+          }
+        }
+      }
+      finalInclude = finalInclude && directiveInclude;
+    }
+  }
+  return finalInclude;
+}
