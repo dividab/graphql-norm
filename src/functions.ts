@@ -148,15 +148,17 @@ export function shouldIncludeField(
         for (const arg of directive.arguments) {
           if (arg.name.value === "if") {
             let argValue: boolean;
-            if (arg.value.kind === "BooleanValue") {
+            if (arg.value.kind === "Variable") {
+              argValue = variables && !!variables[arg.value.name.value];
+            } else if (arg.value.kind === "BooleanValue") {
               argValue = arg.value.value;
-            } else if (arg.value.kind === "Variable") {
-              argValue = variables && variables[arg.value.name.value];
             } else {
+              // The if argument must be of type Boolean!
+              // http://facebook.github.io/graphql/June2018/#sec--skip
               throw new Error(
-                `Unhandled variable kind ${
+                `The if argument must be of type Boolean!, found '${
                   arg.value.kind
-                } for if argument to skip/include directive`
+                }'`
               );
             }
             let argInclude =
