@@ -32,6 +32,5 @@ export const test: OneTest = {
   },
   entities: {
     ROOT_QUERY: {}
-  },
-  only: true
+  }
 };

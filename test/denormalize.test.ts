@@ -4,7 +4,7 @@ import * as SharedTests from "./shared-test-data";
 import * as TestDataDenormalization from "./denormalize-test-data";
 import { onlySkip } from "./test-data-utils";
 
-test.only("denormalize() with shared test data", t => {
+test("denormalize() with shared test data", t => {
   onlySkip(SharedTests.tests).forEach(item => {
     t.test(item.name, st => {
       const actual = denormalize(item.query, item.variables, item.entities, {});

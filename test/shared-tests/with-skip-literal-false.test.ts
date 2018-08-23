@@ -30,6 +30,5 @@ export const test: OneTest = {
   `,
   variables: { noPosts: false },
   response: standardResponse,
-  entities: standardEntities,
-  only: true
+  entities: standardEntities
 };
