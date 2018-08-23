@@ -11,7 +11,8 @@ import {
   defaultGetObjectId,
   expandFragments,
   getDocumentDefinitions,
-  fieldNameWithArguments
+  fieldNameWithArguments,
+  shouldIncludeField
 } from "./functions";
 import {
   EntityCache,
@@ -98,26 +99,31 @@ export function normalize(
       // For each field in the selection-set that has a sub-selection-set we push a work item.
       // For primtivies fields we set them directly on the entity.
       for (const field of expandedSelections) {
-        const responseFieldValue =
-          responseObject[
-            (field.alias && field.alias.value) || field.name.value
-          ];
-        const entityFieldName =
-          field.arguments && field.arguments.length > 0
-            ? fieldNameWithArguments(field, variables)
-            : field.name.value;
-        if (responseFieldValue !== null && field.selectionSet) {
-          // Put a work-item on the stack to normalize this field and set it on the entity
-          stack.push([
-            field as FieldNodeWithSelectionSet,
-            entity,
-            responseFieldValue,
-            path + "." + entityFieldName
-          ]);
-        } else {
-          // This field is a primitive (not a array of entities or a single entity)
-
-          entity[entityFieldName] = responseFieldValue;
+        // Check if this field should be skipped according to @skip and @include directives
+        const include = field.directives
+          ? shouldIncludeField(field.directives, variables)
+          : true;
+        if (include) {
+          const responseFieldValue =
+            responseObject[
+              (field.alias && field.alias.value) || field.name.value
+            ];
+          const entityFieldName =
+            field.arguments && field.arguments.length > 0
+              ? fieldNameWithArguments(field, variables)
+              : field.name.value;
+          if (responseFieldValue !== null && field.selectionSet) {
+            // Put a work-item on the stack to normalize this field and set it on the entity
+            stack.push([
+              field as FieldNodeWithSelectionSet,
+              entity,
+              responseFieldValue,
+              path + "." + entityFieldName
+            ]);
+          } else {
+            // This field is a primitive (not a array of entities or a single entity)
+            entity[entityFieldName] = responseFieldValue;
+          }
         }
       }
     } else {

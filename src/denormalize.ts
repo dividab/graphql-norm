@@ -12,7 +12,8 @@ import {
 import {
   expandFragments,
   getDocumentDefinitions,
-  fieldNameWithArguments
+  fieldNameWithArguments,
+  shouldIncludeField
 } from "./functions";
 import { EntityCache, StaleEntities, EntityId, Mutable } from "./entity-cache";
 
@@ -76,31 +77,37 @@ export function denormalize(
 
       responseObjectOrNewParentArray = {};
       for (const field of expandedSelections) {
-        // Build cacheKey according to any arguments
-        const entityId =
-          field.arguments && field.arguments.length > 0
-            ? fieldNameWithArguments(field, variables)
-            : field.name.value;
-        // Check if this field is stale
-        if (staleEntity) {
-          const staleField = staleEntity[entityId];
-          if (staleField !== undefined) {
-            stale = true;
+        // Check if this field should be skipped according to @skip and @include directives
+        const include = field.directives
+          ? shouldIncludeField(field.directives, variables)
+          : true;
+        if (include) {
+          // Build cacheKey according to any arguments
+          const entityId =
+            field.arguments && field.arguments.length > 0
+              ? fieldNameWithArguments(field, variables)
+              : field.name.value;
+          // Check if this field is stale
+          if (staleEntity) {
+            const staleField = staleEntity[entityId];
+            if (staleField !== undefined) {
+              stale = true;
+            }
           }
-        }
-        const entityValue = entity[entityId];
-        if (entityValue !== null && field.selectionSet) {
-          // Put a work-item on the stack to build this field and set it on the response object
-          stack.push([
-            field as FieldNodeWithSelectionSet,
-            entityValue as any,
-            responseObjectOrNewParentArray
-          ]);
-        } else {
-          // This field is a primitive (not a array or object)
-          responseObjectOrNewParentArray[
-            (field.alias && field.alias.value) || field.name.value
-          ] = entityValue;
+          const entityValue = entity[entityId];
+          if (entityValue !== null && field.selectionSet) {
+            // Put a work-item on the stack to build this field and set it on the response object
+            stack.push([
+              field as FieldNodeWithSelectionSet,
+              entityValue as any,
+              responseObjectOrNewParentArray
+            ]);
+          } else {
+            // This field is a primitive (not a array or object)
+            responseObjectOrNewParentArray[
+              (field.alias && field.alias.value) || field.name.value
+            ] = entityValue;
+          }
         }
       }
     } else {
