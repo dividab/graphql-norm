@@ -4,7 +4,7 @@ export { denormalize } from "./denormalize";
 export {
   mergeEntityCache,
   getNormalizedEntity,
-  updateStaleEntities
+  updateStale
 } from "./entity-cache";
 export { defaultGetObjectId } from "./functions";
 
