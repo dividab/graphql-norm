@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2018-08-24
+
 ### Changed
 
-- Rename `updateStaleEntities` to `updateStale`.
+- Rename `updateStaleEntities()` to `updateStale()`.
+- Fix bug in `updateStaleEntities()` which caused the inputs to be mutated.
 
 ## [0.4.0] - 2018-08-23
 
@@ -51,7 +54,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Initial version.
 
-[unreleased]: https://github.com/dividab/tsconfig-paths/compare/0.4.0...master
+[unreleased]: https://github.com/dividab/tsconfig-paths/compare/0.5.0...master
+[0.5.0]: https://github.com/dividab/tsconfig-paths/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/dividab/tsconfig-paths/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/dividab/tsconfig-paths/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/dividab/tsconfig-paths/compare/0.1.3...0.2.0
