@@ -72,6 +72,9 @@ export function mergeEntityCache(
   };
 }
 
+/**
+ * Removes the stale flag for entitiy fields that are present in the normalized result
+ */
 export function updateStaleEntities(
   newEntities: EntityCache,
   staleEntities: StaleEntities
