@@ -76,36 +76,46 @@ export function mergeEntityCache(
  * Removes the stale flag for entitiy fields that are present in the normalized result
  */
 export function updateStale(
-  newEntities: EntityCache,
-  staleEntities: StaleEntities
+  cache: EntityCache,
+  stale: StaleEntities
 ): StaleEntities {
-  type MutableStaleEntities = MutableDeep<StaleEntities>;
+  type MutableStaleEntities = Mutable<StaleEntities>;
 
-  const newStaleEntities: MutableStaleEntities = { ...staleEntities };
-  for (const staleEntityKey of Object.keys(newStaleEntities)) {
-    const newEntity = newEntities[staleEntityKey];
+  // Make a shallow copy to enable shallow mutation
+  const staleCopy: MutableStaleEntities = { ...stale };
 
-    if (newEntity !== undefined) {
-      const staleEntity = newStaleEntities[staleEntityKey];
-      const staleEntityKeys = Object.keys(staleEntity || {});
+  // Check all stale entities against the cache
+  for (const staleKey of Object.keys(staleCopy)) {
+    const entity = cache[staleKey];
+    if (entity !== undefined) {
+      const staleEntity = staleCopy[staleKey];
+      const staleEntityFields = Object.keys(staleEntity || {});
 
-      let staleEntityKeyCount = staleEntityKeys.length;
+      let staleEntityFieldCount = staleEntityFields.length;
 
-      for (const staleEntityFieldKey of staleEntityKeys) {
-        for (const newEntityFieldKey of Object.keys(newEntity)) {
-          if (newEntityFieldKey === staleEntityFieldKey) {
-            delete staleEntity![staleEntityFieldKey];
-            staleEntityKeyCount--;
+      // Check all fields of the stale entity against the corresponding entity in cache
+      // If a field exists in cache, then it should not be stale anymore
+      let staleEntityCopy: Mutable<StaleEntity> | undefined = undefined;
+      for (const staleEntityField of staleEntityFields) {
+        for (const entityField of Object.keys(entity)) {
+          if (entityField === staleEntityField) {
+            if (!staleEntityCopy) {
+              staleEntityCopy = { ...staleEntity };
+              staleCopy[staleKey] = staleEntityCopy;
+            }
+            delete staleEntityCopy[staleEntityField];
+            staleEntityFieldCount--;
           }
         }
       }
 
-      if (staleEntityKeyCount === 0) {
-        delete newStaleEntities[staleEntityKey];
+      // If the entity has no stale fields then remove it from stale
+      if (staleEntityFieldCount === 0) {
+        delete staleCopy[staleKey];
       }
     }
   }
-  return newStaleEntities;
+  return staleCopy;
 }
 
 export type NormalizedEntityField<T> = T extends string
