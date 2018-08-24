@@ -75,7 +75,7 @@ export function mergeEntityCache(
 /**
  * Removes the stale flag for entitiy fields that are present in the normalized result
  */
-export function updateStaleEntities(
+export function updateStale(
   newEntities: EntityCache,
   staleEntities: StaleEntities
 ): StaleEntities {

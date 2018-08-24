@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Rename `updateStaleEntities` to `updateStale`.
+
 ## [0.4.0] - 2018-08-23
 
 ### Added
