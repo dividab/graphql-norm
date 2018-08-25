@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
     "@types/tape": "^4.2.32",
+    "@types/graphql": "^0.13.0 || ^14.0.0",
     "benchmark": "^2.1.4",
     "coveralls": "^3.0.1",
     "graphql": "^0.13.2",
