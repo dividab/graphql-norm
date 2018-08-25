@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Make the `graohql` package a peer dependency. See [#18](https://github.com/dividab/gql-cache/pull/18).
+
 ## [0.5.0] - 2018-08-24
 
 ### Changed
