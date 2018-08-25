@@ -15,15 +15,16 @@
   ],
   "author": "Jonas Kello <jonas.kello@divid.se>",
   "license": "MIT",
-  "dependencies": {
-    "@types/graphql": "^0.13.0",
-    "graphql": "^0.13.0"
+  "peerDependencies": {
+    "graphql": "^0.13.0 || ^14.0.0",
+    "@types/graphql": "^0.13.0 || ^14.0.0"
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
     "@types/tape": "^4.2.32",
     "benchmark": "^2.1.4",
     "coveralls": "^3.0.1",
+    "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
