@@ -104,9 +104,13 @@ export function denormalize(
             ]);
           } else {
             // This field is a primitive (not a array or object)
-            responseObjectOrNewParentArray[
-              (field.alias && field.alias.value) || field.name.value
-            ] = entityValue;
+            if (entityValue !== undefined) {
+              responseObjectOrNewParentArray[
+                (field.alias && field.alias.value) || field.name.value
+              ] = entityValue;
+            } else {
+              partial = true;
+            }
           }
         }
       }
