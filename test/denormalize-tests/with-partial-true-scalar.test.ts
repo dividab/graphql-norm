@@ -8,21 +8,7 @@ export const test: DenormalizeOneTest = {
       posts {
         id
         __typename
-        author {
-          id
-          __typename
-          name
-        }
         title
-        comments {
-          id
-          __typename
-          commenter {
-            id
-            __typename
-            name
-          }
-        }
       }
     }
   `,
@@ -36,9 +22,7 @@ export const test: DenormalizeOneTest = {
     },
     "Post;123": {
       id: "123",
-      __typename: "Post",
-      author: "Author;1",
-      comments: null
+      __typename: "Post"
     }
   }
 };
