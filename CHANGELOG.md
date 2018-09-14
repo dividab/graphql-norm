@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2018-09-14
+
+- Fix partial bug when only scalar is missing in cache. #19
+
 ## [0.6.0] - 2018-08-26
+
+- Add graphql dependencies as peer dependency
 
 ### Changed
 
-- Make the `graohql` package a peer dependency. See [#18](https://github.com/dividab/gql-cache/pull/18).
+- Make the `graphql` package a peer dependency. See [#18](https://github.com/dividab/gql-cache/pull/18).
 
 ## [0.5.0] - 2018-08-24
 
