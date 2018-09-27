@@ -3,18 +3,17 @@ import { DenormalizeOneTest } from "./denormalize-one-test";
 
 export const test: DenormalizeOneTest = {
   name: "with merged fragments",
-  only: true,
   query: gql`
     query TestQuery {
       posts {
         id
         __typename
-        title
         author {
           id
           __typename
           name
         }
+        title
         comments {
           id
           __typename

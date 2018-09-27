@@ -59,8 +59,7 @@ export function denormalize(
 
     let responseObjectOrNewParentArray:
       | MutableResponseObject
-      | MutableResponseObjectArray
-      | undefined = undefined;
+      | MutableResponseObjectArray;
 
     if (!Array.isArray(idOrIdArray)) {
       const id: EntityId = idOrIdArray as EntityId;
@@ -75,7 +74,10 @@ export function denormalize(
 
       const staleEntity = staleEntities[id];
 
-      responseObjectOrNewParentArray = {};
+      responseObjectOrNewParentArray =
+        (parentObjectOrArray as MutableResponseObject)[
+          (fieldNode.alias && fieldNode.alias.value) || fieldNode.name.value
+        ] || {};
       for (const field of expandedSelections) {
         // Check if this field should be skipped according to @skip and @include directives
         const include = field.directives
@@ -105,7 +107,7 @@ export function denormalize(
           } else {
             // This field is a primitive (not a array or object)
             if (entityValue !== undefined) {
-              responseObjectOrNewParentArray[
+              (responseObjectOrNewParentArray as MutableResponseObject)[
                 (field.alias && field.alias.value) || field.name.value
               ] = entityValue;
             } else {
