@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.8.0] - 2018-09-27
+
+- Bugfix: Invalid response when a query contains multiple subtrees of same node
+
 ## [0.7.0] - 2018-09-14
 
 - Fix partial bug when only scalar is missing in cache. #19
