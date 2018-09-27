@@ -74,10 +74,12 @@ export function denormalize(
 
       const staleEntity = staleEntities[id];
 
+      // If we've been here before we need to use the previously created response object
       responseObjectOrNewParentArray =
         (parentObjectOrArray as MutableResponseObject)[
           (fieldNode.alias && fieldNode.alias.value) || fieldNode.name.value
         ] || {};
+
       for (const field of expandedSelections) {
         // Check if this field should be skipped according to @skip and @include directives
         const include = field.directives
