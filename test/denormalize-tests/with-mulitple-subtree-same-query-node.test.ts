@@ -2,7 +2,8 @@ import gql from "graphql-tag";
 import { DenormalizeOneTest } from "./denormalize-one-test";
 
 export const test: DenormalizeOneTest = {
-  name: "with merged fragments",
+  name: "with multiple subtree on same query node",
+  only: true,
   query: gql`
     query TestQuery {
       posts {
@@ -14,6 +15,10 @@ export const test: DenormalizeOneTest = {
           name
         }
         title
+        comments {
+          id
+          __typename
+        }
         comments {
           id
           __typename
@@ -53,7 +58,17 @@ export const test: DenormalizeOneTest = {
             role: "admin"
           },
           title: "My awesome blog post",
-          comments: null
+          comments: [
+            {
+              id: 1,
+              __typename: "Comment",
+              commenter: {
+                id: 1,
+                __typename: "Commenter",
+                name: "olle"
+              }
+            }
+          ]
         }
       ]
     }
@@ -67,13 +82,23 @@ export const test: DenormalizeOneTest = {
       __typename: "Post",
       author: "Author;1",
       title: "My awesome blog post",
-      comments: null
+      comments: ["Comment;1"]
     },
     "Author;1": {
       id: "1",
       __typename: "Author",
       name: "Paul",
       role: "admin"
+    },
+    "Comment;1": {
+      id: 1,
+      __typename: "Comment",
+      commenter: "Commenter;1"
+    },
+    "Commenter;1": {
+      id: 1,
+      __typename: "Commenter",
+      name: "olle"
     }
   }
 };
