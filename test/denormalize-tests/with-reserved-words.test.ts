@@ -15,10 +15,6 @@ export const test: DenormalizeOneTest = {
           value
         }
         title
-        commenter {
-          id
-          __typename
-        }
         hasOwnProperty {
           id
           __typename
