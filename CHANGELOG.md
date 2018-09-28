@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.9.0] - 2018-09-27
+## [0.9.0] - 2018-09-28
 
 - Bugfix: Trees with array. See [#23](https://github.com/dividab/gql-cache/pull/23)
 - Bugfix: With reserved words See [#24](https://github.com/dividab/gql-cache/pull/24)
