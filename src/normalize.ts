@@ -55,10 +55,10 @@ export function normalize(
   );
 
   const stack: Array<StackWorkItem> = [];
-  const entities: MutableEntityCache = {};
+  const entities: MutableEntityCache = Object.create(null);
 
   // Seed stack with undefined parent and "fake" getObjectId
-  stack.push([rootFieldNode, {}, response.data, "ROOT_QUERY"]);
+  stack.push([rootFieldNode, Object.create(null), response.data, "ROOT_QUERY"]);
   let getObjectIdToUse: GetObjectId = _ => "ROOT_QUERY";
 
   // The stack has work items, depending on the work item we have four different cases to handle:
@@ -93,7 +93,7 @@ export function normalize(
       // Get or create entity
       let entity = entities[entityIdOrNewParentArray];
       if (!entity) {
-        entity = {};
+        entity = Object.create(null);
         entities[entityIdOrNewParentArray] = entity;
       }
       // For each field in the selection-set that has a sub-selection-set we push a work item.
