@@ -22,10 +22,12 @@ type MutableResponseObjectArray = Array<MutableResponseObject>;
 type ParentResponseObjectOrArray =
   | Mutable<ResponseObject2>
   | ResponseObjectArray;
+type ParentResponseKey = string | number | undefined;
 type StackWorkItem = [
   FieldNodeWithSelectionSet,
   EntityId | ReadonlyArray<EntityId>,
-  ParentResponseObjectOrArray
+  ParentResponseObjectOrArray,
+  ParentResponseKey
 ];
 
 export function denormalize(
@@ -42,9 +44,14 @@ export function denormalize(
   const response = {};
   let partial = false;
   let stale = false;
-  stack.push([rootFieldNode, "ROOT_QUERY", response]);
+  stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
   while (stack.length > 0) {
-    const [fieldNode, idOrIdArray, parentObjectOrArray] = stack.pop()!;
+    const [
+      fieldNode,
+      idOrIdArray,
+      parentObjectOrArray,
+      parentResponseKey
+    ] = stack.pop()!;
 
     const expandedSelections = expandFragments(
       fieldNode.selectionSet.selections,
@@ -75,10 +82,17 @@ export function denormalize(
       const staleEntity = staleEntities[id];
 
       // If we've been here before we need to use the previously created response object
-      responseObjectOrNewParentArray =
-        (parentObjectOrArray as MutableResponseObject)[
-          (fieldNode.alias && fieldNode.alias.value) || fieldNode.name.value
-        ] || {};
+      if (Array.isArray(parentObjectOrArray)) {
+        responseObjectOrNewParentArray =
+          (parentObjectOrArray as MutableResponseObjectArray)[
+            parentResponseKey as number
+          ] || {};
+      } else {
+        responseObjectOrNewParentArray =
+          (parentObjectOrArray as MutableResponseObject)[
+            parentResponseKey as string
+          ] || {};
+      }
 
       for (const field of expandedSelections) {
         // Check if this field should be skipped according to @skip and @include directives
@@ -104,7 +118,8 @@ export function denormalize(
             stack.push([
               field as FieldNodeWithSelectionSet,
               entityValue as any,
-              responseObjectOrNewParentArray
+              responseObjectOrNewParentArray,
+              (field.alias && field.alias.value) || field.name.value
             ]);
           } else {
             // This field is a primitive (not a array or object)
@@ -120,21 +135,27 @@ export function denormalize(
       }
     } else {
       const idArray: ReadonlyArray<EntityId> = idOrIdArray;
-      responseObjectOrNewParentArray = [];
-      for (const idArrayItem of idArray) {
-        stack.push([fieldNode, idArrayItem, responseObjectOrNewParentArray]);
+      responseObjectOrNewParentArray =
+        (parentObjectOrArray as MutableResponseObject)[
+          parentResponseKey as string
+        ] || [];
+      for (let i = 0; i < idArray.length; i++) {
+        const idArrayItem = idArray[i];
+        stack.push([fieldNode, idArrayItem, responseObjectOrNewParentArray, i]);
       }
     }
 
     // Add to the parent, either field or an array
     if (Array.isArray(parentObjectOrArray)) {
       const parentArray: MutableResponseObjectArray = parentObjectOrArray;
-      parentArray.unshift(responseObjectOrNewParentArray);
+      parentArray[parentResponseKey as number] = responseObjectOrNewParentArray;
     } else {
       const parentObject: MutableResponseObject = parentObjectOrArray;
-      const fieldName =
-        (fieldNode.alias && fieldNode.alias.value) || fieldNode.name.value;
-      parentObject[fieldName] = responseObjectOrNewParentArray;
+      parentObject[
+        parentResponseKey ||
+          (fieldNode.alias && fieldNode.alias.value) ||
+          fieldNode.name.value
+      ] = responseObjectOrNewParentArray;
     }
   }
 
