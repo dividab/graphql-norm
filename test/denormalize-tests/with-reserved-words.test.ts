@@ -3,7 +3,6 @@ import { DenormalizeOneTest } from "./denormalize-one-test";
 
 export const test: DenormalizeOneTest = {
   name: "with reserved keywords",
-  only: true,
   query: gql`
     query TestQuery {
       posts {
