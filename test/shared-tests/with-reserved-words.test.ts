@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "./denormalize-one-test";
+import { OneTest } from "./one-test";
 
-export const test: DenormalizeOneTest = {
+export const test: OneTest = {
   name: "with reserved keywords",
   query: gql`
     query TestQuery {
@@ -22,9 +22,6 @@ export const test: DenormalizeOneTest = {
       }
     }
   `,
-  partial: false,
-  stale: false,
-  staleEntities: {},
   response: {
     data: {
       posts: [
@@ -64,8 +61,6 @@ export const test: DenormalizeOneTest = {
       title: "My awesome blog post",
       hasOwnProperty: "Commenter;1"
     },
-    "Author;1": { id: "1", __typename: "Author", name: "Paul" },
-    "Author;2": { id: "2", __typename: "Author", name: "Paul2" },
     "Value;1": { id: "1", __typename: "Value", value: 1 },
     "Value;2": { id: "2", __typename: "Value", value: 2 },
     "Commenter;1": { id: "1", __typename: "Commenter", name: "olle" }
