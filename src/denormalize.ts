@@ -86,12 +86,12 @@ export function denormalize(
         responseObjectOrNewParentArray =
           (parentObjectOrArray as MutableResponseObjectArray)[
             parentResponseKey as number
-          ] || {};
+          ] || Object.create(null);
       } else {
         responseObjectOrNewParentArray =
           (parentObjectOrArray as MutableResponseObject)[
             parentResponseKey as string
-          ] || {};
+          ] || Object.create(null);
       }
 
       for (const field of expandedSelections) {
