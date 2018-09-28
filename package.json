@@ -46,6 +46,7 @@
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test:work": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "test:denormalize": "tape --require ts-node/register \"test/denormalize.test.ts\" | tap-spec",
+    "test:denormalize-debug": "node --require ts-node/register --inspect-brk  ./node_modules/tape/bin/tape \"test/denormalize.test.ts\" | tap-spec",
     "test:normalize": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "verify": "yarn lint && yarn build && yarn coverage",
     "publish-npm": "yarn verify && yarn publish && git push --follow-tags",
