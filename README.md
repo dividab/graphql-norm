@@ -12,6 +12,16 @@ A library for normalizing and denormalizing GraphQL responses
 
 When working with GraphQL, caching on the client side can be very important in order to achieve good performance. One of the most popular approaches is to use a normalized cache. Frameworks such as [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) do a good job of providing a normalized cache without exposing the client application to the details of normalization or denormalization. For some applications, abtracting away the cache like this is a good fit. For other applications you may want more control over the cache. Using the gql-cache library you will have full control over the cache and you can make the cache a first class citizen in your appliction. For more information also read the [motivation](#motivation) and [normalization and denormalization](#normalization-and-denormalization) sections.
 
+## Features
+
+* Cache as plain JS objects
+* Store the cache anywhere (for example in redux or other state container)
+* Serializable to plain JSON
+* Optimized for run-time speed
+* Full GraphQL syntax support (including alias, @skip, @include)
+* Staleness flagging
+* Can be used on client or server
+
 ## How to install
 
 ```
