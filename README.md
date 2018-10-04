@@ -54,7 +54,7 @@ const cachedResponse = denormalize(query, cache);
 // cachedResponse now has the response for the query and we can return it without a server request
 ```
 
-### API
+## API
 
 ### normalize()
 
