@@ -208,8 +208,8 @@ const cachedResponse = denormalize(query, cache);
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
-[travis-image]: https://travis-ci.org/dividab/gql-cache.svg?branch=master&style=flat
-[travis-url]: https://travis-ci.org/dividab/gql-cache
+[travis-image]: https://travis-ci.com/dividab/gql-cache.svg?branch=master&style=flat
+[travis-url]: https://travis-ci.com/dividab/gql-cache
 [coveralls-image]: https://coveralls.io/repos/github/dividab/gql-cache/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/dividab/gql-cache?branch=master
 [license-image]: https://img.shields.io/github/license/dividab/gql-cache.svg?style=flat
