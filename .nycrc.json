@@ -3,7 +3,7 @@
   "include": ["src/*"],
   "exclude": ["**/*.d.ts", "src/index.ts", "src/types.ts"],
   "extension": [".ts"],
-  "reporter": ["lcov", "text"],
+  "reporter": ["json"],
   "sourceMap": true,
   "require": ["ts-node/register"]
 }
