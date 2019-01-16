@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.9.2] - 2019-01-16
+
+### Fixed
+
+- Remove console.log.
+
 ## [0.9.1] - 2019-01-16
 
 ### Fixed
