@@ -20,7 +20,7 @@ export const test: OneTest = {
   },
   entities: {
     ROOT_QUERY: {
-      postsByIds: [null]
+      'postsByIds({"ids":["non-existent-id"]})': [null]
     }
   }
 };

@@ -66,9 +66,12 @@ export function denormalize(
 
     let responseObjectOrNewParentArray:
       | MutableResponseObject
-      | MutableResponseObjectArray;
+      | MutableResponseObjectArray
+      | null;
 
-    if (!Array.isArray(idOrIdArray)) {
+    if (idOrIdArray === null) {
+      responseObjectOrNewParentArray = null;
+    } else if (!Array.isArray(idOrIdArray)) {
       const id: EntityId = idOrIdArray as EntityId;
 
       const entity = entities[id];
