@@ -83,7 +83,6 @@ export function normalize(
     let entityIdOrNewParentArray: EntityId | ParentArray | null = null;
     if (responseObjectOrArray === null) {
       entityIdOrNewParentArray = null;
-      console.log("isnull");
     } else if (!Array.isArray(responseObjectOrArray)) {
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
