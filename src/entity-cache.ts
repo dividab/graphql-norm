@@ -9,6 +9,7 @@ export type EntityFieldValue =
   | string
   | boolean
   | number
+  | null
   | EntityFieldValueArray;
 
 export interface EntityFieldValueArray
