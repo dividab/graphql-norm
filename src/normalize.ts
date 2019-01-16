@@ -80,11 +80,7 @@ export function normalize(
       fragmentMap
     );
 
-    let entityIdOrNewParentArray:
-      | EntityId
-      | ParentArray
-      | null
-      | undefined = undefined;
+    let entityIdOrNewParentArray: EntityId | ParentArray | null = null;
     if (responseObjectOrArray === null) {
       entityIdOrNewParentArray = null;
       console.log("isnull");
