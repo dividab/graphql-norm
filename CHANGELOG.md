@@ -7,25 +7,35 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.9.1] - 2019-01-16
+
+### Fixed
+
+- Fix null in result arrays. See [#25](https://github.com/dividab/gql-cache/pull/25)
+
 ## [0.9.0] - 2018-09-28
 
 ### Fixed
+
 - Trees with array. See [#23](https://github.com/dividab/gql-cache/pull/23)
 - With reserved words See [#24](https://github.com/dividab/gql-cache/pull/24)
 
 ## [0.8.0] - 2018-09-27
 
 ### Fixed
+
 - Invalid response when a query contains multiple subtrees of same node
 
 ## [0.7.0] - 2018-09-14
 
 ### Fixed
+
 - Fix partial bug when only scalar is missing in cache. #19
 
 ## [0.6.0] - 2018-08-26
 
 ### Changed
+
 - Make the `graphql` package a peer dependency. See [#18](https://github.com/dividab/gql-cache/pull/18).
 
 ## [0.5.0] - 2018-08-24
@@ -38,34 +48,41 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.4.0] - 2018-08-23
 
 ### Added
+
 - Support for `@skip` and `@include` directives. See [#14](https://github.com/dividab/gql-cache/issues/14).
 
 ## [0.3.0] - 2018-08-17
 
 ### Added
+
 - The `graphql` and `@types/graphql` packages are now a regular dependencies. See [#12](https://github.com/dividab/gql-cache/issues/12).
 
 ## [0.2.0] - 2018-08-08
 
 ### Added
+
 - Support for fallback id when `GetObjectToId` returns undefined. `GetObjectToId` can now return `string | undefined`
 
 ## [0.1.3] - 2018-06-28
 
 ### Fixed
+
 - Add missing exports for types `Variables`, `GraphQLResponse`.
 
 ## [0.1.2] - 2018-06-27
 
 ### Added
+
 - Export `DenormalizationResult`, see PR [#4](https://github.com/dividab/gql-cache/pull/4).
 
 ### Fixed
+
 - Remove redundant typing, see PR [#1](https://github.com/dividab/gql-cache/pull/1). Thanks to [@Jontem](https://github.com/Jontem) for this fix!
 
 ## [0.1.1] - 2018-06-08
 
 ### Added
+
 - Initial version.
 
 [unreleased]: https://github.com/dividab/gql-cache/compare/v0.9.0...master
