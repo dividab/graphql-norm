@@ -1,10 +1,10 @@
 import * as test from "tape";
 import { normalize } from "../src/normalize";
 import gql from "graphql-tag";
-import { mergeEntityCache } from "../src/entity-cache";
+import { merge } from "../src/entity-cache";
 import { denormalize } from "../src/denormalize";
 
-test("mergeEntityCache()", t => {
+test("merge()", t => {
   t.test("full value objects", st => {
     const itemA = {
       name: "",
@@ -70,7 +70,7 @@ test("mergeEntityCache()", t => {
 
     const entitiesA = normalize(itemA.query, {}, itemA.response);
     const entitiesB = normalize(itemB.query, {}, itemB.response);
-    const mergedEntities = mergeEntityCache(entitiesA, entitiesB);
+    const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
 
     st.equal(denormalizedResult.partial, false, "Merged data is complete.");
@@ -140,7 +140,7 @@ test("mergeEntityCache()", t => {
 
     const entitiesA = normalize(itemA.query, {}, itemA.response);
     const entitiesB = normalize(itemB.query, {}, itemB.response);
-    const mergedEntities = mergeEntityCache(entitiesA, entitiesB);
+    const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
 
     st.equal(denormalizedResult.partial, false, "Merged data is complete.");

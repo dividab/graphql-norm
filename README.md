@@ -43,13 +43,13 @@ let cache = {};
 const response = request("{ ...Your graphql query here... }");
 
 // Normalize the response
-const normalizedResponse = normalize(query, response);
+const normalizedResponse = normalize(query, {}, response);
 
 // Merge the normalized response into the cache
 cache = merge(cache, normalizedResponse);
 
 // Later when we want to read a query from the cache
-const cachedResponse = denormalize(query, cache);
+const cachedResponse = denormalize(query, {}, cache);
 
 // cachedResponse now has the response for the query and we can return it without a server request
 ```
@@ -167,7 +167,7 @@ data: {
 */
 
 // Normalize the response
-const normalizedResponse = normalize(query, resopnse);
+const normalizedResponse = normalize(query, {}, response);
 
 /*
 The normalized data now looks like this:
@@ -201,7 +201,7 @@ References between objects are now using these IDs.
 cache = merge(cache, normalizedResponse);
 
 // Later when we want to read a query from the cache
-const cachedResponse = denormalize(query, cache);
+const cachedResponse = denormalize(query, {}, cache);
 
 // cachedResponse now has the response for the query and we can return it without a server request
 ```
