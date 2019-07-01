@@ -61,7 +61,7 @@ export function mergeEntityCache(
       return stateSoFar;
     },
     {} as {
-      // tslint:disable-next-line:readonly-keyword
+      // eslint-disable-next-line ts-immutable/readonly-keyword
       [key: string]: any;
     }
   );

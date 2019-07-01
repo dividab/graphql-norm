@@ -1,12 +1,13 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "ts-immutable"],
   extends: ["plugin:@typescript-eslint/recommended", "prettier"],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module"
   },
   rules: {
+    "ts-immutable/readonly-keyword": "error",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",

@@ -29,6 +29,7 @@
     "codecov": "^3.1.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-ts-immutable": "^0.1.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "husky": "^0.14.3",
@@ -60,7 +61,7 @@
     "report-coverage": "codecov -f coverage/*.json"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "tslint",
+    "*.{ts,tsx}": "eslint --ext .ts -f visualstudio",
     "*.{ts,tsx,json,css}": [
       "prettier --write",
       "git add"
