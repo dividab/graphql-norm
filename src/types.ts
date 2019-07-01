@@ -44,9 +44,9 @@ export interface DenormalizationResult {
   readonly stale: boolean;
 }
 
-export type FragmentMap = {
+export interface FragmentMap {
   readonly [fragmentName: string]: GraphQL.FragmentDefinitionNode;
-};
+}
 export type DocumentDefinitionTuple = [FragmentMap, FieldNodeWithSelectionSet];
 
 export interface FieldNodeWithSelectionSet extends GraphQL.FieldNode {
