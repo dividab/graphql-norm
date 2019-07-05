@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.10.1] - 2019-07-06
+
+### Fixed
+
+- Update readme with new package name.
+
+## [0.10.0] - 2019-07-06
+
 ### Changed
 
 - Renamed the package from `gql-cache` to `graphql-norm` to indicate that it focus is on normalization only, not providing a full caching solution.
