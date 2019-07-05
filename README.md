@@ -10,7 +10,7 @@ A library for normalizing and denormalizing GraphQL responses
 
 ## Introduction
 
-Responses from graphql are in a denormalized form which mean they may contain the same logical object several times. We can normalize the graphql result to store the objects in a flat ID/Object dictionary to remove all duplicates. This is useful for a number of scenarios but the main usage is probably to keep a client-side cache without any duplication. For example, [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) use this approach for their caches. So the main use-case for this library is probably to build your own client-side cache where you get full control of the caching without loosing the benefit of normalization.
+Responses from graphql are in a denormalized form which mean they may contain the same logical object several times. We can normalize the graphql response to a flat ID/Object dictionary without any duplicates. This is useful for a number of scenarios but the main usage is probably to keep a client-side cache without any duplication. For example, [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) use this approach for their caches. So the main use-case for this library is probably to build your own client-side cache where you get full control of the caching without loosing the benefit of normalization.
 
 If you are familiary with the [normalizr](https://www.npmjs.com/package/normalizr) library, you can think of this library as the same thing but without the need to specify an explicit schema as the graphql queries themselves are used to derive the schema.
 
