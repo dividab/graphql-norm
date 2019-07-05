@@ -8,6 +8,12 @@
 
 Normalization and denormalization of GraphQL responses
 
+## How to install
+
+```
+npm install gql-cache --save
+```
+
 ## Introduction
 
 Responses from graphql servers may contain the same logical object several times. Consider for example a response from a blog server that contains a person object both as an author and a commenter. Both person objects are of the same GraphQL type and thus have the same fields and ID. However, since they appear in two different parts of the response they need to be duplicated. When we want to store several GraphQL responsese the problem of duplication amplifies, as many respones may contain the same object. When we later want to update an object, it can be difficult to find all the places where the update needs to happen because there are multiple copies of the same logical object. This package solves these problems by using normalization and denormalization.
@@ -28,15 +34,7 @@ The goal of the package is only to perform normalization and denormalization of 
 - Full GraphQL syntax support (including variables, alias, @skip, @include)
 - Optimized for run-time speed
 
-## How to install
-
-```
-npm install gql-cache --save
-```
-
-## How to use
-
-Here is a small example:
+## Example usage
 
 ```js
 import { normalize, denormalize, merge } from "gql-cache";
@@ -73,8 +71,7 @@ const query = gql`
 const response = request(query);
 
 /*
-The response now looks like this:
-
+response:
 data: {
   posts: [
     {
@@ -106,8 +103,7 @@ data: {
 const normalizedResponse = normalize(query, {}, response);
 
 /*
-The normalized data now looks like this:
-
+normalizedResponse:
 {
   ROOT_QUERY: {
     posts: ["Post;123"]
@@ -130,7 +126,6 @@ The normalized data now looks like this:
 
 As we can see in the normalized response above, an ID was assigned to each object.
 References between objects are now using these IDs.
-
 */
 
 // Merge the normalized response into the cache
@@ -139,7 +134,9 @@ cache = merge(cache, normalizedResponse);
 // Later when we want to read a query from the cache
 const cachedResponse = denormalize(query, {}, cache);
 
-// cachedResponse now has the original response for the query and we can return it without a server request
+// If cachedResponse.partial === false then cachedResponse.response now has the original
+// response for the query and we can use it without a server request. Otherwise
+// we need to fetch from the server, normalize and merge into the cache.
 ```
 
 ## API
