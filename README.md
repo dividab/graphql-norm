@@ -10,15 +10,25 @@ A library for normalizing and denormalizing GraphQL responses
 
 ## Introduction
 
-When working with GraphQL, caching on the client side can be very important in order to achieve good performance. One of the most popular approaches is to use a normalized cache. Frameworks such as [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) do a good job of providing a normalized cache without exposing the client application to the details of normalization or denormalization. For some applications, abtracting away the cache like this is a good fit. For other applications you may want more control over the cache. Using the gql-cache library you will have full control over the cache and you can make the cache a first class citizen in your appliction. For more information also read the [motivation](#motivation) and [normalization and denormalization](#normalization-and-denormalization) sections.
+Responses from graphql are in a denormalized form which mean they may contain the same logical object several times. We can normalize the graphql result to store the objects in a flat ID/Object dictionary to remove all duplicates. This is useful for a number of scenarios but the main usage is probably to keep a client-side cache without any duplication. For example, [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) use this approach for their caches. So the main use-case for this library is probably to build your own client-side cache where you get full control of the caching without loosing the benefit of normalization.
+
+If you are familiary with the [normalizr](https://www.npmjs.com/package/normalizr) library, you can think of this library as the same thing but without the need to specify an explicit schema as the graphql queries themselves are used to derive the schema.
+
+If you are new to normalization please read the [Normalization and denormalization](#normalization-and-denormalization) section.
+
+If you are wondering why this library exists when we already have frameworks like Relay and Apollo, please read the [Motivation](#motivation) section.
+
+## Goal
+
+The goal of the package is only to perform normalization and denormalization of graphql responses. Providing a complete caching solution is an explicit non-goal of this package. However this pacakge can be a building block in a normalized graphql caching solution.
 
 ## Features
 
-- Cache as plain JS objects
-- Store the cache anywhere (for example in redux or other state container)
-- Serializable to plain JSON
+- Turn any graphql response into a flat ID/Object dictionary (normalize)
+- Build a response for any grapqhl query from the normalized dictionary (denormalize)
+- Full GraphQL syntax support (including variables, alias, @skip, @include)
 - Optimized for run-time speed
-- Full GraphQL syntax support (including alias, @skip, @include)
+- The dictionary is a plain JS object and serializable to JSON
 - Staleness flagging
 - Can be used on client or server
 
