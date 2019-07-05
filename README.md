@@ -10,13 +10,11 @@ A library for normalizing and denormalizing GraphQL responses
 
 ## Introduction
 
-Responses from graphql are in a denormalized form which mean they may contain the same logical object several times. We can normalize the graphql response to a flat ID/Object dictionary without any duplicates. This is useful for a number of scenarios but the main usage is probably to keep a client-side cache without any duplication. For example, [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) use this approach for their caches. So the main use-case for this library is probably to build your own client-side cache where you get full control of the caching without loosing the benefit of normalization.
+Responses from graphql servers may contain the same logical object several times. Consider for example a response from a blog server that contains a person object both as an author and a commenter. Both person objects are of the same GraphQL type and thus have the same fields and ID. However, since they appear in two different parts of the response they need to be duplicated. When we want to store several GraphQL responsese the problem of duplication amplifies, as many respones may contain the same object. When we later want to update an object, it can be difficult to find all the places where the update needs to happen because there are multiple copies of the same logical object. This package solves these problems by using normalization and denormalization.
 
-If you are familiary with the [normalizr](https://www.npmjs.com/package/normalizr) library, you can think of this library as the same thing but without the need to specify an explicit schema as the graphql queries themselves are used to derive the schema.
+A basic description of normalization (in this context) is that it takes a tree and flattens it to a map where each object will be assigned an unique ID which is used as the key in the map. Any references that an object holds to other objects will be exhanged to an ID instead of an object reference. The process of denormalizaton goes the other way around, starting with a map and producing a tree. The [normalizr](https://www.npmjs.com/package/normalizr) library does a good job of explaining this. In fact, this package is very similar to normalizr, but it was specifically designed to work with GraphQL so it does not require hand-coded normalization schemas. Instead it uses GraphQL queries to determine how to normalize and denormalize the data.
 
-If you are new to normalization please read the [Normalization and denormalization](#normalization-and-denormalization) section.
-
-If you are wondering why this library exists when we already have frameworks like Relay and Apollo, please read the [Motivation](#motivation) section.
+Normalization and denormalization is useful for a number of scenarios but the main usage is probably to store and update a client-side GraphQL cache without any duplication problems. For example, [Relay](https://facebook.github.io/relay/) and [Apollo](https://www.apollographql.com/) use this approach for their caches. So the main use-case for this library is probably to build your own client-side cache where you get full control of the caching without loosing the benefit of normalization.
 
 ## Goal
 
@@ -46,78 +44,9 @@ Here is a small example:
 import { normalize, denormalize, merge } from "gql-cache";
 import { request } from "graphql-request";
 
-// Our cache is a plain JS object
+// A plain JS object to hold the normalized responses
 let cache = {};
 
-// Make a request to fetch the data
-const response = request("{ ...Your graphql query here... }");
-
-// Normalize the response
-const normalizedResponse = normalize(query, {}, response);
-
-// Merge the normalized response into the cache
-cache = merge(cache, normalizedResponse);
-
-// Later when we want to read a query from the cache
-const cachedResponse = denormalize(query, {}, cache);
-
-// cachedResponse now has the response for the query and we can return it without a server request
-```
-
-## API
-
-### normalize()
-
-The normalize() function takes a GraphQL query with associated variables, and a GraphQL JSON response. From those inputs it produces a normalized cache which is returned as a plain JS object.
-
-```ts
-normalize(
-  query: GraphQL.DocumentNode,
-  variables: { [key: string]: any } | undefined,
-  response: { data: any },
-  getObjectId: (entity: any) => string
-): { [key: string]: any }
-```
-
-### denormalize()
-
-The denormalize() function takes a GraphQL query with associated variables, and a cache object (as returned by normalize()). From those inputs it produces a GraphQL JSON response.
-
-```ts
-export function denormalize(
-  query: GraphQL.DocumentNode,
-  variables: { [key: string]: any } | undefined,
-  cache: { [key: string]: any },
-  staleEntities: { [field: string]: true | undefined } | undefined
-): {
-  response: { data: any } | undefined;
-  partial: boolean;
-  stale: boolean;
-};
-```
-
-### merge()
-
-When you normalize the response of a query you probably want to merge the resulting cache object into a another, large cache object that is held by your application. Since a cache is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging of caches.
-
-## Motivation
-
-Since gql-cache is a library rather than a framework, it just provides functions for normalization and denormalization that your application can call when it so chooses. This enables some scenarios that are hard to do with the framework approaches that abstract away the cache. For example, your application has full control over the storage and upate of the cache (the cache is just a plain JS object). So you can store the cache in Redux and update it with Actions, or store it somehwere else and use a different update mechnaism. It is entirely up to your application. Also, for performance critical applications, your application is free to make optimizations based on assumptions that are specific to your application. Such optimization can be hard to achieve in frameworks that have to cater to many different kind of applications. So for some applications this library-based approach might be better than the aformentioned framework approaches, but of course it comes with the tradeoff that your application will have to know more about the cahce and do more work itself. You can of course write your own components to abstract the cache in any way you want in your application.
-
-## Normalization and denormalization
-
-In order to understand this library, it is important to understand the process of normalization and denormalization. A basic description of normalization (in the context of graphql-cache) is that it takes a tree and flattens it to a map where each object will be assigned an unique ID which is used as the key in the map. Any references that an object holds to other objects will be exhanged to an ID instead of an object reference. The process of denormalizaton goes the other way around, starting with a map and producing a tree. The popular [normalizr](https://www.npmjs.com/package/normalizr) library does a good job of explaining this. In fact, gql-cache is very similar to normalizr, but it was specifically designed to work with GraphQL so it does not require hand-coded normalization schemas. Instead it uses GraphQL queries to determine how to normalize and denormalize the data.
-
-Here is an example with comments that show how the data gets normalized:
-
-```js
-import { normalize, denormalize, mergeCache } from "gql-cache";
-import { request } from "graphql-request";
-
-// Our cache is a simple JS object
-let cache = {};
-
-// Define our GraphQL query
 const query = gql`
   query TestQuery {
     posts {
@@ -173,7 +102,6 @@ data: {
     }
   ];
 }
-
 */
 
 // Normalize the response
@@ -207,14 +135,50 @@ References between objects are now using these IDs.
 
 */
 
-// Merge into the cache
+// Merge the normalized response into the cache
 cache = merge(cache, normalizedResponse);
 
 // Later when we want to read a query from the cache
 const cachedResponse = denormalize(query, {}, cache);
 
-// cachedResponse now has the response for the query and we can return it without a server request
+// cachedResponse now has the original response for the query and we can return it without a server request
 ```
+
+## API
+
+### normalize()
+
+The normalize() function takes a GraphQL query with associated variables, and a GraphQL JSON response. From those inputs it produces a normalized ID/Object dictionary which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the ID/Object dictionary. This happens recursively until there are no nested objects left.
+
+```ts
+normalize(
+  query: GraphQL.DocumentNode,
+  variables: { [key: string]: any } | undefined,
+  response: { data: any },
+  getObjectId: (entity: any) => string
+): { [key: string]: any }
+```
+
+### denormalize()
+
+The denormalize() function takes a GraphQL query with associated variables, and a ID/Object dictionary (as returned by normalize()). From those inputs it produces a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the ID/Object dictionary then `partial` will be set to `true`.
+
+```ts
+export function denormalize(
+  query: GraphQL.DocumentNode,
+  variables: { [key: string]: any } | undefined,
+  cache: { [key: string]: any },
+  staleEntities: { [field: string]: true | undefined } | undefined
+): {
+  response: { data: any } | undefined;
+  partial: boolean;
+  stale: boolean;
+};
+```
+
+### merge()
+
+When you normalize the response of a query you probably want to merge the resulting ID/Object dictionary into a another, large ID/Object dictionary that is held by your application. Since the ID/Object dictionary is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
