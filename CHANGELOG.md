@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed the package from `gql-cache` to `graphql-norm` to indicate that it focus is on normalization only, not providing a full caching solution.
+
+- Renamed mergeEntityCache function to merge, see See [#29](https://github.com/dividab/gql-cache/pull/29). Thanks to [@drejohnson](https://github.com/drejohnson) for this PR.
+
+- Consolidated and cleaned up readme documentation.
+
 ## [0.9.2] - 2019-01-16
 
 ### Fixed

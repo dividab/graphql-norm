@@ -1,17 +1,18 @@
 {
-  "name": "gql-cache",
+  "name": "graphql-norm",
   "version": "0.9.2",
   "description": "Normalization and denormalization of GraphQL responses",
   "main": "lib/index.js",
   "types": "lib/index",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dividab/gql-cache.git"
+    "url": "git+https://github.com/dividab/graphql-norm.git"
   },
   "keywords": [
     "graphql",
     "cache",
-    "normalization"
+    "normalization",
+    "denormalization"
   ],
   "author": "Jonas Kello <jonas.kello@divid.se>",
   "license": "MIT",
@@ -43,7 +44,6 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "lint2": "tslint --config ./tslint.json -- './{src,test}/**/*.ts{,x}'",
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
     "build": "rimraf lib && tsc -p src",
     "performance": "ts-node performance-test/performance-test.ts",
@@ -53,10 +53,11 @@
     "test:denormalize-debug": "node --require ts-node/register --inspect-brk  ./node_modules/tape/bin/tape \"test/denormalize.test.ts\" | tap-spec",
     "test:normalize": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "verify": "yarn lint && yarn build && yarn coverage",
-    "publish-npm": "yarn verify && yarn publish && git push --follow-tags",
     "precommit": "lint-staged",
     "coverage": "rimraf coverage .nyc_output && nyc yarn test",
-    "report-coverage": "codecov -f coverage/*.json"
+    "report-coverage": "codecov -f coverage/*.json",
+    "preversion": "yarn verify",
+    "postversion": "git push --tags && yarn publish --new-version $npm_package_version && git push --follow-tags && echo \"Successfully released version $npm_package_version!\""
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --ext .ts -f visualstudio",

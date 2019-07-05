@@ -175,6 +175,18 @@ export function denormalize(
 
 When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
 
+## How to develop
+
+To execute the tests run `yarn test`.
+
+## How to publish
+
+```
+yarn version --patch
+yarn version --minor
+yarn version --major
+```
+
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache
 [travis-image]: https://travis-ci.com/dividab/gql-cache.svg?branch=master&style=flat
