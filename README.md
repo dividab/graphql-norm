@@ -6,7 +6,7 @@
 [![code style: prettier][prettier-image]][prettier-url]
 [![MIT license][license-image]][license-url]
 
-A library for normalizing and denormalizing GraphQL responses
+Normalization and denormalization of GraphQL responses
 
 ## Introduction
 
@@ -22,13 +22,11 @@ The goal of the package is only to perform normalization and denormalization of 
 
 ## Features
 
-- Turn any graphql response into a flat ID/Object dictionary (normalize)
-- Build a response for any grapqhl query from the normalized dictionary (denormalize)
+- Turn any graphql response into a flat (normalized) object map
+- Build a response for any grapqhl query from the normalized object map (denormalize)
+- Merge normalized object maps to build a larger map (i.e. a cache)
 - Full GraphQL syntax support (including variables, alias, @skip, @include)
 - Optimized for run-time speed
-- The dictionary is a plain JS object and serializable to JSON
-- Staleness flagging
-- Can be used on client or server
 
 ## How to install
 
@@ -148,7 +146,7 @@ const cachedResponse = denormalize(query, {}, cache);
 
 ### normalize()
 
-The normalize() function takes a GraphQL query with associated variables, and a GraphQL JSON response. From those inputs it produces a normalized ID/Object dictionary which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the ID/Object dictionary. This happens recursively until there are no nested objects left.
+The normalize() function takes a GraphQL query with associated variables, and data from a GraphQL response. From those inputs it produces a normalized object map which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name to make them unique. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the normalized object map. This happens recursively until there are no nested objects left.
 
 ```ts
 normalize(
@@ -161,7 +159,7 @@ normalize(
 
 ### denormalize()
 
-The denormalize() function takes a GraphQL query with associated variables, and a ID/Object dictionary (as returned by normalize()). From those inputs it produces a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the ID/Object dictionary then `partial` will be set to `true`.
+The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
 
 ```ts
 export function denormalize(
@@ -178,7 +176,7 @@ export function denormalize(
 
 ### merge()
 
-When you normalize the response of a query you probably want to merge the resulting ID/Object dictionary into a another, large ID/Object dictionary that is held by your application. Since the ID/Object dictionary is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
+When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
 
 [version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
 [version-url]: https://www.npmjs.com/package/gql-cache

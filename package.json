@@ -1,7 +1,7 @@
 {
   "name": "gql-cache",
   "version": "0.9.2",
-  "description": "A library for normalizing and denormalizing GraphQL responses",
+  "description": "Normalization and denormalization of GraphQL responses",
   "main": "lib/index.js",
   "types": "lib/index",
   "repository": {
