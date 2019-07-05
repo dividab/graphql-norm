@@ -62,7 +62,7 @@ export function merge(
       return stateSoFar;
     },
     {} as {
-      // tslint:disable-next-line:readonly-keyword
+      // eslint-disable-next-line ts-immutable/readonly-keyword
       [key: string]: any;
     }
   );
@@ -131,7 +131,7 @@ export type NormalizedEntityField<T> = T extends string
   ? ReadonlyArray<boolean>
   : T extends ReadonlyArray<number>
   ? ReadonlyArray<number>
-  : T extends ReadonlyArray<Object>
+  : T extends ReadonlyArray<object>
   ? ReadonlyArray<EntityId>
   : "undefined value";
 

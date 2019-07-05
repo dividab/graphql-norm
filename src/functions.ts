@@ -16,7 +16,7 @@ export function getDocumentDefinitions(
     | undefined = undefined;
 
   const fragmentMap: {
-    // tslint:disable-next-line:readonly-keyword
+    // eslint-disable-next-line ts-immutable/readonly-keyword
     [fragmentName: string]: GraphQL.FragmentDefinitionNode;
   } = {};
   for (const definition of definitions) {
@@ -76,27 +76,10 @@ export function expandFragments(
   return fieldNodes;
 }
 
-export function fieldNameWithArguments(
-  fieldNode: GraphQL.FieldNode,
-  variables: Variables | undefined
-): string {
-  // tslint:disable-next-line:readonly-keyword
-  const argumentsObject: { [key: string]: any } = {};
-  // tslint:disable-next-line:no-arguments
-  for (const argumentNode of fieldNode.arguments!) {
-    argumentsObject[argumentNode.name.value] = resolveValueNode(
-      argumentNode.value,
-      variables
-    );
-  }
-  const hashedArgs = JSON.stringify(argumentsObject);
-  return fieldNode.name.value + "(" + hashedArgs + ")";
-}
-
 function resolveValueNode(
   valueNode: GraphQL.ValueNode,
   variables: Variables | undefined
-): string | boolean | number | Array<any> | Object | null {
+): string | boolean | number | Array<any> | object | null {
   switch (valueNode.kind) {
     case "Variable":
       return variables![valueNode.name.value];
@@ -105,7 +88,7 @@ function resolveValueNode(
     case "ListValue":
       return valueNode.values.map(f => resolveValueNode(f, variables));
     case "ObjectValue":
-      // tslint:disable-next-line:readonly-keyword
+      // eslint-disable-next-line ts-immutable/readonly-keyword
       const valueObject: { [key: string]: any } = {};
       for (const field of valueNode.fields) {
         valueObject[field.name.value] = resolveValueNode(
@@ -117,6 +100,23 @@ function resolveValueNode(
     default:
       return valueNode.value;
   }
+}
+
+export function fieldNameWithArguments(
+  fieldNode: GraphQL.FieldNode,
+  variables: Variables | undefined
+): string {
+  // eslint-disable-next-line ts-immutable/readonly-keyword
+  const argumentsObject: { [key: string]: any } = {};
+  // tslint:disable-next-line:no-arguments
+  for (const argumentNode of fieldNode.arguments!) {
+    argumentsObject[argumentNode.name.value] = resolveValueNode(
+      argumentNode.value,
+      variables
+    );
+  }
+  const hashedArgs = JSON.stringify(argumentsObject);
+  return fieldNode.name.value + "(" + hashedArgs + ")";
 }
 
 export const defaultGetObjectId: GetObjectId = (object: {

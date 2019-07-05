@@ -23,6 +23,8 @@
     "@types/benchmark": "^1.0.31",
     "@types/graphql": "^14.2.1",
     "@types/tape": "^4.2.33",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
     "benchmark": "^2.1.4",
     "codecov": "^3.5.0",
     "graphql": "^14.3.1",
@@ -35,12 +37,14 @@
     "tap-spec": "^5.0.0",
     "tape": "^4.10.2",
     "ts-node": "^8.3.0",
-    "tslint": "^5.17.0",
-    "tslint-immutable": "^6.0.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-ts-immutable": "^0.1.0",
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "lint": "tslint --config ./tslint.json -- './{src,test}/**/*.ts{,x}'",
+    "lint2": "tslint --config ./tslint.json -- './{src,test}/**/*.ts{,x}'",
+    "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
     "build": "rimraf lib && tsc -p src",
     "performance": "ts-node performance-test/performance-test.ts",
     "test": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
@@ -55,7 +59,7 @@
     "report-coverage": "codecov -f coverage/*.json"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "tslint",
+    "*.{ts,tsx}": "eslint --ext .ts -f visualstudio",
     "*.{ts,tsx,json,css}": [
       "prettier --write",
       "git add"

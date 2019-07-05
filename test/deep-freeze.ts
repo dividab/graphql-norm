@@ -1,4 +1,4 @@
-export function deepFreeze(o: any) {
+export function deepFreeze(o: any): any {
   Object.freeze(o);
 
   Object.getOwnPropertyNames(o).forEach(function(prop) {
