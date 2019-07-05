@@ -131,7 +131,7 @@ export type NormalizedEntityField<T> = T extends string
   ? ReadonlyArray<boolean>
   : T extends ReadonlyArray<number>
   ? ReadonlyArray<number>
-  : T extends ReadonlyArray<Object>
+  : T extends ReadonlyArray<object>
   ? ReadonlyArray<EntityId>
   : "undefined value";
 
