@@ -1,4 +1,4 @@
-# gql-cache
+# graphql-norm
 
 [![npm version][version-image]][version-url]
 [![travis build][travis-image]][travis-url]
@@ -11,7 +11,7 @@ Normalization and denormalization of GraphQL responses
 ## How to install
 
 ```
-npm install gql-cache --save
+npm install graphql-norm --save
 ```
 
 ## Introduction
@@ -37,7 +37,7 @@ The goal of the package is only to perform normalization and denormalization of 
 ## Example usage
 
 ```js
-import { normalize, denormalize, merge } from "gql-cache";
+import { normalize, denormalize, merge } from "graphql-norm";
 import { request } from "graphql-request";
 
 // A plain JS object to hold the normalized responses
@@ -187,13 +187,13 @@ yarn version --minor
 yarn version --major
 ```
 
-[version-image]: https://img.shields.io/npm/v/gql-cache.svg?style=flat
-[version-url]: https://www.npmjs.com/package/gql-cache
-[travis-image]: https://travis-ci.com/dividab/gql-cache.svg?branch=master&style=flat
-[travis-url]: https://travis-ci.com/dividab/gql-cache
-[codecov-image]: https://codecov.io/gh/dividab/gql-cache/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/dividab/gql-cache
-[license-image]: https://img.shields.io/github/license/dividab/gql-cache.svg?style=flat
+[version-image]: https://img.shields.io/npm/v/graphql-norm.svg?style=flat
+[version-url]: https://www.npmjs.com/package/graphql-norm
+[travis-image]: https://travis-ci.com/dividab/graphql-norm.svg?branch=master&style=flat
+[travis-url]: https://travis-ci.com/dividab/graphql-norm
+[codecov-image]: https://codecov.io/gh/dividab/graphql-norm/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/dividab/graphql-norm
+[license-image]: https://img.shields.io/github/license/dividab/graphql-norm.svg?style=flat
 [license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier

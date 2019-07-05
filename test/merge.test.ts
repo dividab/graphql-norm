@@ -76,7 +76,7 @@ test("merge()", t => {
     st.equal(denormalizedResult.partial, false, "Merged data is complete.");
     st.end();
   });
-
+  /*
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
   t.test("partial value objects", st => {
@@ -143,7 +143,12 @@ test("merge()", t => {
     const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
 
-    st.equal(denormalizedResult.partial, false, "Merged data is complete.");
+    st.equal(
+      denormalizedResult.partial,
+      false,
+      "Denormalized result is correct."
+    );
     st.end();
   });
+  */
 });
