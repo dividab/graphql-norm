@@ -1,11 +1,7 @@
 // Exported functions
 export { normalize } from "./normalize";
 export { denormalize } from "./denormalize";
-export {
-  mergeEntityCache,
-  getNormalizedEntity,
-  updateStale
-} from "./entity-cache";
+export { merge, getNormalizedEntity, updateStale } from "./entity-cache";
 export { defaultGetObjectId } from "./functions";
 
 // Exported types used in signature of exported functions
@@ -18,7 +14,7 @@ export {
 } from "./types";
 
 export {
-  EntityCache, // ref: normalize(), denormalize(), mergeEntityCache(), getNormalizedEntity(), updateStaleEntities()
+  EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
   Entity, // ref: EntityCache
   EntityFieldValue, // ref: Entity
   EntityId, // ref: EntityFieldValue

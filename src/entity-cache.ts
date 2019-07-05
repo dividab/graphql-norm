@@ -9,6 +9,7 @@ export type EntityFieldValue =
   | string
   | boolean
   | number
+  | null
   | EntityFieldValueArray;
 
 export interface EntityFieldValueArray
@@ -47,7 +48,7 @@ export function getNormalizedEntity<TDenormalized>(
  * @param entities The first cache
  * @param newEntities The second cache
  */
-export function mergeEntityCache(
+export function merge(
   entities: EntityCache,
   newEntities: EntityCache
 ): EntityCache {
@@ -121,23 +122,23 @@ export function updateStale(
 export type NormalizedEntityField<T> = T extends string
   ? string
   : T extends number
-    ? number
-    : T extends boolean
-      ? boolean
-      : T extends ReadonlyArray<string>
-        ? ReadonlyArray<string>
-        : T extends ReadonlyArray<boolean>
-          ? ReadonlyArray<boolean>
-          : T extends ReadonlyArray<number>
-            ? ReadonlyArray<number>
-            : T extends ReadonlyArray<object>
-              ? ReadonlyArray<EntityId>
-              : "undefined value";
+  ? number
+  : T extends boolean
+  ? boolean
+  : T extends ReadonlyArray<string>
+  ? ReadonlyArray<string>
+  : T extends ReadonlyArray<boolean>
+  ? ReadonlyArray<boolean>
+  : T extends ReadonlyArray<number>
+  ? ReadonlyArray<number>
+  : T extends ReadonlyArray<Object>
+  ? ReadonlyArray<EntityId>
+  : "undefined value";
 
 /**
  * This type maps a denormalized entity type to a normalized entity type.
  * It does it by converting arrays of objects into arrays of EntityId.
  */
 export type NormalizedEntity<TDenormalized> = {
-  readonly [P in keyof TDenormalized]: NormalizedEntityField<TDenormalized[P]>
+  readonly [P in keyof TDenormalized]: NormalizedEntityField<TDenormalized[P]>;
 };

@@ -66,9 +66,12 @@ export function denormalize(
 
     let responseObjectOrNewParentArray:
       | MutableResponseObject
-      | MutableResponseObjectArray;
+      | MutableResponseObjectArray
+      | null;
 
-    if (!Array.isArray(idOrIdArray)) {
+    if (idOrIdArray === null) {
+      responseObjectOrNewParentArray = null;
+    } else if (!Array.isArray(idOrIdArray)) {
       const id: EntityId = idOrIdArray as EntityId;
 
       const entity = entities[id];
@@ -118,7 +121,9 @@ export function denormalize(
             stack.push([
               field as FieldNodeWithSelectionSet,
               entityValue as any,
-              responseObjectOrNewParentArray,
+              responseObjectOrNewParentArray as
+                | MutableResponseObject
+                | MutableResponseObjectArray,
               (field.alias && field.alias.value) || field.name.value
             ]);
           } else {
@@ -141,14 +146,25 @@ export function denormalize(
         ] || [];
       for (let i = 0; i < idArray.length; i++) {
         const idArrayItem = idArray[i];
-        stack.push([fieldNode, idArrayItem, responseObjectOrNewParentArray, i]);
+        stack.push([
+          fieldNode,
+          idArrayItem,
+          responseObjectOrNewParentArray as
+            | MutableResponseObject
+            | MutableResponseObjectArray,
+          i
+        ]);
       }
     }
 
     // Add to the parent, either field or an array
     if (Array.isArray(parentObjectOrArray)) {
       const parentArray: MutableResponseObjectArray = parentObjectOrArray;
-      parentArray[parentResponseKey as number] = responseObjectOrNewParentArray;
+      parentArray[
+        parentResponseKey as number
+      ] = responseObjectOrNewParentArray as
+        | MutableResponseObject
+        | MutableResponseObjectArray;
     } else {
       const parentObject: MutableResponseObject = parentObjectOrArray;
       parentObject[
