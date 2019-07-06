@@ -46,7 +46,6 @@
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
     "build": "rimraf lib && tsc -p src",
     "performance": "ts-node performance-test/performance-test.ts",
-    "test2": "tape --require ts-node/register \"test/**/*.ts\" | tap-spec",
     "test": "jest test",
     "test:work": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
     "test:denormalize": "tape --require ts-node/register \"test/denormalize.test.ts\" | tap-spec",
