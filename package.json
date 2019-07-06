@@ -52,10 +52,9 @@
     "test:denormalize": "tape --require ts-node/register \"test/denormalize.test.ts\" | tap-spec",
     "test:denormalize-debug": "node --require ts-node/register --inspect-brk  ./node_modules/tape/bin/tape \"test/denormalize.test.ts\" | tap-spec",
     "test:normalize": "tape --require ts-node/register \"test/normalize.test.ts\" | tap-spec",
-    "verify": "yarn lint && yarn build && yarn coverage",
+    "verify": "yarn lint && yarn test && yarn build",
     "precommit": "lint-staged",
-    "coverage": "rimraf coverage .nyc_output && nyc yarn test",
-    "report-coverage": "codecov -f coverage/*.json",
+    "report-coverage": "codecov -f coverage/lcov.info",
     "preversion": "yarn verify",
     "postversion": "git push --tags && yarn publish --new-version $npm_package_version && git push --follow-tags && echo \"Successfully released version $npm_package_version!\""
   },
