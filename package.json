@@ -24,6 +24,7 @@
     "@types/benchmark": "^1.0.31",
     "@types/graphql": "^14.2.1",
     "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.12",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "benchmark": "^2.1.4",
@@ -44,6 +45,7 @@
   "scripts": {
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
     "build": "rimraf lib && tsc -p src",
+    "build-test": "rimraf lib-test && tsc -p test",
     "performance": "ts-node performance-test/performance-test.ts",
     "test": "jest",
     "verify": "yarn lint && yarn test && yarn build",
