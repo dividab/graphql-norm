@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
-import { standardResponse } from "./data/standard-response";
-import { standardEntities } from "./data/standard-entities";
+import { OneTest } from "../shared-test-def";
+import { standardResponse } from "../shared-data/standard-response";
+import { standardEntities } from "../shared-data/standard-entities";
 
 export const test: OneTest = {
   name: "with skip variable false",

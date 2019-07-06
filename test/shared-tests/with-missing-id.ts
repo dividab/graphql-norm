@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
+import { OneTest } from "../shared-test-def";
 
 const fallbackId1 = 'ROOT_QUERY.posts.0.comments({"a":{"b":"1","c":"asd"}}).0';
 const fallbackId2 = 'ROOT_QUERY.posts.0.comments({"a":{"b":"1","c":"asd"}}).1';

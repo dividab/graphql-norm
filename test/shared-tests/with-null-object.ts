@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
+import { OneTest } from "../shared-test-def";
 
 export const test: OneTest = {
   name: "with null object",

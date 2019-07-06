@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
-import { standardEntities } from "./data/standard-entities";
-import { standardResponse } from "./data/standard-response";
+import { OneTest } from "../shared-test-def";
+import { standardEntities } from "../shared-data/standard-entities";
+import { standardResponse } from "../shared-data/standard-response";
 
 export const test: OneTest = {
   name: "with named fragments",

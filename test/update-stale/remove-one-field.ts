@@ -1,4 +1,4 @@
-import { OneTest } from "./one-test";
+import { OneTest } from "../update-stale-def";
 
 export const test: OneTest = {
   name: "remove one field",

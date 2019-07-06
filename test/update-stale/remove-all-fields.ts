@@ -1,4 +1,4 @@
-import { OneTest } from "./one-test";
+import { OneTest } from "../update-stale-def";
 
 /**
  * When there is no fields left, the entity should be removed from stale

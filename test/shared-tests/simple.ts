@@ -1,7 +1,7 @@
-import { OneTest } from "./one-test";
+import { OneTest } from "../shared-test-def";
 import gql from "graphql-tag";
-import { standardResponse } from "./data/standard-response";
-import { standardEntities } from "./data/standard-entities";
+import { standardResponse } from "../shared-data/standard-response";
+import { standardEntities } from "../shared-data/standard-entities";
 
 export const test: OneTest = {
   name: "simple",

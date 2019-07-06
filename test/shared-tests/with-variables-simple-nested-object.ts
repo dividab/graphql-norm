@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
-import { standardResponse } from "./data/standard-response";
+import { OneTest } from "../shared-test-def";
+import { standardResponse } from "../shared-data/standard-response";
 
 export const test: OneTest = {
   name: "with variables simple nested object",

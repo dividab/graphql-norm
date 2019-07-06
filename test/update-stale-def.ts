@@ -1,4 +1,4 @@
-import { EntityCache, StaleEntities } from "../../src/entity-cache";
+import { EntityCache, StaleEntities } from "../src/entity-cache";
 
 export interface OneTest {
   readonly name: string;

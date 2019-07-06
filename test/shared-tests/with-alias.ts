@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
-import { OneTest } from "./one-test";
-import { standardEntities } from "./data/standard-entities";
+import { OneTest } from "../shared-test-def";
+import { standardEntities } from "../shared-data/standard-entities";
 
 export const test: OneTest = {
   name: "with alias",
