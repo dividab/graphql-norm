@@ -39,7 +39,6 @@
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
-    "tap-spec": "^5.0.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
