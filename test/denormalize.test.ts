@@ -1,23 +1,22 @@
-import * as test from "tape";
 import { denormalize } from "../src/denormalize";
-import * as SharedTests from "./shared-test-data";
+// import * as SharedTests from "./shared-test-data";
 import * as TestDataDenormalization from "./denormalize-test-data";
 import { onlySkip } from "./test-data-utils";
 
-test("denormalize() with shared test data", t => {
-  onlySkip(SharedTests.tests).forEach(item => {
-    t.test(item.name, st => {
-      const actual = denormalize(item.query, item.variables, item.entities, {});
-      const expected = item.response;
-      st.deepEqual(actual.response, expected, "Denormalized data valid");
-      st.end();
-    });
-  });
-});
+// describe("denormalize() with shared test data", () => {
+//   onlySkip(SharedTests.tests).forEach(item => {
+//     test(item.name, done => {
+//       const actual = denormalize(item.query, item.variables, item.entities, {});
+//       const expected = item.response;
+//       expect(actual.response).toEqual(expected);
+//       done();
+//     });
+//   });
+// });
 
-test("denormalize() with specialized test data", t => {
+describe("denormalize() with specialized test data", () => {
   onlySkip(TestDataDenormalization.tests).forEach(item => {
-    t.test(item.name, st => {
+    test(item.name, done => {
       const actual = denormalize(
         item.query,
         item.variables,
@@ -25,14 +24,10 @@ test("denormalize() with specialized test data", t => {
         item.staleEntities
       );
       const expected = item.response;
-      st.deepEqual(actual.response, expected, "Denormalized data valid");
-      st.equal(
-        actual.partial,
-        !!item.partial,
-        `Partial should be ${item.partial}`
-      );
-      st.equal(actual.stale, !!item.stale, `Stale should be ${item.stale}`);
-      st.end();
+      expect(actual.response).toEqual(expected);
+      expect(actual.partial).toBe(!!item.partial);
+      expect(actual.stale).toBe(!!item.stale);
+      done();
     });
   });
 });

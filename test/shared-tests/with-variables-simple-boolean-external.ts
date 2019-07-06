@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { OneTest } from "./one-test";
-import { standardResponse } from "./standard-response";
+import { standardResponse } from "./data/standard-response";
 
 export const test: OneTest = {
   name: "with variables simple boolean external",

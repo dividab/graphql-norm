@@ -1,19 +1,17 @@
 import gql from "graphql-tag";
 import { OneTest } from "./one-test";
-import { standardResponse } from "./standard-response";
-import { standardEntities } from "./standard-entities";
+import { standardEntities } from "./data/standard-entities";
+import { standardResponse } from "./data/standard-response";
 
 export const test: OneTest = {
-  name: "with skip literal false",
+  name: "with named fragments",
   query: gql`
     query TestQuery {
-      posts @skip(if: false) {
+      posts {
         id
         __typename
         author {
-          id
-          __typename
-          name
+          ...olle
         }
         title
         comments {
@@ -27,8 +25,13 @@ export const test: OneTest = {
         }
       }
     }
+
+    fragment olle on Author {
+      id
+      __typename
+      name
+    }
   `,
-  variables: { noPosts: false },
   response: standardResponse,
   entities: standardEntities
 };

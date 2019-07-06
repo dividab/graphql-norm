@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "./denormalize-one-test";
+import { DenormalizeOneTest } from "../denormalize-test-def";
 
 export const test: DenormalizeOneTest = {
-  name: "with stale true",
+  name: "with stale false",
   query: gql`
     query TestQuery {
       posts {
@@ -27,9 +27,9 @@ export const test: DenormalizeOneTest = {
     }
   `,
   partial: false,
-  stale: true,
+  stale: false,
   staleEntities: {
-    "Post;123": {
+    "Post;555": {
       author: true,
       title: true,
       comments: true

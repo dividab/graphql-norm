@@ -1,10 +1,6 @@
 import * as GraphQL from "graphql";
-import { EntityCache, StaleEntities } from "../../src/entity-cache";
-import {
-  GraphQLResponse,
-  // Entities,
-  Variables
-} from "../../src/types";
+import { EntityCache, StaleEntities } from "../src/entity-cache";
+import { GraphQLResponse, Variables } from "../src/types";
 
 export interface DenormalizeOneTest {
   readonly name: string;

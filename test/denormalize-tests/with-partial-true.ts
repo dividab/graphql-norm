@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "./denormalize-one-test";
+import { DenormalizeOneTest } from "../denormalize-test-def";
 
 export const test: DenormalizeOneTest = {
   name: "with partial true",

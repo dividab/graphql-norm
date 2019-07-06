@@ -1,11 +1,10 @@
-import * as test from "tape";
 import { normalize } from "../src/normalize";
 import gql from "graphql-tag";
 import { merge } from "../src/entity-cache";
 import { denormalize } from "../src/denormalize";
 
-test("merge()", t => {
-  t.test("full value objects", st => {
+describe("merge()", () => {
+  test("full value objects", done => {
     const itemA = {
       name: "",
       query: gql`
@@ -73,8 +72,8 @@ test("merge()", t => {
     const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
 
-    st.equal(denormalizedResult.partial, false, "Merged data is complete.");
-    st.end();
+    expect(denormalizedResult.partial).toBe(false);
+    done();
   });
   /*
   // When a value-object (an object with no ID, owned by it's parent) is

@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
 import { OneTest } from "./one-test";
-import { standardResponse } from "./standard-response";
+import { standardResponse } from "./data/standard-response";
 
 export const test: OneTest = {
-  name: "with variables simple boolean",
+  name: "with variables simple list",
   query: gql`
     query TestQuery {
       posts {
@@ -15,7 +15,7 @@ export const test: OneTest = {
           name
         }
         title
-        comments(a: true) {
+        comments(a: [1, 2]) {
           id
           __typename
           commenter {
@@ -37,7 +37,7 @@ export const test: OneTest = {
       __typename: "Post",
       author: "Author;1",
       title: "My awesome blog post",
-      'comments({"a":true})': ["Comment;324"]
+      'comments({"a":["1","2"]})': ["Comment;324"]
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" },
     "Comment;324": {

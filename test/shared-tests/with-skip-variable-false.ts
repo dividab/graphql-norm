@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
 import { OneTest } from "./one-test";
-import { standardResponse } from "./standard-response";
-import { standardEntities } from "./standard-entities";
+import { standardResponse } from "./data/standard-response";
+import { standardEntities } from "./data/standard-entities";
 
 export const test: OneTest = {
   name: "with skip variable false",
   query: gql`
     query TestQuery($noPosts: Boolean!) {
-      posts @include(if: $noPosts) {
+      posts @skip(if: $noPosts) {
         id
         __typename
         author {
@@ -28,7 +28,7 @@ export const test: OneTest = {
       }
     }
   `,
-  variables: { noPosts: true },
+  variables: { noPosts: false },
   response: standardResponse,
   entities: standardEntities
 };

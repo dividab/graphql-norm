@@ -1,14 +1,15 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "./denormalize-one-test";
+import { OneTest } from "./one-test";
+import { standardEntities } from "./data/standard-entities";
 
-export const test: DenormalizeOneTest = {
-  name: "with partial false",
+export const test: OneTest = {
+  name: "with alias",
   query: gql`
     query TestQuery {
       posts {
         id
         __typename
-        author {
+        olle: author {
           id
           __typename
           name
@@ -26,37 +27,32 @@ export const test: DenormalizeOneTest = {
       }
     }
   `,
-  partial: false,
-  stale: false,
-  staleEntities: {},
   response: {
     data: {
       posts: [
         {
           id: "123",
           __typename: "Post",
-          author: {
+          olle: {
             id: "1",
             __typename: "Author",
             name: "Paul"
           },
           title: "My awesome blog post",
-          comments: null
+          comments: [
+            {
+              id: "324",
+              __typename: "Comment",
+              commenter: {
+                id: "2",
+                __typename: "Author",
+                name: "Nicole"
+              }
+            }
+          ]
         }
       ]
     }
   },
-  entities: {
-    ROOT_QUERY: {
-      posts: ["Post;123"]
-    },
-    "Post;123": {
-      id: "123",
-      __typename: "Post",
-      author: "Author;1",
-      title: "My awesome blog post",
-      comments: null
-    },
-    "Author;1": { id: "1", __typename: "Author", name: "Paul" }
-  }
+  entities: standardEntities
 };
