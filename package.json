@@ -28,7 +28,7 @@
     "@typescript-eslint/parser": "^1.11.0",
     "benchmark": "^2.1.4",
     "codecov": "^3.5.0",
-    "eslint": "^6.0.1",
+    "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-ts-immutable": "^0.1.0",
     "graphql": "^14.3.1",
