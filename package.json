@@ -45,7 +45,7 @@
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
     "build": "rimraf lib && tsc -p src",
     "performance": "ts-node performance-test/performance-test.ts",
-    "test": "jest test",
+    "test": "jest",
     "verify": "yarn lint && yarn test && yarn build",
     "precommit": "lint-staged",
     "report-coverage": "codecov -f coverage/lcov.info",
