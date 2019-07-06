@@ -1,7 +1,7 @@
 import * as BenchMark from "benchmark";
 import { normalize } from "../src/normalize";
 import { denormalize } from "../src/denormalize";
-import * as BigAmountOfData from "../test/shared-tests/test-with-big-amount-of-data.test";
+import * as BigAmountOfData from "../test/shared-tests/test-with-big-amount-of-data";
 
 const normalizeSuite = new BenchMark.Suite();
 
