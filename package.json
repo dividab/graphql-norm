@@ -36,7 +36,7 @@
     "graphql-tag": "^2.10.1",
     "husky": "^2.4.1",
     "jest": "^24.8.0",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^9.1.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "ts-node": "^8.3.0",
