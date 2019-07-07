@@ -35,7 +35,7 @@ export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
   normMap: NormMap,
-  staleEntities: StaleMap = {}
+  staleMap: StaleMap = {}
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -83,7 +83,7 @@ export function denormalize(
         break;
       }
 
-      const staleEntity = staleEntities[id];
+      const staleFields = staleMap[id];
 
       // If we've been here before we need to use the previously created response object
       if (Array.isArray(parentObjectOrArray)) {
@@ -105,23 +105,23 @@ export function denormalize(
           : true;
         if (include) {
           // Build cacheKey according to any arguments
-          const entityId =
+          const cacheKey =
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
           // Check if this field is stale
-          if (staleEntity) {
-            const staleField = staleEntity[entityId];
+          if (staleFields) {
+            const staleField = staleFields[cacheKey];
             if (staleField !== undefined) {
               stale = true;
             }
           }
-          const entityValue = normObj[entityId];
-          if (entityValue !== null && field.selectionSet) {
+          const normObjValue = normObj[cacheKey];
+          if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
               field as FieldNodeWithSelectionSet,
-              entityValue as any,
+              normObjValue as any,
               responseObjectOrNewParentArray as
                 | MutableResponseObject
                 | MutableResponseObjectArray,
@@ -129,10 +129,10 @@ export function denormalize(
             ]);
           } else {
             // This field is a primitive (not a array or object)
-            if (entityValue !== undefined) {
+            if (normObjValue !== undefined) {
               (responseObjectOrNewParentArray as MutableResponseObject)[
                 (field.alias && field.alias.value) || field.name.value
-              ] = entityValue;
+              ] = normObjValue;
             } else {
               partial = true;
             }

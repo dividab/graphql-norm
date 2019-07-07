@@ -1,19 +1,19 @@
 import { NormKey, NormMap } from "./norm-map";
 
 /**
- * Fetches an entity from the cache, taking as type parameter the entity
- * has when denormalized, but returning the type it will have as a normalized entity.
+ * Fetches an object from the cache, taking as type parameter the object
+ * has when denormalized, but returning the type it will have as a normalized object.
  * @param key The cache key
  * @param cache The cache
  */
-export function getNormalizedEntity<TDenormalized>(
+export function getNormalizedObject<TDenormalized>(
   key: string,
   cache: NormMap
-): NormalizedEntity<TDenormalized> {
+): NormalizedObject<TDenormalized> {
   return cache[key] as any;
 }
 
-export type NormalizedEntityField<T> = T extends string
+export type NormalizedField<T> = T extends string
   ? string
   : T extends number
   ? number
@@ -30,9 +30,9 @@ export type NormalizedEntityField<T> = T extends string
   : "undefined value";
 
 /**
- * This type maps a denormalized entity type to a normalized entity type.
- * It does it by converting arrays of objects into arrays of EntityId.
+ * This type maps a denormalized object type to a normalized object type.
+ * It does it by converting arrays of objects into arrays of cache keys.
  */
-export type NormalizedEntity<TDenormalized> = {
-  readonly [P in keyof TDenormalized]: NormalizedEntityField<TDenormalized[P]>;
+export type NormalizedObject<TDenormalized> = {
+  readonly [P in keyof TDenormalized]: NormalizedField<TDenormalized[P]>;
 };

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Rename `EntityCache` to `NormMap`, `Entity` to `NormObj`, `EntityFieldVlue` to `NormFieldVlue`, and associated renames. See [#16](https://github.com/dividab/graphql-norm/issues/16) and PR [#34](https://github.com/dividab/graphql-norm/pull/29).
+
 ### Changes
 
 - `normalize` directly take the `data` from a GraphQL response as argument instead of an object with a `data` property. See [#34](https://github.com/dividab/graphql-norm/pull/29).

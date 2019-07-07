@@ -13,7 +13,9 @@ export {
 } from "./types";
 
 // These should be moved out of this lib
-export { getNormalizedEntity } from "./normalized-entity";
+export {
+  getNormalizedObject as getNormalizedEntity
+} from "./normalized-entity";
 export { updateStale } from "./stale";
 
 export {
@@ -24,8 +26,8 @@ export {
 } from "./norm-map";
 
 export {
-  NormalizedEntity, // ref: getNormalizedEntity()
-  NormalizedEntityField // ref: NormalizedEntityField
+  NormalizedObject as NormalizedEntity, // ref: getNormalizedEntity()
+  NormalizedField as NormalizedEntityField // ref: NormalizedEntityField
 } from "./normalized-entity";
 
 export {
