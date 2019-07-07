@@ -28,8 +28,8 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
 
       let staleFieldKeyCount = staleFieldKeys.length;
 
-      // Check all fields of the stale normalized object against the corresponding normalized object in cache
-      // If a field exists in cache, then it should not be stale anymore
+      // Check all fields of the stale normalized object against the corresponding normalized object in normalized map
+      // If a field exists in the normalized map, then it should not be stale anymore
       let staleFieldsCopy: Mutable<StaleFields> | undefined = undefined;
       for (const staleFieldKey of staleFieldKeys) {
         for (const normField of Object.keys(normObj)) {

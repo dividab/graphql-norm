@@ -20,8 +20,8 @@ export interface NormObj {
 
 /**
  * An optimized function to merge two maps of normalized objects (as returned from normalize)
- * @param normMap The first cache
- * @param newNormMap The second cache
+ * @param normMap The first normalized map
+ * @param newNormMap The second normalized map
  */
 export function merge(normMap: NormMap, newNormMap: NormMap): NormMap {
   const updatedNormMap = Object.keys(newNormMap).reduce(
