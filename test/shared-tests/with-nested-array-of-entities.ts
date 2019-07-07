@@ -18,26 +18,24 @@ export const test: OneTest = {
       }
     }
   `,
-  response: {
-    data: {
-      table: {
-        id: "T1",
-        __typename: "Table",
-        rows: [
-          [
-            { id: "1.1", __typename: "Cell", value: "value 1.1" },
-            { id: "1.2", __typename: "Cell", value: "value 1.2" }
-          ],
-          [
-            { id: "2.1", __typename: "Cell", value: "value 2.1" },
-            { id: "2.2", __typename: "Cell", value: "value 2.2" }
-          ],
-          [
-            { id: "3.1", __typename: "Cell", value: "value 3.1" },
-            { id: "3.2", __typename: "Cell", value: "value 3.2" }
-          ]
+  data: {
+    table: {
+      id: "T1",
+      __typename: "Table",
+      rows: [
+        [
+          { id: "1.1", __typename: "Cell", value: "value 1.1" },
+          { id: "1.2", __typename: "Cell", value: "value 1.2" }
+        ],
+        [
+          { id: "2.1", __typename: "Cell", value: "value 2.1" },
+          { id: "2.2", __typename: "Cell", value: "value 2.2" }
+        ],
+        [
+          { id: "3.1", __typename: "Cell", value: "value 3.1" },
+          { id: "3.2", __typename: "Cell", value: "value 3.2" }
         ]
-      }
+      ]
     }
   },
   entities: {

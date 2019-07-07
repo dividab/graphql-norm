@@ -9,8 +9,7 @@ export {
   GetObjectId, // ref: normalize(), defaultGetObjectId()
   Variables, // ref: normalize(), denormalize()
   DenormalizationResult, // used in: denormalize()
-  GraphQLResponse, // ref: normalize()
-  RootFields // ref: GraphQLResponse
+  RootFields // ref: normalize(), DenormalizationResult
 } from "./types";
 
 export {

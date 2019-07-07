@@ -32,6 +32,6 @@ export const test: OneTest = {
       name
     }
   `,
-  response: standardResponse,
+  data: standardResponse,
   entities: standardEntities
 };

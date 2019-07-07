@@ -49,7 +49,7 @@
     "performance": "ts-node performance-test/performance-test.ts",
     "test-coverage": "jest",
     "test": "jest --no-coverage",
-    "test:work": "jest --no-coverage ./test/normalize.test.ts",
+    "test:work": "jest --no-coverage ./test/denormalize.test.ts",
     "verify": "yarn lint && yarn test-coverage && yarn build",
     "precommit": "lint-staged",
     "report-coverage": "codecov -f coverage/lcov.info",

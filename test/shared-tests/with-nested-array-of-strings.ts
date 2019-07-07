@@ -8,14 +8,12 @@ export const test: OneTest = {
       tagsArray
     }
   `,
-  response: {
-    data: {
-      tagsArray: [
-        ["tag1.1", "tag1.2", "tag1.3"],
-        ["tag2.1", "tag2.2", "tag2.3"],
-        ["tag3.1", "tag3.2", "tag3.3"]
-      ]
-    }
+  data: {
+    tagsArray: [
+      ["tag1.1", "tag1.2", "tag1.3"],
+      ["tag2.1", "tag2.2", "tag2.3"],
+      ["tag3.1", "tag3.2", "tag3.3"]
+    ]
   },
   entities: {
     ROOT_QUERY: {

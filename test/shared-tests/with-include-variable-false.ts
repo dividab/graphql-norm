@@ -27,9 +27,7 @@ export const test: OneTest = {
     }
   `,
   variables: { noPosts: false },
-  response: {
-    data: {}
-  },
+  data: {},
   entities: {
     ROOT_QUERY: {}
   }

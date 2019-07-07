@@ -13,17 +13,15 @@ export const test: OneTest = {
     }
   `,
   variables: { postIds: ["123", "non-existent-id"] },
-  response: {
-    data: {
-      postsByIds: [
-        {
-          id: "123",
-          __typename: "Post",
-          title: "My awesome blog post"
-        },
-        null
-      ]
-    }
+  data: {
+    postsByIds: [
+      {
+        id: "123",
+        __typename: "Post",
+        title: "My awesome blog post"
+      },
+      null
+    ]
   },
   entities: {
     ROOT_QUERY: {

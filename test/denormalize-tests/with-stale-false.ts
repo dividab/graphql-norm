@@ -35,22 +35,20 @@ export const test: DenormalizeOneTest = {
       comments: true
     }
   },
-  response: {
-    data: {
-      posts: [
-        {
-          id: "123",
-          __typename: "Post",
-          author: {
-            id: "1",
-            __typename: "Author",
-            name: "Paul"
-          },
-          title: "My awesome blog post",
-          comments: null
-        }
-      ]
-    }
+  data: {
+    posts: [
+      {
+        id: "123",
+        __typename: "Post",
+        author: {
+          id: "1",
+          __typename: "Author",
+          name: "Paul"
+        },
+        title: "My awesome blog post",
+        comments: null
+      }
+    ]
   },
   entities: {
     ROOT_QUERY: {
