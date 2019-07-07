@@ -17,10 +17,10 @@ export {
 } from "./types";
 
 export {
-  EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
-  Entity, // ref: EntityCache
-  EntityFieldValue, // ref: Entity
-  EntityId // ref: EntityFieldValue
+  NormMap as EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
+  NormObj as Entity, // ref: EntityCache
+  NormFieldValue as EntityFieldValue, // ref: Entity
+  NormKey as EntityId // ref: EntityFieldValue
 } from "./entity-cache";
 
 export {

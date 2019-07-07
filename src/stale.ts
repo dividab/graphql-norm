@@ -1,4 +1,4 @@
-import { EntityCache } from "./entity-cache";
+import { NormMap } from "./entity-cache";
 
 export interface StaleEntities {
   readonly [cacheKey: string]: StaleEntity | undefined;
@@ -14,7 +14,7 @@ export type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
  * Removes the stale flag for entitiy fields that are present in the normalized result
  */
 export function updateStale(
-  cache: EntityCache,
+  cache: NormMap,
   stale: StaleEntities
 ): StaleEntities {
   type MutableStaleEntities = Mutable<StaleEntities>;

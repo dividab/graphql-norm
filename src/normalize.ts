@@ -14,23 +14,18 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import {
-  EntityCache,
-  Entity,
-  EntityId,
-  EntityFieldValue
-} from "./entity-cache";
+import { NormMap, NormObj, NormKey, NormFieldValue } from "./entity-cache";
 
 type MutableDeep<T> = { -readonly [P in keyof T]: MutableDeep<T[P]> }; // Remove readonly deep
 
-type ParentEntity = MutableDeep<Entity>;
-type MutableEntityCache = MutableDeep<EntityCache>;
+type ParentEntity = MutableDeep<NormObj>;
+type MutableEntityCache = MutableDeep<NormMap>;
 type ResponseArray = ReadonlyArray<
   ResponseObject | ReadonlyArray<ResponseObject>
 >;
 type ResponseObjectOrArray = ResponseObject | ResponseArray;
 type ParentEntityOrArray = ParentEntity | ParentArray;
-type ParentArray = Array<EntityFieldValue>;
+type ParentArray = Array<NormFieldValue>;
 type StackWorkItem = [
   FieldNodeWithSelectionSet,
   ParentEntityOrArray | undefined /*parentEntity*/,
@@ -50,7 +45,7 @@ export function normalize(
   variables: Variables | undefined,
   data: RootFields,
   getObjectId: GetObjectId = defaultGetObjectId
-): EntityCache {
+): NormMap {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
   );
@@ -81,7 +76,7 @@ export function normalize(
       fragmentMap
     );
 
-    let entityIdOrNewParentArray: EntityId | ParentArray | null = null;
+    let entityIdOrNewParentArray: NormKey | ParentArray | null = null;
     if (responseObjectOrArray === null) {
       entityIdOrNewParentArray = null;
     } else if (!Array.isArray(responseObjectOrArray)) {
@@ -159,5 +154,5 @@ export function normalize(
     }
   }
 
-  return entities as EntityCache;
+  return entities as NormMap;
 }

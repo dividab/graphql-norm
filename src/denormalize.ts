@@ -15,7 +15,7 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import { EntityCache, EntityId } from "./entity-cache";
+import { NormMap, NormKey } from "./entity-cache";
 import { StaleEntities, Mutable } from "./stale";
 
 type MutableResponseObject = Mutable<ResponseObject>;
@@ -26,7 +26,7 @@ type ParentResponseObjectOrArray =
 type ParentResponseKey = string | number | undefined;
 type StackWorkItem = [
   FieldNodeWithSelectionSet,
-  EntityId | ReadonlyArray<EntityId>,
+  NormKey | ReadonlyArray<NormKey>,
   ParentResponseObjectOrArray,
   ParentResponseKey
 ];
@@ -34,7 +34,7 @@ type StackWorkItem = [
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  entities: EntityCache,
+  normMap: NormMap,
   staleEntities: StaleEntities = {}
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
@@ -73,12 +73,12 @@ export function denormalize(
     if (idOrIdArray === null) {
       responseObjectOrNewParentArray = null;
     } else if (!Array.isArray(idOrIdArray)) {
-      const id: EntityId = idOrIdArray as EntityId;
+      const id: NormKey = idOrIdArray as NormKey;
 
-      const entity = entities[id];
+      const normObj = normMap[id];
 
       // Does not exist in cache. We can't fully resolve query
-      if (entity === undefined) {
+      if (normObj === undefined) {
         partial = true;
         break;
       }
@@ -116,7 +116,7 @@ export function denormalize(
               stale = true;
             }
           }
-          const entityValue = entity[entityId];
+          const entityValue = normObj[entityId];
           if (entityValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
@@ -140,7 +140,7 @@ export function denormalize(
         }
       }
     } else {
-      const idArray: ReadonlyArray<EntityId> = idOrIdArray;
+      const idArray: ReadonlyArray<NormKey> = idOrIdArray;
       responseObjectOrNewParentArray =
         (parentObjectOrArray as MutableResponseObject)[
           parentResponseKey as string

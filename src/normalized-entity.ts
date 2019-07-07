@@ -1,4 +1,4 @@
-import { EntityId, EntityCache } from "entity-cache";
+import { NormKey, NormMap } from "entity-cache";
 
 /**
  * Fetches an entity from the cache, taking as type parameter the entity
@@ -8,7 +8,7 @@ import { EntityId, EntityCache } from "entity-cache";
  */
 export function getNormalizedEntity<TDenormalized>(
   key: string,
-  cache: EntityCache
+  cache: NormMap
 ): NormalizedEntity<TDenormalized> {
   return cache[key] as any;
 }
@@ -26,7 +26,7 @@ export type NormalizedEntityField<T> = T extends string
   : T extends ReadonlyArray<number>
   ? ReadonlyArray<number>
   : T extends ReadonlyArray<object>
-  ? ReadonlyArray<EntityId>
+  ? ReadonlyArray<NormKey>
   : "undefined value";
 
 /**

@@ -1,40 +1,36 @@
-export interface EntityCache {
-  readonly [cacheKey: string]: Entity;
+export interface NormMap {
+  readonly [key: string]: NormObj;
 }
 
-export type EntityId = string;
+export type NormKey = string;
 
-export type EntityFieldValue =
-  | EntityId
+export type NormFieldValue =
+  | NormKey
   | string
   | boolean
   | number
   | null
-  | EntityFieldValueArray;
+  | NormFieldValueArray;
 
-export interface EntityFieldValueArray
-  extends ReadonlyArray<EntityFieldValue> {}
+export interface NormFieldValueArray extends ReadonlyArray<NormFieldValue> {}
 
-export interface Entity {
-  readonly [field: string]: null | EntityFieldValue;
+export interface NormObj {
+  readonly [field: string]: null | NormFieldValue;
 }
 
 /**
  * An optimized function to merge two cache objects (as returned from normalize)
- * @param entities The first cache
- * @param newEntities The second cache
+ * @param normMap The first cache
+ * @param newNormMap The second cache
  */
-export function merge(
-  entities: EntityCache,
-  newEntities: EntityCache
-): EntityCache {
-  const updatedEntities = Object.keys(newEntities).reduce(
+export function merge(normMap: NormMap, newNormMap: NormMap): NormMap {
+  const updatedNormMap = Object.keys(newNormMap).reduce(
     (stateSoFar, current) => {
-      const newEntity = {
-        ...(entities[current] || {}),
-        ...newEntities[current]
+      const newNormObj = {
+        ...(normMap[current] || {}),
+        ...newNormMap[current]
       };
-      stateSoFar[current] = newEntity;
+      stateSoFar[current] = newNormObj;
       return stateSoFar;
     },
     {} as {
@@ -44,7 +40,7 @@ export function merge(
   );
 
   return {
-    ...entities,
-    ...updatedEntities
+    ...normMap,
+    ...updatedNormMap
   };
 }
