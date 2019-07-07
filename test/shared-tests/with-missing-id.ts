@@ -71,7 +71,7 @@ export const test: OneTest = {
       nisse: "asd"
     }
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"],
       testNode: fallbackId3

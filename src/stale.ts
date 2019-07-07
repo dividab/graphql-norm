@@ -14,12 +14,12 @@ export type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
  * Removes the stale flag for entitiy fields that are present in the normalized result
  */
 export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
-  type MutableStaleEntities = Mutable<StaleMap>;
+  type MutableStaleMap = Mutable<StaleMap>;
 
   // Make a shallow copy to enable shallow mutation
-  const staleCopy: MutableStaleEntities = { ...staleMap };
+  const staleCopy: MutableStaleMap = { ...staleMap };
 
-  // Check all stale entities against the cache
+  // Check all stale fields against the cache
   for (const staleKey of Object.keys(staleCopy)) {
     const normObj = normMap[staleKey];
     if (normObj !== undefined) {

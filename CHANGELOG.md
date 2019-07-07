@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- Rename `EntityCache` to `NormMap`, `Entity` to `NormObj`, `EntityFieldVlue` to `NormFieldVlue`, and associated renames. See [#16](https://github.com/dividab/graphql-norm/issues/16) and PR [#34](https://github.com/dividab/graphql-norm/pull/29).
+- Rename `EntityCache` to `NormMap`, `Entity` to `NormObj`, `EntityFieldVlue` to `NormFieldVlue`, and associated renames. See [#16](https://github.com/dividab/graphql-norm/issues/16) and PR [#35](https://github.com/dividab/graphql-norm/pull/35).
 
 ### Changes
 

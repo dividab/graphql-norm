@@ -12,23 +12,22 @@ export {
   RootFields // ref: normalize(), DenormalizationResult
 } from "./types";
 
-// These should be moved out of this lib
 export {
-  getNormalizedObject as getNormalizedEntity
-} from "./normalized-entity";
-export { updateStale } from "./stale";
-
-export {
-  NormMap, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
+  NormMap, // ref: normalize(), denormalize(), merge()
   NormObj, // ref: NormMap
   NormFieldValue, // ref: NormObj
   NormKey // ref: NormFieldValue
 } from "./norm-map";
 
+// All below this line should be moved out of this lib
+
+export { getNormalizedObject } from "./normalized-object";
+export { updateStale } from "./stale";
+
 export {
-  NormalizedObject as NormalizedEntity, // ref: getNormalizedEntity()
-  NormalizedField as NormalizedEntityField // ref: NormalizedEntityField
-} from "./normalized-entity";
+  NormalizedObject, // ref: getNormalizedObject()
+  NormalizedField // ref: NormalizedField
+} from "./normalized-object";
 
 export {
   StaleMap, // ref: denormalize(), updateStaleEntities()

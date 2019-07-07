@@ -38,7 +38,7 @@ export const test: OneTest = {
       ]
     }
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       table: "Table;T1"
     },

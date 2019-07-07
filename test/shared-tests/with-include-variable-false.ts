@@ -28,7 +28,7 @@ export const test: OneTest = {
   `,
   variables: { noPosts: false },
   data: {},
-  entities: {
+  normMap: {
     ROOT_QUERY: {}
   }
 };

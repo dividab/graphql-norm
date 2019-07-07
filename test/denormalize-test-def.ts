@@ -10,8 +10,8 @@ export interface DenormalizeOneTest {
   readonly query: GraphQL.DocumentNode;
   readonly variables?: Variables;
   readonly data: RootFields | undefined;
-  readonly entities: NormMap;
+  readonly normMap: NormMap;
   readonly partial: boolean;
   readonly stale: boolean;
-  readonly staleEntities: StaleMap;
+  readonly staleMap: StaleMap;
 }

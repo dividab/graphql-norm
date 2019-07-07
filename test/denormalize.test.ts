@@ -6,7 +6,7 @@ import { onlySkip } from "./test-data-utils";
 describe("denormalize() with shared test data", () => {
   onlySkip(SharedTests.tests).forEach(item => {
     test(item.name, done => {
-      const actual = denormalize(item.query, item.variables, item.entities, {});
+      const actual = denormalize(item.query, item.variables, item.normMap, {});
       expect(actual.data).toEqual(item.data);
       done();
     });
@@ -19,8 +19,8 @@ describe("denormalize() with specialized test data", () => {
       const actual = denormalize(
         item.query,
         item.variables,
-        item.entities,
-        item.staleEntities
+        item.normMap,
+        item.staleMap
       );
       expect(actual.data).toEqual(item.data);
       expect(actual.partial).toBe(!!item.partial);

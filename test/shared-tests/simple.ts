@@ -1,7 +1,7 @@
 import { OneTest } from "../shared-test-def";
 import gql from "graphql-tag";
 import { standardResponse } from "../shared-data/standard-response";
-import { standardEntities } from "../shared-data/standard-entities";
+import { standardNormMap } from "../shared-data/standard-norm-map";
 
 export const test: OneTest = {
   name: "simple",
@@ -29,5 +29,5 @@ export const test: OneTest = {
     }
   `,
   data: standardResponse,
-  entities: standardEntities
+  normMap: standardNormMap
 };

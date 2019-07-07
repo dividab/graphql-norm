@@ -15,7 +15,7 @@ export const test: OneTest = {
       ["tag3.1", "tag3.2", "tag3.3"]
     ]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       tagsArray: [
         ["tag1.1", "tag1.2", "tag1.3"],

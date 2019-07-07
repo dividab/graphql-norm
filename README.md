@@ -150,7 +150,7 @@ normalize(
   query: GraphQL.DocumentNode,
   variables: { [key: string]: any } | undefined,
   response: { data: any },
-  getObjectId: (entity: any) => string
+  getObjectId: (object: any) => string
 ): { [key: string]: any }
 ```
 
@@ -163,7 +163,7 @@ export function denormalize(
   query: GraphQL.DocumentNode,
   variables: { [key: string]: any } | undefined,
   cache: { [key: string]: any },
-  staleEntities: { [field: string]: true | undefined } | undefined
+  staleMap: { [field: string]: true | undefined } | undefined
 ): {
   response: { data: any } | undefined;
   partial: boolean;

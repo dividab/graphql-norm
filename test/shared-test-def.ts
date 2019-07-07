@@ -9,5 +9,5 @@ export interface OneTest {
   readonly query: GraphQL.DocumentNode;
   readonly variables?: Variables;
   readonly data: RootFields;
-  readonly entities: NormMap;
+  readonly normMap: NormMap;
 }
