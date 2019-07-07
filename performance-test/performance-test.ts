@@ -7,12 +7,12 @@ const normalizeSuite = new BenchMark.Suite();
 
 normalizeSuite
   .add("Normalize BigAmountOfData", function() {
-    const { query, variables, response } = BigAmountOfData.test;
-    normalize(query, variables, response);
+    const { query, variables, data } = BigAmountOfData.test;
+    normalize(query, variables, data);
   })
   .add("Denormalize BigAmountOfData", function() {
-    const { query, variables, entities } = BigAmountOfData.test;
-    denormalize(query, variables, entities);
+    const { query, variables, data } = BigAmountOfData.test;
+    denormalize(query, variables, data);
   })
   .on("complete", function(this: any) {
     // tslint:disable-next-line:no-invalid-this
