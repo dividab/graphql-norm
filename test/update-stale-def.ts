@@ -5,7 +5,7 @@ export interface OneTest {
   readonly name: string;
   readonly only?: boolean;
   readonly skip?: boolean;
-  readonly cache: NormMap;
+  readonly normMap: NormMap;
   readonly staleBefore: StaleMap;
   readonly staleAfter: StaleMap;
 }

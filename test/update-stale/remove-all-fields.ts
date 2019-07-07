@@ -5,7 +5,7 @@ import { OneTest } from "../update-stale-def";
  */
 export const test: OneTest = {
   name: "remove last field",
-  cache: { myid: { id: "myid", name: "foo" } },
+  normMap: { myid: { id: "myid", name: "foo" } },
   staleBefore: { myid: { name: true } },
   staleAfter: {}
 };

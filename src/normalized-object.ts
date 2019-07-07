@@ -4,13 +4,13 @@ import { NormKey, NormMap } from "./norm-map";
  * Fetches an object from the cache, taking as type parameter the object
  * has when denormalized, but returning the type it will have as a normalized object.
  * @param key The cache key
- * @param cache The cache
+ * @param normMap The cache
  */
 export function getNormalizedObject<TDenormalized>(
   key: string,
-  cache: NormMap
+  normMap: NormMap
 ): NormalizedObject<TDenormalized> {
-  return cache[key] as any;
+  return normMap[key] as any;
 }
 
 export type NormalizedField<T> = T extends string

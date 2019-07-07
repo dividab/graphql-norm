@@ -19,7 +19,7 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
   // Make a shallow copy to enable shallow mutation
   const staleCopy: MutableStaleMap = { ...staleMap };
 
-  // Check all stale fields against the cache
+  // Check all stale fields against the normalized map
   for (const staleKey of Object.keys(staleCopy)) {
     const normObj = normMap[staleKey];
     if (normObj !== undefined) {

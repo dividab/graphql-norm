@@ -38,7 +38,7 @@ type StackWorkItem = [
  * @param query The graphql query document
  * @param variables The graphql query variables
  * @param response The graphql response
- * @param getObjectId Function to get cache key from an object
+ * @param getObjectId Function to get key from an object
  */
 export function normalize(
   query: GraphQL.DocumentNode,
@@ -139,12 +139,12 @@ export function normalize(
       const parentArray = parentNormObjOrArray as ParentArray;
       parentArray.unshift(keyOrNewParentArray);
     } else {
-      const cacheKey =
+      const key =
         fieldNode.arguments && fieldNode.arguments.length > 0
           ? fieldNameWithArguments(fieldNode, variables)
           : fieldNode.name.value;
       const parentNormObj = parentNormObjOrArray as ParentNormObj;
-      parentNormObj[cacheKey] = keyOrNewParentArray;
+      parentNormObj[key] = keyOrNewParentArray;
     }
 
     // Use fake objectId function only for the first iteration, then switch to the real one

@@ -77,7 +77,7 @@ export function denormalize(
 
       const normObj = normMap[id];
 
-      // Does not exist in cache. We can't fully resolve query
+      // Does not exist in normalized map. We can't fully resolve query
       if (normObj === undefined) {
         partial = true;
         break;
@@ -104,19 +104,19 @@ export function denormalize(
           ? shouldIncludeField(field.directives, variables)
           : true;
         if (include) {
-          // Build cacheKey according to any arguments
-          const cacheKey =
+          // Build key according to any arguments
+          const key =
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
           // Check if this field is stale
           if (staleFields) {
-            const staleField = staleFields[cacheKey];
+            const staleField = staleFields[key];
             if (staleField !== undefined) {
               stale = true;
             }
           }
-          const normObjValue = normObj[cacheKey];
+          const normObjValue = normObj[key];
           if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
