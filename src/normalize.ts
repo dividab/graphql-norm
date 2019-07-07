@@ -17,10 +17,11 @@ import {
 import {
   EntityCache,
   Entity,
-  MutableDeep,
   EntityId,
   EntityFieldValue
 } from "./entity-cache";
+
+type MutableDeep<T> = { -readonly [P in keyof T]: MutableDeep<T[P]> }; // Remove readonly deep
 
 type ParentEntity = MutableDeep<Entity>;
 type MutableEntityCache = MutableDeep<EntityCache>;

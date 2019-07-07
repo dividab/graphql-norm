@@ -1,8 +1,12 @@
 // Exported functions
 export { normalize } from "./normalize";
 export { denormalize } from "./denormalize";
-export { merge, getNormalizedEntity, updateStale } from "./entity-cache";
+export { merge } from "./entity-cache";
 export { defaultGetObjectId } from "./functions";
+
+// These should be moved out of this lib
+export { getNormalizedEntity } from "./normalized-entity";
+export { updateStale } from "./stale";
 
 // Exported types used in signature of exported functions
 export {
@@ -16,9 +20,15 @@ export {
   EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
   Entity, // ref: EntityCache
   EntityFieldValue, // ref: Entity
-  EntityId, // ref: EntityFieldValue
-  StaleEntities, // ref: denormalize(), updateStaleEntities()
-  StaleEntity, // ref: StaleEntities
+  EntityId // ref: EntityFieldValue
+} from "./entity-cache";
+
+export {
   NormalizedEntity, // ref: getNormalizedEntity()
   NormalizedEntityField // ref: NormalizedEntityField
-} from "./entity-cache";
+} from "./normalized-entity";
+
+export {
+  StaleEntities, // ref: denormalize(), updateStaleEntities()
+  StaleEntity // ref: StaleEntities
+} from "./stale";

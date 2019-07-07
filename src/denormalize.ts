@@ -15,7 +15,8 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import { EntityCache, StaleEntities, EntityId, Mutable } from "./entity-cache";
+import { EntityCache, EntityId } from "./entity-cache";
+import { StaleEntities, Mutable } from "./stale";
 
 type MutableResponseObject = Mutable<ResponseObject>;
 type MutableResponseObjectArray = Array<MutableResponseObject>;

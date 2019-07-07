@@ -1,6 +1,6 @@
 import { tests } from "./update-stale-data";
 import { onlySkip } from "./test-data-utils";
-import { updateStale } from "../src/entity-cache";
+import { updateStale } from "../src/stale";
 
 function deepFreeze(o: any): any {
   Object.freeze(o);
