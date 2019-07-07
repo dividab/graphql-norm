@@ -28,7 +28,7 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
 
       let staleFieldKeyCount = staleFieldKeys.length;
 
-      // Check all fields of the stale entity against the corresponding entity in cache
+      // Check all fields of the stale normalized object against the corresponding normalized object in cache
       // If a field exists in cache, then it should not be stale anymore
       let staleFieldsCopy: Mutable<StaleFields> | undefined = undefined;
       for (const staleFieldKey of staleFieldKeys) {
@@ -44,7 +44,7 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
         }
       }
 
-      // If the entity has no stale fields then remove it from stale
+      // If the normalized object has no stale fields then remove it from stale
       if (staleFieldKeyCount === 0) {
         delete staleCopy[staleKey];
       }
