@@ -8,10 +8,8 @@ export const test: OneTest = {
       tags
     }
   `,
-  response: {
-    data: {
-      tags: ["tag1", "tag2", "tag3"]
-    }
+  data: {
+    tags: ["tag1", "tag2", "tag3"]
   },
   entities: {
     ROOT_QUERY: {

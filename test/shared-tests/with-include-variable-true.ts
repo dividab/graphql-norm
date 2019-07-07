@@ -29,6 +29,6 @@ export const test: OneTest = {
     }
   `,
   variables: { noPosts: true },
-  response: standardResponse,
+  data: standardResponse,
   entities: standardEntities
 };

@@ -12,16 +12,14 @@ export const test: OneTest = {
       }
     }
   `,
-  response: {
-    data: {
-      posts: [
-        {
-          id: "123",
-          __typename: "Post",
-          tags: ["olle", "kalle"]
-        }
-      ]
-    }
+  data: {
+    posts: [
+      {
+        id: "123",
+        __typename: "Post",
+        tags: ["olle", "kalle"]
+      }
+    ]
   },
   entities: {
     ROOT_QUERY: {

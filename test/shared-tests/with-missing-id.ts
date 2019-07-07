@@ -35,42 +35,40 @@ export const test: OneTest = {
       }
     }
   `,
-  response: {
-    data: {
-      posts: [
-        {
-          id: "123",
-          __typename: "Post",
-          author: {
-            id: "1",
-            __typename: "Author",
-            name: "Paul"
-          },
-          title: "My awesome blog post",
-          comments: [
-            {
-              __typename: "Comment",
-              commenter: {
-                id: "2",
-                __typename: "Author",
-                name: "Nicole"
-              }
-            },
-            {
-              __typename: "Comment",
-              commenter: {
-                id: "2",
-                __typename: "Author",
-                name: "Nicole"
-              }
+  data: {
+    posts: [
+      {
+        id: "123",
+        __typename: "Post",
+        author: {
+          id: "1",
+          __typename: "Author",
+          name: "Paul"
+        },
+        title: "My awesome blog post",
+        comments: [
+          {
+            __typename: "Comment",
+            commenter: {
+              id: "2",
+              __typename: "Author",
+              name: "Nicole"
             }
-          ]
-        }
-      ],
-      testNode: {
-        __typename: "olle",
-        nisse: "asd"
+          },
+          {
+            __typename: "Comment",
+            commenter: {
+              id: "2",
+              __typename: "Author",
+              name: "Nicole"
+            }
+          }
+        ]
       }
+    ],
+    testNode: {
+      __typename: "olle",
+      nisse: "asd"
     }
   },
   entities: {

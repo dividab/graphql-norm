@@ -1,6 +1,6 @@
 import * as GraphQL from "graphql";
 import { EntityCache, StaleEntities } from "../src/entity-cache";
-import { GraphQLResponse, Variables } from "../src/types";
+import { RootFields, Variables } from "../src/types";
 
 export interface DenormalizeOneTest {
   readonly name: string;
@@ -8,7 +8,7 @@ export interface DenormalizeOneTest {
   readonly skip?: boolean;
   readonly query: GraphQL.DocumentNode;
   readonly variables?: Variables;
-  readonly response: GraphQLResponse | undefined;
+  readonly data: RootFields | undefined;
   readonly entities: EntityCache;
   readonly partial: boolean;
   readonly stale: boolean;

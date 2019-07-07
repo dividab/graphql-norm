@@ -22,33 +22,31 @@ export const test: OneTest = {
       }
     }
   `,
-  response: {
-    data: {
-      posts: [
-        {
-          id: "123",
-          __typename: "Post",
-          isProtoTypeOf: [
-            {
-              id: "1",
-              __typename: "Value",
-              value: 1
-            },
-            {
-              id: "2",
-              __typename: "Value",
-              value: 2
-            }
-          ],
-          title: "My awesome blog post",
-          hasOwnProperty: {
+  data: {
+    posts: [
+      {
+        id: "123",
+        __typename: "Post",
+        isProtoTypeOf: [
+          {
             id: "1",
-            __typename: "Commenter",
-            name: "olle"
+            __typename: "Value",
+            value: 1
+          },
+          {
+            id: "2",
+            __typename: "Value",
+            value: 2
           }
+        ],
+        title: "My awesome blog post",
+        hasOwnProperty: {
+          id: "1",
+          __typename: "Commenter",
+          name: "olle"
         }
-      ]
-    }
+      }
+    ]
   },
   entities: {
     ROOT_QUERY: {

@@ -34,12 +34,9 @@ export interface ResponseObjectArray
 export interface RootFields {
   readonly [rootField: string]: any;
 }
-export interface GraphQLResponse {
-  readonly data: RootFields;
-}
 
 export interface DenormalizationResult {
-  readonly response: GraphQLResponse | undefined;
+  readonly data: RootFields | undefined;
   readonly partial: boolean;
   readonly stale: boolean;
 }
@@ -55,9 +52,7 @@ export interface FieldNodeWithSelectionSet extends GraphQL.FieldNode {
 
 export type GetObjectToIdResult = string | undefined;
 
-export type GetObjectId = (
-  object: {
-    readonly id?: string;
-    readonly __typename?: string;
-  }
-) => GetObjectToIdResult;
+export type GetObjectId = (object: {
+  readonly id?: string;
+  readonly __typename?: string;
+}) => GetObjectToIdResult;

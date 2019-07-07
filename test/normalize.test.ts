@@ -4,11 +4,10 @@ import { onlySkip } from "./test-data-utils";
 
 describe("normalize() with shared test data", () => {
   onlySkip(tests).forEach(item => {
-    test(item.name, done => {
-      const actual = normalize(item.query, item.variables, item.response);
+    test(item.name, () => {
+      const actual = normalize(item.query, item.variables, item.data);
       const expected = item.entities;
       expect(actual).toEqual(expected);
-      done();
     });
   });
 });

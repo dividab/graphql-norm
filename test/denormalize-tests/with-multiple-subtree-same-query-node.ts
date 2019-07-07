@@ -44,33 +44,31 @@ export const test: DenormalizeOneTest = {
   partial: false,
   stale: false,
   staleEntities: {},
-  response: {
-    data: {
-      posts: [
-        {
-          id: "123",
-          __typename: "Post",
-          author: {
-            id: "1",
-            __typename: "Author",
-            name: "Paul",
-            role: "admin"
-          },
-          title: "My awesome blog post",
-          comments: [
-            {
+  data: {
+    posts: [
+      {
+        id: "123",
+        __typename: "Post",
+        author: {
+          id: "1",
+          __typename: "Author",
+          name: "Paul",
+          role: "admin"
+        },
+        title: "My awesome blog post",
+        comments: [
+          {
+            id: 1,
+            __typename: "Comment",
+            commenter: {
               id: 1,
-              __typename: "Comment",
-              commenter: {
-                id: 1,
-                __typename: "Commenter",
-                name: "olle"
-              }
+              __typename: "Commenter",
+              name: "olle"
             }
-          ]
-        }
-      ]
-    }
+          }
+        ]
+      }
+    ]
   },
   entities: {
     ROOT_QUERY: {

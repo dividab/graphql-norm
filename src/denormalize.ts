@@ -3,11 +3,11 @@ import * as GraphQL from "graphql";
 import {
   DenormalizationResult,
   FieldNodeWithSelectionSet,
-  GraphQLResponse,
   Variables,
   ResponseObject,
   ResponseObject2,
-  ResponseObjectArray
+  ResponseObjectArray,
+  RootFields
 } from "./types";
 import {
   expandFragments,
@@ -175,9 +175,15 @@ export function denormalize(
     }
   }
 
+  interface GraphQLResponse {
+    readonly data: RootFields;
+  }
+
+  const data = (response as GraphQLResponse).data;
+
   return {
     partial,
     stale,
-    response: !partial ? (response as GraphQLResponse) : undefined
+    data: !partial ? data : undefined
   };
 }

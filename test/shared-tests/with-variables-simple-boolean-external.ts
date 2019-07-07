@@ -28,7 +28,7 @@ export const test: OneTest = {
     }
   `,
   variables: { a: true },
-  response: standardResponse,
+  data: standardResponse,
   entities: {
     ROOT_QUERY: {
       posts: ["Post;123"]

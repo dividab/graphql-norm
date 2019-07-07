@@ -13,10 +13,8 @@ export const test: OneTest = {
     }
   `,
   variables: { postIds: ["non-existent-id"] },
-  response: {
-    data: {
-      postsByIds: [null]
-    }
+  data: {
+    postsByIds: [null]
   },
   entities: {
     ROOT_QUERY: {
