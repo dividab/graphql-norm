@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 import { standardResponse } from "../shared-data/standard-response";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "with variables simple object",
   query: gql`
     query TestQuery {

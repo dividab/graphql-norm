@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "same object twice in response but with different fields",
   query: gql`
     query TestQuery {

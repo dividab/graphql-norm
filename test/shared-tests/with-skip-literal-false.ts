@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 import { standardResponse } from "../shared-data/standard-response";
 import { standardNormMap } from "../shared-data/standard-norm-map";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "with skip literal false",
   query: gql`
     query TestQuery {

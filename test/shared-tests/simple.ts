@@ -1,9 +1,9 @@
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 import gql from "graphql-tag";
 import { standardResponse } from "../shared-data/standard-response";
 import { standardNormMap } from "../shared-data/standard-norm-map";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "simple",
   query: gql`
     query TestQuery {
