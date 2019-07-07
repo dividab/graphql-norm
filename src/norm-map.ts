@@ -19,7 +19,7 @@ export interface NormObj {
 }
 
 /**
- * An optimized function to merge two cache objects (as returned from normalize)
+ * An optimized function to merge two maps of normalized objects (as returned from normalize)
  * @param normMap The first cache
  * @param newNormMap The second cache
  */

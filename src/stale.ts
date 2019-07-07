@@ -11,7 +11,7 @@ export interface StaleFields {
 export type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
 
 /**
- * Removes the stale flag for entitiy fields that are present in the normalized result
+ * Removes the stale flag for fields that are present in the normalized result
  */
 export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
   type MutableStaleMap = Mutable<StaleMap>;

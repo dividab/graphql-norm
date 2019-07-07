@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { OneTest } from "../shared-test-def";
 
 export const test: OneTest = {
-  name: "with nested arrays of entities",
+  name: "with nested arrays of objects",
   // only: true,
   // skip: true,
   query: gql`

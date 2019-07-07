@@ -4,7 +4,7 @@ import { merge } from "../src/norm-map";
 import { denormalize } from "../src/denormalize";
 
 describe("merge()", () => {
-  test("full value objects", done => {
+  test("full value objects", () => {
     const itemA = {
       name: "",
       query: gql`
@@ -67,18 +67,17 @@ describe("merge()", () => {
       }
     };
 
-    const entitiesA = normalize(itemA.query, {}, itemA.response.data);
-    const entitiesB = normalize(itemB.query, {}, itemB.response.data);
-    const mergedEntities = merge(entitiesA, entitiesB);
-    const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
+    const normMapA = normalize(itemA.query, {}, itemA.response.data);
+    const normMapB = normalize(itemB.query, {}, itemB.response.data);
+    const mergedNormMap = merge(normMapA, normMapB);
+    const denormalizedResult = denormalize(itemA.query, {}, mergedNormMap);
     expect(denormalizedResult.partial).toBe(false);
-    done();
   });
 
   /*
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
-  test("partial value objects", done => {
+  test("partial value objects", () => {
     const itemA = {
       name: "",
       query: gql`
@@ -137,13 +136,12 @@ describe("merge()", () => {
       }
     };
 
-    const entitiesA = normalize(itemA.query, {}, itemA.response);
-    const entitiesB = normalize(itemB.query, {}, itemB.response);
-    const mergedEntities = merge(entitiesA, entitiesB);
-    const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
+    const normMapA = normalize(itemA.query, {}, itemA.response);
+    const normMapB = normalize(itemB.query, {}, itemB.response);
+    const mergedNormMaps = merge(normMapA, normMapB);
+    const denormalizedResult = denormalize(itemA.query, {}, mergedNormMaps);
 
     expect(denormalizedResult.partial).toBe(false);
-    done();
   });
-  */
+*/
 });

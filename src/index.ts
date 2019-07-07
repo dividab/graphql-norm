@@ -30,6 +30,6 @@ export {
 } from "./normalized-object";
 
 export {
-  StaleMap, // ref: denormalize(), updateStaleEntities()
-  StaleFields // ref: StaleEntities
+  StaleMap, // ref: denormalize(), updateStaleFields()
+  StaleFields // ref: StaleMap
 } from "./stale";

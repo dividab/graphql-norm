@@ -53,16 +53,11 @@ function generateTestData(): OneTest {
     posts.push(post);
   }
 
-  const response = {
-    data: {
-      posts
-    }
-  };
   return {
-    entities: normalize(query, undefined, response),
+    normMap: normalize(query, undefined, posts),
     name: "GeneratedTestData",
     query,
-    response
+    data: posts
   };
 }
 
