@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 
-- `normalize` and `denormalize` directly take the `data` from a GraphQL response as argument instead of an object with a `data` property.
+- `normalize` directly take the `data` from a GraphQL response as argument instead of an object with a `data` property. See [#34](https://github.com/dividab/graphql-norm/pull/29).
+- `denormalize` returns `data` directly instead of an object with a `data` property. See [#34](https://github.com/dividab/graphql-norm/pull/29).
 
 ## [0.11.0] - 2019-07-06
 
