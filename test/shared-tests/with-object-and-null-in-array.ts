@@ -23,7 +23,7 @@ export const test: OneTest = {
       null
     ]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       'postsByIds({"ids":["123","non-existent-id"]})': ["Post;123", null]
     },

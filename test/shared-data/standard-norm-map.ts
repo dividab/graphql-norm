@@ -1,4 +1,4 @@
-export const standardEntities = {
+export const standardNormMap = {
   ROOT_QUERY: {
     posts: ["Post;123"]
   },

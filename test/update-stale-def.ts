@@ -1,11 +1,11 @@
-import { EntityCache } from "../src/entity-cache";
-import { StaleEntities } from "../src/stale";
+import { NormMap } from "../src/norm-map";
+import { StaleMap } from "../src/stale";
 
 export interface OneTest {
   readonly name: string;
   readonly only?: boolean;
   readonly skip?: boolean;
-  readonly cache: EntityCache;
-  readonly staleBefore: StaleEntities;
-  readonly staleAfter: StaleEntities;
+  readonly normMap: NormMap;
+  readonly staleBefore: StaleMap;
+  readonly staleAfter: StaleMap;
 }

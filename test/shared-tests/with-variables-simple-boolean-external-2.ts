@@ -52,7 +52,7 @@ export const test: OneTest = {
       }
     ]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"]
     },

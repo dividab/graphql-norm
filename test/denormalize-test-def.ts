@@ -1,6 +1,6 @@
 import * as GraphQL from "graphql";
-import { EntityCache } from "../src/entity-cache";
-import { StaleEntities } from "../src/stale";
+import { NormMap } from "../src/norm-map";
+import { StaleMap } from "../src/stale";
 import { RootFields, Variables } from "../src/types";
 
 export interface DenormalizeOneTest {
@@ -10,8 +10,8 @@ export interface DenormalizeOneTest {
   readonly query: GraphQL.DocumentNode;
   readonly variables?: Variables;
   readonly data: RootFields | undefined;
-  readonly entities: EntityCache;
+  readonly normMap: NormMap;
   readonly partial: boolean;
   readonly stale: boolean;
-  readonly staleEntities: StaleEntities;
+  readonly staleMap: StaleMap;
 }

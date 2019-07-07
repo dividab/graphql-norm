@@ -10,7 +10,6 @@
   },
   "keywords": [
     "graphql",
-    "cache",
     "normalization",
     "denormalization"
   ],

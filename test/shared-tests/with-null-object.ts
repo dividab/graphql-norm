@@ -16,7 +16,7 @@ export const test: OneTest = {
   data: {
     postsByIds: [null]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       'postsByIds({"ids":["non-existent-id"]})': [null]
     }

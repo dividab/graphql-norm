@@ -28,7 +28,7 @@ export const test: DenormalizeOneTest = {
   `,
   partial: false,
   stale: true,
-  staleEntities: {
+  staleMap: {
     "Post;123": {
       author: true,
       title: true,
@@ -50,7 +50,7 @@ export const test: DenormalizeOneTest = {
       }
     ]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"]
     },

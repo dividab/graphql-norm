@@ -29,7 +29,7 @@ export const test: OneTest = {
   `,
   variables: { a: true },
   data: standardResponse,
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"]
     },

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { OneTest } from "../shared-test-def";
-import { standardEntities } from "../shared-data/standard-entities";
+import { standardNormMap } from "../shared-data/standard-norm-map";
 
 export const test: OneTest = {
   name: "with alias",
@@ -52,5 +52,5 @@ export const test: OneTest = {
       }
     ]
   },
-  entities: standardEntities
+  normMap: standardNormMap
 };

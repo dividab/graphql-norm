@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { OneTest } from "../shared-test-def";
 
 export const test: OneTest = {
-  name: "same entity twice in response but with different fields",
+  name: "same object twice in response but with different fields",
   query: gql`
     query TestQuery {
       posts {
@@ -53,7 +53,7 @@ export const test: OneTest = {
       }
     ]
   },
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"]
     },

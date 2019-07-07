@@ -28,9 +28,9 @@ export const test: DenormalizeOneTest = {
   `,
   partial: true,
   stale: false,
-  staleEntities: {},
+  staleMap: {},
   data: undefined,
-  entities: {
+  normMap: {
     ROOT_QUERY: {
       posts: ["Post;123"]
     },

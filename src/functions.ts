@@ -123,13 +123,6 @@ export const defaultGetObjectId: GetObjectId = (object: {
   readonly id: string;
   readonly __typename?: string;
 }): GetObjectToIdResult => {
-  if (object === undefined) {
-    console.log("The object was", object);
-  }
-  if (object.__typename === undefined) {
-    throw new Error("Required field __typename is missing");
-  }
-
   return object.id === undefined
     ? undefined
     : `${object.__typename};${object.id}`;

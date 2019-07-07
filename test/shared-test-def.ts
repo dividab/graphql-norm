@@ -1,5 +1,5 @@
 import * as GraphQL from "graphql";
-import { EntityCache } from "../src/entity-cache";
+import { NormMap } from "../src/norm-map";
 import { Variables, RootFields } from "../src/types";
 
 export interface OneTest {
@@ -9,5 +9,5 @@ export interface OneTest {
   readonly query: GraphQL.DocumentNode;
   readonly variables?: Variables;
   readonly data: RootFields;
-  readonly entities: EntityCache;
+  readonly normMap: NormMap;
 }

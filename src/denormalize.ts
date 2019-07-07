@@ -15,8 +15,8 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import { EntityCache, EntityId } from "./entity-cache";
-import { StaleEntities, Mutable } from "./stale";
+import { NormMap, NormKey } from "./norm-map";
+import { StaleMap, Mutable } from "./stale";
 
 type MutableResponseObject = Mutable<ResponseObject>;
 type MutableResponseObjectArray = Array<MutableResponseObject>;
@@ -26,7 +26,7 @@ type ParentResponseObjectOrArray =
 type ParentResponseKey = string | number | undefined;
 type StackWorkItem = [
   FieldNodeWithSelectionSet,
-  EntityId | ReadonlyArray<EntityId>,
+  NormKey | ReadonlyArray<NormKey>,
   ParentResponseObjectOrArray,
   ParentResponseKey
 ];
@@ -34,8 +34,8 @@ type StackWorkItem = [
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  entities: EntityCache,
-  staleEntities: StaleEntities = {}
+  normMap: NormMap,
+  staleMap: StaleMap = {}
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -73,17 +73,17 @@ export function denormalize(
     if (idOrIdArray === null) {
       responseObjectOrNewParentArray = null;
     } else if (!Array.isArray(idOrIdArray)) {
-      const id: EntityId = idOrIdArray as EntityId;
+      const id: NormKey = idOrIdArray as NormKey;
 
-      const entity = entities[id];
+      const normObj = normMap[id];
 
-      // Does not exist in cache. We can't fully resolve query
-      if (entity === undefined) {
+      // Does not exist in normalized map. We can't fully resolve query
+      if (normObj === undefined) {
         partial = true;
         break;
       }
 
-      const staleEntity = staleEntities[id];
+      const staleFields = staleMap[id];
 
       // If we've been here before we need to use the previously created response object
       if (Array.isArray(parentObjectOrArray)) {
@@ -104,24 +104,24 @@ export function denormalize(
           ? shouldIncludeField(field.directives, variables)
           : true;
         if (include) {
-          // Build cacheKey according to any arguments
-          const entityId =
+          // Build key according to any arguments
+          const key =
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
           // Check if this field is stale
-          if (staleEntity) {
-            const staleField = staleEntity[entityId];
+          if (staleFields) {
+            const staleField = staleFields[key];
             if (staleField !== undefined) {
               stale = true;
             }
           }
-          const entityValue = entity[entityId];
-          if (entityValue !== null && field.selectionSet) {
+          const normObjValue = normObj[key];
+          if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
               field as FieldNodeWithSelectionSet,
-              entityValue as any,
+              normObjValue as any,
               responseObjectOrNewParentArray as
                 | MutableResponseObject
                 | MutableResponseObjectArray,
@@ -129,10 +129,10 @@ export function denormalize(
             ]);
           } else {
             // This field is a primitive (not a array or object)
-            if (entityValue !== undefined) {
+            if (normObjValue !== undefined) {
               (responseObjectOrNewParentArray as MutableResponseObject)[
                 (field.alias && field.alias.value) || field.name.value
-              ] = entityValue;
+              ] = normObjValue;
             } else {
               partial = true;
             }
@@ -140,7 +140,7 @@ export function denormalize(
         }
       }
     } else {
-      const idArray: ReadonlyArray<EntityId> = idOrIdArray;
+      const idArray: ReadonlyArray<NormKey> = idOrIdArray;
       responseObjectOrNewParentArray =
         (parentObjectOrArray as MutableResponseObject)[
           parentResponseKey as string

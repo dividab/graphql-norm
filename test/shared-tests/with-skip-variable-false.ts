@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { OneTest } from "../shared-test-def";
 import { standardResponse } from "../shared-data/standard-response";
-import { standardEntities } from "../shared-data/standard-entities";
+import { standardNormMap } from "../shared-data/standard-norm-map";
 
 export const test: OneTest = {
   name: "with skip variable false",
@@ -30,5 +30,5 @@ export const test: OneTest = {
   `,
   variables: { noPosts: false },
   data: standardResponse,
-  entities: standardEntities
+  normMap: standardNormMap
 };

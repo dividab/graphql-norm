@@ -6,7 +6,7 @@ describe("normalize() with shared test data", () => {
   onlySkip(tests).forEach(item => {
     test(item.name, () => {
       const actual = normalize(item.query, item.variables, item.data);
-      const expected = item.entities;
+      const expected = item.normMap;
       expect(actual).toEqual(expected);
     });
   });

@@ -1,12 +1,8 @@
 // Exported functions
 export { normalize } from "./normalize";
 export { denormalize } from "./denormalize";
-export { merge } from "./entity-cache";
+export { merge } from "./norm-map";
 export { defaultGetObjectId } from "./functions";
-
-// These should be moved out of this lib
-export { getNormalizedEntity } from "./normalized-entity";
-export { updateStale } from "./stale";
 
 // Exported types used in signature of exported functions
 export {
@@ -17,18 +13,23 @@ export {
 } from "./types";
 
 export {
-  EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
-  Entity, // ref: EntityCache
-  EntityFieldValue, // ref: Entity
-  EntityId // ref: EntityFieldValue
-} from "./entity-cache";
+  NormMap, // ref: normalize(), denormalize(), merge()
+  NormObj, // ref: NormMap
+  NormFieldValue, // ref: NormObj
+  NormKey // ref: NormFieldValue
+} from "./norm-map";
+
+// All below this line should be moved out of this lib
+
+export { getNormalizedObject } from "./normalized-object";
+export { updateStale } from "./stale";
 
 export {
-  NormalizedEntity, // ref: getNormalizedEntity()
-  NormalizedEntityField // ref: NormalizedEntityField
-} from "./normalized-entity";
+  NormalizedObject, // ref: getNormalizedObject()
+  NormalizedField // ref: NormalizedField
+} from "./normalized-object";
 
 export {
-  StaleEntities, // ref: denormalize(), updateStaleEntities()
-  StaleEntity // ref: StaleEntities
+  StaleMap, // ref: denormalize(), updateStaleFields()
+  StaleFields // ref: StaleMap
 } from "./stale";

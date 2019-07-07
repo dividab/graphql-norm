@@ -24,7 +24,7 @@ describe("normalize() with shared test data", () => {
     test(item.name, done => {
       // Freeze the test so we test that the function does not mutate the inputs on any level
       deepFreeze(item);
-      const actual = updateStale(item.cache, item.staleBefore);
+      const actual = updateStale(item.normMap, item.staleBefore);
       const expected = item.staleAfter;
       expect(actual).toEqual(expected);
       done();
