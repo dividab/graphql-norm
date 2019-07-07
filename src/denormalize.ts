@@ -15,8 +15,8 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import { NormMap, NormKey } from "./entity-cache";
-import { StaleEntities, Mutable } from "./stale";
+import { NormMap, NormKey } from "./norm-map";
+import { StaleMap, Mutable } from "./stale";
 
 type MutableResponseObject = Mutable<ResponseObject>;
 type MutableResponseObjectArray = Array<MutableResponseObject>;
@@ -35,7 +35,7 @@ export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
   normMap: NormMap,
-  staleEntities: StaleEntities = {}
+  staleEntities: StaleMap = {}
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions

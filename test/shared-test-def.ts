@@ -1,5 +1,5 @@
 import * as GraphQL from "graphql";
-import { NormMap } from "../src/entity-cache";
+import { NormMap } from "../src/norm-map";
 import { Variables, RootFields } from "../src/types";
 
 export interface OneTest {

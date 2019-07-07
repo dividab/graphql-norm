@@ -1,6 +1,6 @@
 import { normalize } from "../src/normalize";
 import gql from "graphql-tag";
-import { merge } from "../src/entity-cache";
+import { merge } from "../src/norm-map";
 import { denormalize } from "../src/denormalize";
 
 describe("merge()", () => {

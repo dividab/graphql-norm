@@ -1,4 +1,4 @@
-import { NormKey, NormMap } from "entity-cache";
+import { NormKey, NormMap } from "./norm-map";
 
 /**
  * Fetches an entity from the cache, taking as type parameter the entity

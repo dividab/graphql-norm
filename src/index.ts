@@ -1,7 +1,7 @@
 // Exported functions
 export { normalize } from "./normalize";
 export { denormalize } from "./denormalize";
-export { merge } from "./entity-cache";
+export { merge } from "./norm-map";
 export { defaultGetObjectId } from "./functions";
 
 // These should be moved out of this lib
@@ -17,11 +17,11 @@ export {
 } from "./types";
 
 export {
-  NormMap as EntityCache, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
-  NormObj as Entity, // ref: EntityCache
-  NormFieldValue as EntityFieldValue, // ref: Entity
-  NormKey as EntityId // ref: EntityFieldValue
-} from "./entity-cache";
+  NormMap, // ref: normalize(), denormalize(), merge(), getNormalizedEntity(), updateStaleEntities()
+  NormObj, // ref: EntityCache
+  NormFieldValue, // ref: Entity
+  NormKey // ref: EntityFieldValue
+} from "./norm-map";
 
 export {
   NormalizedEntity, // ref: getNormalizedEntity()
@@ -29,6 +29,6 @@ export {
 } from "./normalized-entity";
 
 export {
-  StaleEntities, // ref: denormalize(), updateStaleEntities()
-  StaleEntity // ref: StaleEntities
+  StaleMap as StaleEntities, // ref: denormalize(), updateStaleEntities()
+  StaleNormObj as StaleEntity // ref: StaleEntities
 } from "./stale";

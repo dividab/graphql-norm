@@ -1,6 +1,6 @@
 import * as GraphQL from "graphql";
-import { NormMap } from "../src/entity-cache";
-import { StaleEntities } from "../src/stale";
+import { NormMap } from "../src/norm-map";
+import { StaleMap } from "../src/stale";
 import { RootFields, Variables } from "../src/types";
 
 export interface DenormalizeOneTest {
@@ -13,5 +13,5 @@ export interface DenormalizeOneTest {
   readonly entities: NormMap;
   readonly partial: boolean;
   readonly stale: boolean;
-  readonly staleEntities: StaleEntities;
+  readonly staleEntities: StaleMap;
 }

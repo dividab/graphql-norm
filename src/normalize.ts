@@ -14,7 +14,7 @@ import {
   fieldNameWithArguments,
   shouldIncludeField
 } from "./functions";
-import { NormMap, NormObj, NormKey, NormFieldValue } from "./entity-cache";
+import { NormMap, NormObj, NormKey, NormFieldValue } from "./norm-map";
 
 type MutableDeep<T> = { -readonly [P in keyof T]: MutableDeep<T[P]> }; // Remove readonly deep
 
