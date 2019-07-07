@@ -71,14 +71,14 @@ describe("merge()", () => {
     const entitiesB = normalize(itemB.query, {}, itemB.response);
     const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
-
     expect(denormalizedResult.partial).toBe(false);
     done();
   });
+
   /*
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
-  t.test("partial value objects", st => {
+  test("partial value objects", done => {
     const itemA = {
       name: "",
       query: gql`
@@ -142,12 +142,8 @@ describe("merge()", () => {
     const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
 
-    st.equal(
-      denormalizedResult.partial,
-      false,
-      "Denormalized result is correct."
-    );
-    st.end();
+    expect(denormalizedResult.partial).toBe(false);
+    done();
   });
   */
 });
