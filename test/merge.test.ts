@@ -67,8 +67,8 @@ describe("merge()", () => {
       }
     };
 
-    const entitiesA = normalize(itemA.query, {}, itemA.response);
-    const entitiesB = normalize(itemB.query, {}, itemB.response);
+    const entitiesA = normalize(itemA.query, {}, itemA.response.data);
+    const entitiesB = normalize(itemB.query, {}, itemB.response.data);
     const mergedEntities = merge(entitiesA, entitiesB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedEntities);
     expect(denormalizedResult.partial).toBe(false);

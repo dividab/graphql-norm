@@ -5,5 +5,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.ts"],
   moduleFileExtensions: ["ts", "js", "json", "node"],
-  coverageReporters: ["text-summary", "lcov"]
+  coverageReporters: ["text-summary", "lcov"],
+  globals: {
+    "ts-jest": {
+      tsConfig: "<rootDir>/test/tsconfig.json"
+    }
+  }
 };

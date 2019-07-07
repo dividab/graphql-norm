@@ -1,6 +1,6 @@
-import { OneTest } from "../shared-test-def";
+import { OneTest } from "../test/shared-test-def";
 import gql from "graphql-tag";
-import { normalize } from "../../src/normalize";
+import { normalize } from "../src/normalize";
 
 function generateTestData(): OneTest {
   const query = gql`

@@ -123,6 +123,9 @@ export const defaultGetObjectId: GetObjectId = (object: {
   readonly id: string;
   readonly __typename?: string;
 }): GetObjectToIdResult => {
+  if (object === undefined) {
+    console.log("The object was", object);
+  }
   if (object.__typename === undefined) {
     throw new Error("Required field __typename is missing");
   }
@@ -156,9 +159,7 @@ export function shouldIncludeField(
               // The if argument must be of type Boolean!
               // http://facebook.github.io/graphql/June2018/#sec--skip
               throw new Error(
-                `The if argument must be of type Boolean!, found '${
-                  arg.value.kind
-                }'`
+                `The if argument must be of type Boolean!, found '${arg.value.kind}'`
               );
             }
             let argInclude =

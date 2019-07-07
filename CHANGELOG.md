@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changes
+
+- `normalize` and `denormalize` directly take the `data` from a GraphQL response as argument instead of an object with a `data` property.
+
 ## [0.11.0] - 2019-07-06
 
 ### Fixed

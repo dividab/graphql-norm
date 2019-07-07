@@ -3,7 +3,7 @@ import * as GraphQL from "graphql";
 import {
   FieldNodeWithSelectionSet,
   GetObjectId,
-  GraphQLResponse,
+  RootFields,
   Variables,
   ResponseObject
 } from "./types";
@@ -47,7 +47,7 @@ type StackWorkItem = [
 export function normalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  response: GraphQLResponse,
+  data: RootFields,
   getObjectId: GetObjectId = defaultGetObjectId
 ): EntityCache {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
@@ -58,7 +58,7 @@ export function normalize(
   const entities: MutableEntityCache = Object.create(null);
 
   // Seed stack with undefined parent and "fake" getObjectId
-  stack.push([rootFieldNode, Object.create(null), response.data, "ROOT_QUERY"]);
+  stack.push([rootFieldNode, Object.create(null), data, "ROOT_QUERY"]);
   let getObjectIdToUse: GetObjectId = _ => "ROOT_QUERY";
 
   // The stack has work items, depending on the work item we have four different cases to handle:
