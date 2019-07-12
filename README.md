@@ -24,7 +24,7 @@ Normalization and denormalization is useful for a number of scenarios but the ma
 
 ## Goal
 
-The goal of the package is only to perform normalization and denormalization of graphql responses. Providing a complete caching solution is an explicit non-goal of this package. However this pacakge can be a building block in a normalized graphql caching solution.
+The goal of the package is only to perform normalization and denormalization of graphql responses. Providing a complete caching solution is an explicit non-goal of this package. However this package can be a building block in a normalized GraphQL caching solution.
 
 ## Features
 
@@ -174,6 +174,11 @@ export function denormalize(
 ### merge()
 
 When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
+
+## Related packages
+
+- [graphql-add-remove-fields](https://www.npmjs.com/package/graphql-add-remove-fields)
+- [graphql-norm-patch](https://www.npmjs.com/package/graphql-norm-patch)
 
 ## How to develop
 
