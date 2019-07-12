@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "../denormalize-test-def";
+import { DenormalizeTestDef } from "../denormalize-test-def";
 
-export const test: DenormalizeOneTest = {
+export const test: DenormalizeTestDef = {
   name: "with partial true",
   query: gql`
     query TestQuery {
@@ -41,5 +41,6 @@ export const test: DenormalizeOneTest = {
       title: "My awesome blog post",
       comments: null
     }
-  }
+  },
+  keys: ["ROOT_QUERY", "Post;123"]
 };

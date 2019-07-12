@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "../denormalize-test-def";
+import { DenormalizeTestDef } from "../denormalize-test-def";
 
-export const test: DenormalizeOneTest = {
+export const test: DenormalizeTestDef = {
   name: "with stale true",
   query: gql`
     query TestQuery {
@@ -62,5 +62,6 @@ export const test: DenormalizeOneTest = {
       comments: null
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" }
-  }
+  },
+  keys: ["ROOT_QUERY", "Post;123", "Author;1"]
 };

@@ -45,7 +45,7 @@ export function denormalize(
   const response = {};
   let partial = false;
   let stale = false;
-  const keys: Array<string> = [];
+  const keys = new Set<string>();
   stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
   while (stack.length > 0) {
     const [
@@ -84,7 +84,7 @@ export function denormalize(
         break;
       }
 
-      keys.push(key);
+      keys.add(key);
       const staleFields = staleMap[key];
 
       // If we've been here before we need to use the previously created response object
@@ -188,6 +188,6 @@ export function denormalize(
     partial,
     stale,
     data: !partial ? data : undefined,
-    keys
+    keys: Array.from(keys)
   };
 }

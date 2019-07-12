@@ -3,7 +3,7 @@ import { NormMap } from "../src/norm-map";
 import { StaleMap } from "../src/stale";
 import { RootFields, Variables } from "../src/types";
 
-export interface DenormalizeOneTest {
+export interface DenormalizeTestDef {
   readonly name: string;
   readonly only?: boolean;
   readonly skip?: boolean;
@@ -14,4 +14,5 @@ export interface DenormalizeOneTest {
   readonly partial: boolean;
   readonly stale: boolean;
   readonly staleMap: StaleMap;
+  readonly keys: ReadonlyArray<string>;
 }
