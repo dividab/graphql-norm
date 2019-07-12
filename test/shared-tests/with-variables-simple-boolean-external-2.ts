@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "with variables simple boolean external 2",
   query: gql`
     query TestQuery($a: Boolean) {

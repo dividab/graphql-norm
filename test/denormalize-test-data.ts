@@ -1,4 +1,4 @@
 import { loadTests } from "./test-data-utils";
-import { DenormalizeOneTest } from "./denormalize-test-def";
+import { DenormalizeTestDef } from "./denormalize-test-def";
 
-export const tests = loadTests<DenormalizeOneTest>("denormalize-tests/");
+export const tests = loadTests<DenormalizeTestDef>("denormalize-tests/");

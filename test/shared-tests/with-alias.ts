@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
-import { OneTest } from "../shared-test-def";
+import { SharedTestDef } from "../shared-test-def";
 import { standardNormMap } from "../shared-data/standard-norm-map";
 
-export const test: OneTest = {
+export const test: SharedTestDef = {
   name: "with alias",
   query: gql`
     query TestQuery {

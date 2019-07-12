@@ -12,20 +12,11 @@ export interface ResponseObject2 {
   readonly [key: string]: ResponseObjectFieldValue;
 }
 
-// export type ResponseObjectPrimitiveValue =
-//   | string
-//   | number
-//   | boolean
-//   | ResponseObjectPrimitiveArray;
-
-// export interface ResponseObjectPrimitiveArray
-//   extends ReadonlyArray<ResponseObjectPrimitiveValue> {}
-
 export type ResponseObjectFieldValue =
   | string
   | number
   | boolean
-  | ResponseObject
+  | ResponseObject2
   | ResponseObjectArray;
 
 export interface ResponseObjectArray
@@ -39,6 +30,7 @@ export interface DenormalizationResult {
   readonly data: RootFields | undefined;
   readonly partial: boolean;
   readonly stale: boolean;
+  readonly keys: ReadonlyArray<string>;
 }
 
 export interface FragmentMap {

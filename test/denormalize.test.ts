@@ -25,6 +25,7 @@ describe("denormalize() with specialized test data", () => {
       expect(actual.data).toEqual(item.data);
       expect(actual.partial).toBe(!!item.partial);
       expect(actual.stale).toBe(!!item.stale);
+      expect(actual.keys).toEqual(item.keys);
       done();
     });
   });

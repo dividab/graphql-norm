@@ -45,6 +45,7 @@ export function denormalize(
   const response = {};
   let partial = false;
   let stale = false;
+  const keys = new Set<string>();
   stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
   while (stack.length > 0) {
     const [
@@ -73,9 +74,9 @@ export function denormalize(
     if (idOrIdArray === null) {
       responseObjectOrNewParentArray = null;
     } else if (!Array.isArray(idOrIdArray)) {
-      const id: NormKey = idOrIdArray as NormKey;
+      const key: NormKey = idOrIdArray as NormKey;
 
-      const normObj = normMap[id];
+      const normObj = normMap[key];
 
       // Does not exist in normalized map. We can't fully resolve query
       if (normObj === undefined) {
@@ -83,7 +84,8 @@ export function denormalize(
         break;
       }
 
-      const staleFields = staleMap[id];
+      keys.add(key);
+      const staleFields = staleMap[key];
 
       // If we've been here before we need to use the previously created response object
       if (Array.isArray(parentObjectOrArray)) {
@@ -185,6 +187,7 @@ export function denormalize(
   return {
     partial,
     stale,
-    data: !partial ? data : undefined
+    data: !partial ? data : undefined,
+    keys: Array.from(keys)
   };
 }

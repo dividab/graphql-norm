@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
-import { DenormalizeOneTest } from "../denormalize-test-def";
+import { DenormalizeTestDef } from "../denormalize-test-def";
 
-export const test: DenormalizeOneTest = {
+export const test: DenormalizeTestDef = {
   name: "with multiple subtree on same query node",
   query: gql`
     query TestQuery {
@@ -97,5 +97,6 @@ export const test: DenormalizeOneTest = {
       __typename: "Commenter",
       name: "olle"
     }
-  }
+  },
+  keys: ["ROOT_QUERY", "Post;123", "Author;1", "Comment;1", "Commenter;1"]
 };
