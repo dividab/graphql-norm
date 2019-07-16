@@ -1,6 +1,5 @@
 import * as GraphQL from "graphql";
 import { NormMap } from "../src/norm-map";
-import { StaleMap } from "../src/stale";
 import { RootFields, Variables } from "../src/types";
 
 export interface DenormalizeTestDef {
@@ -12,7 +11,5 @@ export interface DenormalizeTestDef {
   readonly data: RootFields | undefined;
   readonly normMap: NormMap;
   readonly partial: boolean;
-  readonly stale: boolean;
-  readonly staleMap: StaleMap;
   readonly fields: { readonly [key: string]: ReadonlyArray<string> };
 }

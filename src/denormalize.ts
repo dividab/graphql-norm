@@ -15,7 +15,8 @@ import {
   shouldIncludeField
 } from "./functions";
 import { NormMap, NormKey } from "./norm-map";
-import { StaleMap, Mutable } from "./stale";
+
+type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
 
 type MutableResponseObject = Mutable<ResponseObject>;
 type MutableResponseObjectArray = Array<MutableResponseObject>;
@@ -33,8 +34,7 @@ type StackWorkItem = [
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  normMap: NormMap,
-  staleMap: StaleMap = {}
+  normMap: NormMap
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -91,7 +91,6 @@ export function denormalize(
         usedFields = new Set();
         usedFieldsMap[key] = usedFields;
       }
-      const staleFields = staleMap[key];
 
       // If we've been here before we need to use the previously created response object
       if (Array.isArray(parentObjectOrArray)) {
@@ -119,13 +118,6 @@ export function denormalize(
               : field.name.value;
           // Add this to used fields
           usedFields.add(key);
-          // Check if this field is stale
-          if (staleFields) {
-            const staleField = staleFields[key];
-            if (staleField !== undefined) {
-              stale = true;
-            }
-          }
           const normObjValue = normObj[key];
           if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object

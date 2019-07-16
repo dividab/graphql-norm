@@ -42,8 +42,6 @@ export const test: DenormalizeTestDef = {
     }
   `,
   partial: false,
-  stale: false,
-  staleMap: {},
   data: {
     posts: [
       {

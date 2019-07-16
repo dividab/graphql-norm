@@ -13,8 +13,6 @@ export const test: DenormalizeTestDef = {
     }
   `,
   partial: true,
-  stale: false,
-  staleMap: {},
   data: undefined,
   normMap: {
     ROOT_QUERY: {
