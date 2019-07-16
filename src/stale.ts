@@ -57,9 +57,9 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
 /**
  * Checks if any of the provided fields are stale
  */
-export function isStale(fields: FieldsMap, staleMap: StaleMap): boolean {
-  for (const key in Object.keys(fields)) {
-    for (const field in fields[key]) {
+export function isStale(staleMap: StaleMap, fields: FieldsMap): boolean {
+  for (const key of Object.keys(fields)) {
+    for (const field of fields[key]) {
       const staleObj = staleMap[key];
       if (staleObj && staleObj[field]) {
         return true;
