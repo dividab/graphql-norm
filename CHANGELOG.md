@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 
-- Return used fields per key of normalized object used during denormalization in `keys` props in denormalize() result. See [#30](https://github.com/dividab/graphql-norm/pull/30), PR [#36](https://github.com/dividab/graphql-norm/pull/36) and additional work in PR [#39](https://github.com/dividab/graphql-norm/pull/39)
+- Return used fields per key of normalized object used during denormalization in `fields` props in denormalize() result. See [#30](https://github.com/dividab/graphql-norm/pull/30), PR [#36](https://github.com/dividab/graphql-norm/pull/36) and additional work in PR [#39](https://github.com/dividab/graphql-norm/pull/39)
 - Rename `EntityCache` to `NormMap`, `Entity` to `NormObj`, `EntityFieldVlue` to `NormFieldVlue`, and associated renames. See [#16](https://github.com/dividab/graphql-norm/issues/16) and PR [#35](https://github.com/dividab/graphql-norm/pull/35).
 - `normalize` directly take the `data` from a GraphQL response as argument instead of an object with a `data` property. See [#34](https://github.com/dividab/graphql-norm/pull/29).
 - `denormalize` returns `data` directly instead of an object with a `data` property. See [#34](https://github.com/dividab/graphql-norm/pull/29).
