@@ -182,6 +182,8 @@ When you normalize the response of a query you probably want to merge the result
 
 ## How to develop
 
+Node version >=12.6.0 is needed for development.
+
 To execute the tests run `yarn test`.
 
 ## How to publish

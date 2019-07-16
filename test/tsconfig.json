@@ -11,7 +11,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {},
-    "lib": ["es2015", "esnext.asynciterable"]
+    "lib": ["esnext"]
   },
   "include": ["**/*"]
 }

@@ -30,7 +30,11 @@ export interface DenormalizationResult {
   readonly data: RootFields | undefined;
   readonly partial: boolean;
   readonly stale: boolean;
-  readonly keys: ReadonlyArray<string>;
+  readonly fields: FieldsMap;
+}
+
+export interface FieldsMap {
+  readonly [key: string]: ReadonlySet<string>;
 }
 
 export interface FragmentMap {

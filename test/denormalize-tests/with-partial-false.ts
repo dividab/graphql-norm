@@ -57,5 +57,9 @@ export const test: DenormalizeTestDef = {
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" }
   },
-  keys: ["ROOT_QUERY", "Post;123", "Author;1"]
+  fields: {
+    ROOT_QUERY: ["posts"],
+    "Post;123": ["id", "__typename", "author", "title", "comments"],
+    "Author;1": ["id", "__typename", "name"]
+  }
 };
