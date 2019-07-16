@@ -1,4 +1,3 @@
-// tslint:disable:no-arguments
 import * as GraphQL from "graphql";
 import {
   DenormalizationResult,
@@ -45,7 +44,10 @@ export function denormalize(
   const response = {};
   let partial = false;
   let stale = false;
-  const keys = new Set<string>();
+  const usedFieldsMap: {
+    // eslint-disable-next-line
+    [key: string]: Set<string>;
+  } = {};
   stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
   while (stack.length > 0) {
     const [
@@ -84,7 +86,11 @@ export function denormalize(
         break;
       }
 
-      keys.add(key);
+      let usedFields = usedFieldsMap[key];
+      if (usedFields === undefined) {
+        usedFields = new Set();
+        usedFieldsMap[key] = usedFields;
+      }
       const staleFields = staleMap[key];
 
       // If we've been here before we need to use the previously created response object
@@ -111,6 +117,8 @@ export function denormalize(
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
+          // Add this to used fields
+          usedFields.add(key);
           // Check if this field is stale
           if (staleFields) {
             const staleField = staleFields[key];
@@ -188,6 +196,6 @@ export function denormalize(
     partial,
     stale,
     data: !partial ? data : undefined,
-    keys: Array.from(keys)
+    fields: usedFieldsMap
   };
 }

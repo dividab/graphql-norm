@@ -14,5 +14,5 @@ export interface DenormalizeTestDef {
   readonly partial: boolean;
   readonly stale: boolean;
   readonly staleMap: StaleMap;
-  readonly keys: ReadonlyArray<string>;
+  readonly fields: { readonly [key: string]: ReadonlyArray<string> };
 }
