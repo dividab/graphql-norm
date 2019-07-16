@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.12.0] - 2019-07-16
+
 ### Changes
 
 - Return used fields per key of normalized object used during denormalization in `keys` props in denormalize() result. See [#30](https://github.com/dividab/graphql-norm/pull/30), PR [#36](https://github.com/dividab/graphql-norm/pull/36) and additional work in PR [#39](https://github.com/dividab/graphql-norm/pull/39)
