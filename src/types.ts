@@ -29,7 +29,6 @@ export interface RootFields {
 export interface DenormalizationResult {
   readonly data: RootFields | undefined;
   readonly partial: boolean;
-  readonly stale: boolean;
   readonly fields: FieldsMap;
 }
 

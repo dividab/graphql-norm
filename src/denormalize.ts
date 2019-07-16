@@ -43,7 +43,6 @@ export function denormalize(
   const stack: Array<StackWorkItem> = [];
   const response = {};
   let partial = false;
-  let stale = false;
   const usedFieldsMap: {
     // eslint-disable-next-line
     [key: string]: Set<string>;
@@ -186,7 +185,6 @@ export function denormalize(
 
   return {
     partial,
-    stale,
     data: !partial ? data : undefined,
     fields: usedFieldsMap
   };
