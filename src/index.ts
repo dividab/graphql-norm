@@ -9,7 +9,8 @@ export {
   GetObjectId, // ref: normalize(), defaultGetObjectId()
   Variables, // ref: normalize(), denormalize()
   DenormalizationResult, // used in: denormalize()
-  RootFields // ref: normalize(), DenormalizationResult
+  RootFields, // ref: normalize(), DenormalizationResult
+  FieldsMap // DenormalizationResult
 } from "./types";
 
 export {
