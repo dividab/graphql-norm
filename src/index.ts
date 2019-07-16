@@ -22,15 +22,8 @@ export {
 
 // All below this line should be moved out of this lib
 
-export { getNormalizedObject } from "./normalized-object";
-export { updateStale } from "./stale";
-
 export {
+  getNormalizedObject,
   NormalizedObject, // ref: getNormalizedObject()
   NormalizedField // ref: NormalizedField
 } from "./normalized-object";
-
-export {
-  StaleMap, // ref: denormalize(), updateStaleFields()
-  StaleFields // ref: StaleMap
-} from "./stale";

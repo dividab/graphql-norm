@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+
+- Removed staleness checking from denormalize(). See issue [#38](https://github.com/dividab/graphql-norm/issues/38) and PR [#40](https://github.com/dividab/graphql-norm/pull/40).
+
 ## [0.12.2] - 2019-07-16
 
 ### Fixed

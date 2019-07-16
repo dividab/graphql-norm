@@ -1,7 +1,7 @@
 import * as GraphQL from "graphql";
 
 export interface Variables {
-  readonly [key: string]: any;
+  readonly [name: string]: any;
 }
 
 export interface ResponseObject {
@@ -29,7 +29,6 @@ export interface RootFields {
 export interface DenormalizationResult {
   readonly data: RootFields | undefined;
   readonly partial: boolean;
-  readonly stale: boolean;
   readonly fields: FieldsMap;
 }
 

@@ -148,10 +148,10 @@ The normalize() function takes a GraphQL query with associated variables, and da
 ```ts
 normalize(
   query: GraphQL.DocumentNode,
-  variables: { [key: string]: any } | undefined,
-  response: { data: any },
-  getObjectId: (object: any) => string
-): { [key: string]: any }
+  variables: Variables | undefined,
+  data: RootFields,
+  getObjectId: GetObjectId = defaultGetObjectId
+): NormMap
 ```
 
 ### denormalize()
@@ -159,21 +159,20 @@ normalize(
 The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
 
 ```ts
-export function denormalize(
+denormalize(
   query: GraphQL.DocumentNode,
-  variables: { [key: string]: any } | undefined,
-  cache: { [key: string]: any },
-  staleMap: { [field: string]: true | undefined } | undefined
-): {
-  response: { data: any } | undefined;
-  partial: boolean;
-  stale: boolean;
-};
+  variables: Variables | undefined,
+  normMap: NormMap
+): DenormalizationResult
 ```
 
 ### merge()
 
 When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
+
+```ts
+merge(normMap: NormMap, newNormMap: NormMap): NormMap
+```
 
 ## Related packages
 
