@@ -1,6 +1,6 @@
 {
   "name": "graphql-norm",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Normalization and denormalization of GraphQL responses",
   "main": "lib/index.js",
   "types": "lib/index",
