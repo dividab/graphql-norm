@@ -178,6 +178,7 @@ merge(normMap: NormMap, newNormMap: NormMap): NormMap
 
 - [graphql-add-remove-fields](https://www.npmjs.com/package/graphql-add-remove-fields)
 - [graphql-norm-patch](https://www.npmjs.com/package/graphql-norm-patch)
+- [graphql-norm-stale](https://www.npmjs.com/package/graphql-norm-stale)
 
 ## How to develop
 
