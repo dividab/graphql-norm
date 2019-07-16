@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.12.2] - 2019-07-16
+
+### Fixed
+
+- Remove invalid dependency.
+
 ## [0.12.1] - 2019-07-16
 
 ### Fixed
