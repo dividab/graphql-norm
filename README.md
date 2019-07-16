@@ -28,10 +28,10 @@ The goal of the package is only to perform normalization and denormalization of 
 
 ## Features
 
+- Full GraphQL syntax support (including variables, alias, @skip, @include, etc.)
 - Turn any graphql response into a flat (normalized) object map
 - Build a response for any grapqhl query from the normalized object map (denormalize)
 - Merge normalized object maps to build a larger map (eg. a cache)
-- Full GraphQL syntax support (including variables, alias, @skip, @include)
 - Optimized for run-time speed
 
 ## Example usage
