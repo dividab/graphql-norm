@@ -1,7 +1,7 @@
 import * as GraphQL from "graphql";
 
 export interface Variables {
-  readonly [key: string]: any;
+  readonly [name: string]: any;
 }
 
 export interface ResponseObject {
