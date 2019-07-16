@@ -1,4 +1,5 @@
 import { NormMap } from "./norm-map";
+import { FieldsMap } from "./types";
 
 export interface StaleMap {
   readonly [key: string]: StaleFields | undefined;
@@ -51,4 +52,19 @@ export function updateStale(normMap: NormMap, staleMap: StaleMap): StaleMap {
     }
   }
   return staleCopy;
+}
+
+/**
+ * Checks if any of the provided fields are stale
+ */
+export function isStale(fields: FieldsMap, staleMap: StaleMap): boolean {
+  for (const key in Object.keys(fields)) {
+    for (const field in fields[key]) {
+      const staleObj = staleMap[key];
+      if (staleObj && staleObj[field]) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

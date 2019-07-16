@@ -19,7 +19,7 @@ function deepFreeze(o: any): any {
   return o;
 }
 
-describe("normalize() with shared test data", () => {
+describe("updateStale() with special test data", () => {
   onlySkip(tests).forEach(item => {
     test(item.name, done => {
       // Freeze the test so we test that the function does not mutate the inputs on any level
