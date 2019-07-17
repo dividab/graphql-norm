@@ -113,7 +113,8 @@ export function normalize(
               field as FieldNodeWithSelectionSet,
               normObj,
               responseFieldValue,
-              path + "." + normFieldName
+              //path + "." + normFieldName
+              keyOrNewParentArray + ";" + normFieldName
             ]);
           } else {
             // This field is a primitive (not a array of normalized objects or a single normalized object)
