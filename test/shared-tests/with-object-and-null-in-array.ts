@@ -25,9 +25,9 @@ export const test: SharedTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      'postsByIds({"ids":["123","non-existent-id"]})': ["Post;123", null]
+      'postsByIds({"ids":["123","non-existent-id"]})': ["Post:123", null]
     },
-    "Post;123": {
+    "Post:123": {
       id: "123",
       __typename: "Post",
       title: "My awesome blog post"

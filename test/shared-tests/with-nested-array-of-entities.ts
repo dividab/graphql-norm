@@ -40,43 +40,43 @@ export const test: SharedTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      table: "Table;T1"
+      table: "Table:T1"
     },
-    "Table;T1": {
+    "Table:T1": {
       id: "T1",
       __typename: "Table",
       rows: [
-        ["Cell;1.1", "Cell;1.2"],
-        ["Cell;2.1", "Cell;2.2"],
-        ["Cell;3.1", "Cell;3.2"]
+        ["Cell:1.1", "Cell:1.2"],
+        ["Cell:2.1", "Cell:2.2"],
+        ["Cell:3.1", "Cell:3.2"]
       ]
     },
-    "Cell;1.1": {
+    "Cell:1.1": {
       id: "1.1",
       __typename: "Cell",
       value: "value 1.1"
     },
-    "Cell;1.2": {
+    "Cell:1.2": {
       id: "1.2",
       __typename: "Cell",
       value: "value 1.2"
     },
-    "Cell;2.1": {
+    "Cell:2.1": {
       id: "2.1",
       __typename: "Cell",
       value: "value 2.1"
     },
-    "Cell;2.2": {
+    "Cell:2.2": {
       id: "2.2",
       __typename: "Cell",
       value: "value 2.2"
     },
-    "Cell;3.1": {
+    "Cell:3.1": {
       id: "3.1",
       __typename: "Cell",
       value: "value 3.1"
     },
-    "Cell;3.2": {
+    "Cell:3.2": {
       id: "3.2",
       __typename: "Cell",
       value: "value 3.2"
