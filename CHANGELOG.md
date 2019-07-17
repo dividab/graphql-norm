@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Genearate fallback IDs using the nearest parent as base. See issue [#27](https://github.com/dividab/graphql-norm/issues/27) and PR [#41](https://github.com/dividab/graphql-norm/pull/41).
+
 ### Removed
 
 - Removed staleness checking from denormalize(). See issue [#38](https://github.com/dividab/graphql-norm/issues/38) and PR [#40](https://github.com/dividab/graphql-norm/pull/40).
