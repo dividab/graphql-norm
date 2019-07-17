@@ -1,12 +1,8 @@
-import gql from "graphql-tag";
 import { SharedTestDef } from "../shared-test-def";
-
-const fallbackId1 = 'Post;123.comments({"a":{"b":"1","c":"asd"}}).0';
-const fallbackId2 = 'Post;123.comments({"a":{"b":"1","c":"asd"}}).1';
-const fallbackId3 = "ROOT_QUERY.testNode";
+import gql from "graphql-tag";
 
 export const test: SharedTestDef = {
-  name: "with missing id",
+  name: "with value object",
   query: gql`
     query TestQuery {
       posts {
@@ -17,8 +13,12 @@ export const test: SharedTestDef = {
           __typename
           name
         }
-        title
-        comments(a: { b: 1, c: "asd" }) {
+        header {
+          title
+          subtitle
+        }
+        comments {
+          id
           __typename
           commenter {
             id
@@ -26,11 +26,6 @@ export const test: SharedTestDef = {
             name
           }
         }
-      }
-
-      testNode {
-        __typename
-        nisse
       }
     }
   `,
@@ -44,17 +39,13 @@ export const test: SharedTestDef = {
           __typename: "Author",
           name: "Paul"
         },
-        title: "My awesome blog post",
+        header: {
+          title: "My awesome blog post",
+          subtitle: "This is the best post ever"
+        },
         comments: [
           {
-            __typename: "Comment",
-            commenter: {
-              id: "2",
-              __typename: "Author",
-              name: "Nicole"
-            }
-          },
-          {
+            id: "324",
             __typename: "Comment",
             commenter: {
               id: "2",
@@ -64,37 +55,29 @@ export const test: SharedTestDef = {
           }
         ]
       }
-    ],
-    testNode: {
-      __typename: "olle",
-      nisse: "asd"
-    }
+    ]
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"],
-      testNode: fallbackId3
+      posts: ["Post;123"]
     },
     "Post;123": {
       id: "123",
       __typename: "Post",
       author: "Author;1",
+      header: "Post;123.header",
+      comments: ["Comment;324"]
+    },
+    "Post;123.header": {
       title: "My awesome blog post",
-      'comments({"a":{"b":"1","c":"asd"}})': [fallbackId1, fallbackId2]
+      subtitle: "This is the best post ever"
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" },
-    [fallbackId1]: {
+    "Comment;324": {
+      id: "324",
       __typename: "Comment",
       commenter: "Author;2"
     },
-    [fallbackId2]: {
-      __typename: "Comment",
-      commenter: "Author;2"
-    },
-    "Author;2": { id: "2", __typename: "Author", name: "Nicole" },
-    [fallbackId3]: {
-      __typename: "olle",
-      nisse: "asd"
-    }
+    "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
   }
 };

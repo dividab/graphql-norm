@@ -30,7 +30,7 @@ type StackWorkItem = [
   FieldNodeWithSelectionSet,
   ParentNormObjOrArray | undefined /*parentNormObj*/,
   ResponseObjectOrArray,
-  string
+  string // FallbackId
 ];
 
 /**
@@ -68,7 +68,7 @@ export function normalize(
       fieldNode,
       parentNormObjOrArray,
       responseObjectOrArray,
-      path
+      fallbackId
     ] = stack.pop()!;
 
     const expandedSelections = expandFragments(
@@ -83,8 +83,7 @@ export function normalize(
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
       const objectToIdResult = getObjectIdToUse(responseObject);
-      keyOrNewParentArray =
-        objectToIdResult !== undefined ? objectToIdResult : path;
+      keyOrNewParentArray = objectToIdResult ? objectToIdResult : fallbackId;
       // Get or create normalized object
       let normObj = normMap[keyOrNewParentArray];
       if (!normObj) {
@@ -113,7 +112,9 @@ export function normalize(
               field as FieldNodeWithSelectionSet,
               normObj,
               responseFieldValue,
-              path + "." + normFieldName
+              //path + "." + normFieldName
+              // Use the current key plus fieldname as fallback id
+              keyOrNewParentArray + "." + normFieldName
             ]);
           } else {
             // This field is a primitive (not a array of normalized objects or a single normalized object)
@@ -129,7 +130,7 @@ export function normalize(
           fieldNode,
           keyOrNewParentArray,
           responseArray[i],
-          path + "." + i.toString()
+          fallbackId + "." + i.toString()
         ]);
       }
     }

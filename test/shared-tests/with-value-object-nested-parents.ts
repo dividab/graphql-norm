@@ -1,12 +1,8 @@
-import gql from "graphql-tag";
 import { SharedTestDef } from "../shared-test-def";
-
-const fallbackId1 = 'Post;123.comments({"a":{"b":"1","c":"asd"}}).0';
-const fallbackId2 = 'Post;123.comments({"a":{"b":"1","c":"asd"}}).1';
-const fallbackId3 = "ROOT_QUERY.testNode";
+import gql from "graphql-tag";
 
 export const test: SharedTestDef = {
-  name: "with missing id",
+  name: "with value object nested parents",
   query: gql`
     query TestQuery {
       posts {
@@ -18,19 +14,19 @@ export const test: SharedTestDef = {
           name
         }
         title
-        comments(a: { b: 1, c: "asd" }) {
+        comments {
+          id
           __typename
           commenter {
             id
             __typename
             name
+            address {
+              street
+              town
+            }
           }
         }
-      }
-
-      testNode {
-        __typename
-        nisse
       }
     }
   `,
@@ -47,54 +43,45 @@ export const test: SharedTestDef = {
         title: "My awesome blog post",
         comments: [
           {
+            id: "324",
             __typename: "Comment",
             commenter: {
               id: "2",
               __typename: "Author",
-              name: "Nicole"
-            }
-          },
-          {
-            __typename: "Comment",
-            commenter: {
-              id: "2",
-              __typename: "Author",
-              name: "Nicole"
+              name: "Nicole",
+              address: {
+                street: "Nicolestreet",
+                town: "Nicoletown"
+              }
             }
           }
         ]
       }
-    ],
-    testNode: {
-      __typename: "olle",
-      nisse: "asd"
-    }
+    ]
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"],
-      testNode: fallbackId3
+      posts: ["Post;123"]
     },
     "Post;123": {
       id: "123",
       __typename: "Post",
       author: "Author;1",
       title: "My awesome blog post",
-      'comments({"a":{"b":"1","c":"asd"}})': [fallbackId1, fallbackId2]
+      comments: ["Comment;324"]
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" },
-    [fallbackId1]: {
+    "Comment;324": {
+      id: "324",
       __typename: "Comment",
       commenter: "Author;2"
     },
-    [fallbackId2]: {
-      __typename: "Comment",
-      commenter: "Author;2"
+    "Author;2": {
+      id: "2",
+      __typename: "Author",
+      name: "Nicole",
+      address: "Author;2.address"
     },
-    "Author;2": { id: "2", __typename: "Author", name: "Nicole" },
-    [fallbackId3]: {
-      __typename: "olle",
-      nisse: "asd"
-    }
+    "Author;2.address": { street: "Nicolestreet", town: "Nicoletown" }
   }
 };
