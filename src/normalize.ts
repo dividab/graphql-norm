@@ -83,8 +83,7 @@ export function normalize(
       const responseObject = responseObjectOrArray as ResponseObject;
       // console.log("responseObject", responseObject);
       const objectToIdResult = getObjectIdToUse(responseObject);
-      keyOrNewParentArray =
-        objectToIdResult !== undefined ? objectToIdResult : fallbackId;
+      keyOrNewParentArray = objectToIdResult ? objectToIdResult : fallbackId;
       // Get or create normalized object
       let normObj = normMap[keyOrNewParentArray];
       if (!normObj) {
