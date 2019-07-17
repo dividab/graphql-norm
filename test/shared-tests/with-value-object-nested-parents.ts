@@ -2,7 +2,7 @@ import { SharedTestDef } from "../shared-test-def";
 import gql from "graphql-tag";
 
 export const test: SharedTestDef = {
-  name: "with value object",
+  name: "with value object nested parents",
   query: gql`
     query TestQuery {
       posts {
