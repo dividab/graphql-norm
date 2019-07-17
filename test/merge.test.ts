@@ -21,15 +21,13 @@ describe("merge()", () => {
         }
       `,
       response: {
-        data: {
-          user: {
-            id: "123",
-            __typename: "User",
-            address: {
-              __typename: "Address",
-              city: "Los Leones",
-              region: "Miramar"
-            }
+        user: {
+          id: "123",
+          __typename: "User",
+          address: {
+            __typename: "Address",
+            city: "Los Leones",
+            region: "Miramar"
           }
         }
       }
@@ -51,30 +49,27 @@ describe("merge()", () => {
         }
       `,
       response: {
-        data: {
-          users: [
-            {
-              id: "123",
-              __typename: "User",
-              address: {
-                __typename: "Address",
-                city: "Los Leones",
-                region: "Miramar"
-              }
+        users: [
+          {
+            id: "123",
+            __typename: "User",
+            address: {
+              __typename: "Address",
+              city: "Los Leones",
+              region: "Miramar"
             }
-          ]
-        }
+          }
+        ]
       }
     };
 
-    const normMapA = normalize(itemA.query, {}, itemA.response.data);
-    const normMapB = normalize(itemB.query, {}, itemB.response.data);
+    const normMapA = normalize(itemA.query, {}, itemA.response);
+    const normMapB = normalize(itemB.query, {}, itemB.response);
     const mergedNormMap = merge(normMapA, normMapB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedNormMap);
     expect(denormalizedResult.partial).toBe(false);
   });
 
-  /*
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
   test("partial value objects", () => {
@@ -93,14 +88,12 @@ describe("merge()", () => {
         }
       `,
       response: {
-        data: {
-          user: {
-            id: "123",
-            __typename: "User",
-            address: {
-              __typename: "Address",
-              city: "Los Leones"
-            }
+        user: {
+          id: "123",
+          __typename: "User",
+          address: {
+            __typename: "Address",
+            city: "Los Leones"
           }
         }
       }
@@ -121,18 +114,16 @@ describe("merge()", () => {
         }
       `,
       response: {
-        data: {
-          users: [
-            {
-              id: "123",
-              __typename: "User",
-              address: {
-                __typename: "Address",
-                region: "Miramar"
-              }
+        users: [
+          {
+            id: "123",
+            __typename: "User",
+            address: {
+              __typename: "Address",
+              region: "Miramar"
             }
-          ]
-        }
+          }
+        ]
       }
     };
 
@@ -143,5 +134,4 @@ describe("merge()", () => {
 
     expect(denormalizedResult.partial).toBe(false);
   });
-*/
 });
