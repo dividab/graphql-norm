@@ -71,46 +71,46 @@ export const test: SharedTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"]
+      posts: ["Post:123"]
     },
-    "Post;123": {
+    "Post:123": {
       id: "123",
       __typename: "Post",
-      author: "Author;1",
+      author: "Author:1",
       headers: [
-        "Post;123.headers.0",
-        "Post;123.headers.1",
-        "Post;123.headers.2"
+        "Post:123.headers.0",
+        "Post:123.headers.1",
+        "Post:123.headers.2"
       ],
-      comments: ["Comment;324"]
+      comments: ["Comment:324"]
     },
-    "Post;123.headers.0": {
+    "Post:123.headers.0": {
       title: "My awesome blog post",
-      subheader: "Post;123.headers.0.subheader"
+      subheader: "Post:123.headers.0.subheader"
     },
-    "Post;123.headers.0.subheader": {
+    "Post:123.headers.0.subheader": {
       title: "This is the best post ever"
     },
-    "Post;123.headers.1": {
+    "Post:123.headers.1": {
       title: "Alternate awesomeness",
-      subheader: "Post;123.headers.1.subheader"
+      subheader: "Post:123.headers.1.subheader"
     },
-    "Post;123.headers.1.subheader": {
+    "Post:123.headers.1.subheader": {
       title: "Never better"
     },
-    "Post;123.headers.2": {
+    "Post:123.headers.2": {
       title: "Also another alternative",
-      subheader: "Post;123.headers.2.subheader"
+      subheader: "Post:123.headers.2.subheader"
     },
-    "Post;123.headers.2.subheader": {
+    "Post:123.headers.2.subheader": {
       title: "Actually not that good"
     },
-    "Author;1": { id: "1", __typename: "Author", name: "Paul" },
-    "Comment;324": {
+    "Author:1": { id: "1", __typename: "Author", name: "Paul" },
+    "Comment:324": {
       id: "324",
       __typename: "Comment",
-      commenter: "Author;2"
+      commenter: "Author:2"
     },
-    "Author;2": { id: "2", __typename: "Author", name: "Nicole" }
+    "Author:2": { id: "2", __typename: "Author", name: "Nicole" }
   }
 };

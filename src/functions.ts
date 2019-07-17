@@ -125,7 +125,7 @@ export const defaultGetObjectId: GetObjectId = (object: {
 }): GetObjectToIdResult => {
   return object.id === undefined
     ? undefined
-    : `${object.__typename};${object.id}`;
+    : `${object.__typename}:${object.id}`;
 };
 
 /**

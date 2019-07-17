@@ -55,20 +55,20 @@ export const test: SharedTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"]
+      posts: ["Post:123"]
     },
-    "Post;123": {
+    "Post:123": {
       id: "123",
       __typename: "Post",
-      author: "Author;1",
+      author: "Author:1",
       title: "My awesome blog post",
-      comments: ["Comment;324"]
+      comments: ["Comment:324"]
     },
-    "Comment;324": {
+    "Comment:324": {
       id: "324",
       __typename: "Comment",
-      commenter: "Author;1"
+      commenter: "Author:1"
     },
-    "Author;1": { id: "1", __typename: "Author", name: "Paul", age: 33 }
+    "Author:1": { id: "1", __typename: "Author", name: "Paul", age: 33 }
   }
 };

@@ -44,20 +44,20 @@ export const test: DenormalizeTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"]
+      posts: ["Post:123"]
     },
-    "Post;123": {
+    "Post:123": {
       id: "123",
       __typename: "Post",
-      author: "Author;1",
+      author: "Author:1",
       title: "My awesome blog post",
       comments: null
     },
-    "Author;1": { id: "1", __typename: "Author", name: "Paul" }
+    "Author:1": { id: "1", __typename: "Author", name: "Paul" }
   },
   fields: {
     ROOT_QUERY: ["posts"],
-    "Post;123": ["id", "__typename", "author", "title", "comments"],
-    "Author;1": ["id", "__typename", "name"]
+    "Post:123": ["id", "__typename", "author", "title", "comments"],
+    "Author:1": ["id", "__typename", "name"]
   }
 };

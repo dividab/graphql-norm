@@ -50,17 +50,17 @@ export const test: SharedTestDef = {
   },
   normMap: {
     ROOT_QUERY: {
-      posts: ["Post;123"]
+      posts: ["Post:123"]
     },
-    "Post;123": {
+    "Post:123": {
       id: "123",
       __typename: "Post",
-      isProtoTypeOf: ["Value;1", "Value;2"],
+      isProtoTypeOf: ["Value:1", "Value:2"],
       title: "My awesome blog post",
-      hasOwnProperty: "Commenter;1"
+      hasOwnProperty: "Commenter:1"
     },
-    "Value;1": { id: "1", __typename: "Value", value: 1 },
-    "Value;2": { id: "2", __typename: "Value", value: 2 },
-    "Commenter;1": { id: "1", __typename: "Commenter", name: "olle" }
+    "Value:1": { id: "1", __typename: "Value", value: 1 },
+    "Value:2": { id: "2", __typename: "Value", value: 2 },
+    "Commenter:1": { id: "1", __typename: "Commenter", name: "olle" }
   }
 };
