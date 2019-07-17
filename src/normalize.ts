@@ -38,7 +38,7 @@ type StackWorkItem = [
  * @param query The graphql query document
  * @param variables The graphql query variables
  * @param response The graphql response
- * @param getObjectId Function to get key from an object
+ * @param getObjectId Function to get normalized map key from an object
  */
 export function normalize(
   query: GraphQL.DocumentNode,
