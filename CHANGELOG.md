@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- Use colon as default ID separator. See issue [#42](https://github.com/dividab/graphql-norm/issues/42) and PR [#43](https://github.com/dividab/graphql-norm/pull/43).
 - Genearate fallback IDs using the nearest parent as base. See issue [#27](https://github.com/dividab/graphql-norm/issues/27) and PR [#41](https://github.com/dividab/graphql-norm/pull/41).
 
 ### Removed
