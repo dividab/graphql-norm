@@ -114,7 +114,7 @@ export function normalize(
               responseFieldValue,
               //path + "." + normFieldName
               // Use the current key plus fieldname as fallback id
-              keyOrNewParentArray + ";" + normFieldName
+              keyOrNewParentArray + "." + normFieldName
             ]);
           } else {
             // This field is a primitive (not a array of normalized objects or a single normalized object)

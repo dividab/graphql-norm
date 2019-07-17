@@ -2,7 +2,7 @@ import { SharedTestDef } from "../shared-test-def";
 import gql from "graphql-tag";
 
 export const test: SharedTestDef = {
-  name: "with value object",
+  name: "with value object array",
   only: true,
   query: gql`
     query TestQuery {
@@ -14,7 +14,7 @@ export const test: SharedTestDef = {
           __typename
           name
         }
-        header {
+        headers {
           title
           subtitle
         }
@@ -40,10 +40,20 @@ export const test: SharedTestDef = {
           __typename: "Author",
           name: "Paul"
         },
-        header: {
-          title: "My awesome blog post",
-          subtitle: "This is the best post ever"
-        },
+        headers: [
+          {
+            title: "My awesome blog post",
+            subtitle: "This is the best post ever"
+          },
+          {
+            title: "Alternate awesomeness",
+            subtitle: "Never better"
+          },
+          {
+            title: "Also another alternative",
+            subtitle: "Actually not that good"
+          }
+        ],
         comments: [
           {
             id: "324",
@@ -66,12 +76,24 @@ export const test: SharedTestDef = {
       id: "123",
       __typename: "Post",
       author: "Author;1",
-      header: "Post;123.header",
+      headers: [
+        "Post;123.headers.0",
+        "Post;123.headers.1",
+        "Post;123.headers.2"
+      ],
       comments: ["Comment;324"]
     },
-    "Post;123.header": {
+    "Post;123.headers.0": {
       title: "My awesome blog post",
       subtitle: "This is the best post ever"
+    },
+    "Post;123.headers.1": {
+      title: "Alternate awesomeness",
+      subtitle: "Never better"
+    },
+    "Post;123.headers.2": {
+      title: "Also another alternative",
+      subtitle: "Actually not that good"
     },
     "Author;1": { id: "1", __typename: "Author", name: "Paul" },
     "Comment;324": {
