@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 
 export const test: SharedTestDef = {
   name: "with value object",
-  only: true,
   query: gql`
     query TestQuery {
       posts {
