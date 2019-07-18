@@ -51,13 +51,13 @@ let cache = {};
 
 // This query will be fetched from the server
 const query = `
-query GetCountry($code: String!) {
-  country(code: $code) {
-    __typename code name
-    continent {__typename code name}
-    languages {__typename code name}
-  }
-}`;
+  query GetCountry($code: String!) {
+    country(code: $code) {
+      __typename code name
+      continent {__typename code name}
+      languages {__typename code name}
+    }
+  }`;
 const queryDoc = parse(query);
 const queryVars = { code: "SE" };
 request("https://countries.trevorblades.com/graphql", query, queryVars).then(
