@@ -103,7 +103,7 @@ request("https://countries.trevorblades.com/graphql", query).then(data => {
     "Language:sv": {"__typename": "Language", "code": "sv", "name": "Swedish"},
     "Continent:EU": {"__typename": "Continent", "code": "EU", "name": "Europe"}
   }
-*/
+  */
 
   // Merge the normalized response into the cache
   cache = merge(cache, normMap);
