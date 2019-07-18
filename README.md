@@ -37,106 +37,103 @@ The goal of the package is only to perform normalization and denormalization of 
 ## Example usage
 
 ```js
+const appDiv: HTMLElement = document.getElementById("app");
+appDiv.innerHTML = `<div>graphql-norm example, see console output</div>`;
+
 import { normalize, denormalize, merge } from "graphql-norm";
 import { request } from "graphql-request";
+import { parse } from "graphql";
 
 // A plain JS object to hold the normalized responses
 let cache = {};
 
-const query = gql`
-  query TestQuery {
-    posts {
-      id
+// This query will be fetched from the server
+const query = `
+{
+  country(code: "SE") {
+    __typename
+    code
+    name
+    continent {
       __typename
-      title
-      author {
-        id
-        __typename
-        name
-      }
-      comments {
-        id
-        __typename
-        commenter {
-          id
-          __typename
-          name
-        }
-      }
+      code
+      name
+    }
+    languages {
+      __typename
+      code
+      name
     }
   }
-`;
-
-// Make a request to fetch the data
-const response = request(query);
-
-/*
-response:
-data: {
-  posts: [
-    {
-      id: "123",
-      __typename: "Post",
-      author: {
-        id: "1",
-        __typename: "Author",
-        name: "Paul"
-      },
-      title: "My awesome blog post",
-      comments: [
-        {
-          id: "324",
-          __typename: "Comment",
-          commenter: {
-            id: "2",
-            __typename: "Author",
-            name: "Nicole"
-          }
-        }
-      ]
+}`;
+const queryDoc = parse(query);
+request("https://countries.trevorblades.com/graphql", query).then(data => {
+  console.log("data", JSON.stringify(data));
+  /*
+  {
+    "country": {
+      "__typename": "Country",
+      "code": "SE",
+      "name": "Sweden",
+      "continent": {"__typename": "Continent", "code": "EU", "name": "Europe"},
+      "languages": [{"__typename": "Language", "code": "sv", "name": "Swedish"}]
     }
-  ];
-}
+  }
+  */
+
+  // Function to find normalized key for each object in response data
+  const getKey = obj =>
+    obj.code && obj.__typename && `${obj.__typename}:${obj.code}`;
+
+  // Normalize the response data
+  const normMap = normalize(queryDoc, {}, data, getKey);
+
+  // In the normalized data, an ID was assigned to each object.
+  // References between objects are now using these IDs.
+  console.log("normMap", JSON.stringify(normMap));
+  /*
+  {
+    "ROOT_QUERY": {"country({\"code\":\"SE\"})": "Country:SE"},
+    "Country:SE": {
+      "__typename": "Country",
+      "code": "SE",
+      "name": "Sweden",
+      "languages": ["Language:sv"],
+      "continent": "Continent:EU"
+    },
+    "Language:sv": {"__typename": "Language", "code": "sv", "name": "Swedish"},
+    "Continent:EU": {"__typename": "Continent", "code": "EU", "name": "Europe"}
+  }
 */
 
-// Normalize the response
-const normalizedResponse = normalize(query, {}, response);
+  // Merge the normalized response into the cache
+  cache = merge(cache, normMap);
 
-/*
-normalizedResponse:
-{
-  ROOT_QUERY: {
-    posts: ["Post:123"]
-  },
-  "Post:123": {
-    id: "123",
-    __typename: "Post",
-    author: "Author:1",
-    title: "My awesome blog post",
-    comments: [ "Comment:324"]
-  },
-  "Author:1": { id: "1", __typename: "Author", name: "Paul" },
-   "Comment:324": {
-    id: "324",
-    __typename: "Comment",
-    commenter: "Author:2"
-  },
-  "Author:2": { id: "2", __typename: "Author", name: "Nicole" }
-}
+  // Now we can use denormalize to read a query from the cache
+  const query2 = `
+  {
+    country(code: "SE") {
+      __typename
+      code
+      name
+    }
+  }
+  `;
+  const query2Doc = parse(query2);
+  const denormResult = denormalize(query2Doc, {}, cache);
 
-As we can see in the normalized response above, an ID was assigned to each object.
-References between objects are now using these IDs.
-*/
-
-// Merge the normalized response into the cache
-cache = merge(cache, normalizedResponse);
-
-// Later when we want to read a query from the cache
-const cachedResponse = denormalize(query, {}, cache);
-
-// If cachedResponse.partial === false then cachedResponse.response now has the original
-// response for the query and we can use it without a server request. Otherwise
-// we need to fetch from the server, normalize and merge into the cache.
+  console.log("denormResult", JSON.stringify(denormResult));
+  /*
+  {
+    "partial": false,
+    "data": {"country": {"__typename": "Country", "code": "SE", "name": "Sweden"}},
+    "fields": {
+      "ROOT_QUERY": {},
+      "Country:SE": {}
+    }
+  }
+  */
+});
 ```
 
 ## API
