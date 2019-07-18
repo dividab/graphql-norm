@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.13.0] - 2019-07-18
+
 ### Changed
 
 - Use colon as default ID separator. See issue [#42](https://github.com/dividab/graphql-norm/issues/42) and PR [#43](https://github.com/dividab/graphql-norm/pull/43).
