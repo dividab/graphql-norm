@@ -39,6 +39,9 @@ The goal of the package is only to perform normalization and denormalization of 
 You can also run the below example [live at stackblitz](https://stackblitz.com/edit/typescript-pbmen8).
 
 ```js
+const appDiv: HTMLElement = document.getElementById("app");
+appDiv.innerHTML = `<div>graphql-norm example, see console output</div>`;
+
 import { normalize, denormalize, merge } from "graphql-norm";
 import { request } from "graphql-request";
 import { parse } from "graphql";
@@ -48,27 +51,19 @@ let cache = {};
 
 // This query will be fetched from the server
 const query = `
-{
-  country(code: "SE") {
-    __typename
-    code
-    name
-    continent {
-      __typename
-      code
-      name
-    }
-    languages {
-      __typename
-      code
-      name
-    }
+query GetCountry($code: String!) {
+  country(code: $code) {
+    __typename code name
+    continent {__typename code name}
+    languages {__typename code name}
   }
 }`;
 const queryDoc = parse(query);
-request("https://countries.trevorblades.com/graphql", query).then(data => {
-  console.log("data", JSON.stringify(data));
-  /*
+const queryVars = { code: "SE" };
+request("https://countries.trevorblades.com/graphql", query, queryVars).then(
+  data => {
+    console.log("data", JSON.stringify(data));
+    /*
   {
     "country": {
       "__typename": "Country",
@@ -80,17 +75,17 @@ request("https://countries.trevorblades.com/graphql", query).then(data => {
   }
   */
 
-  // Function to find normalized key for each object in response data
-  const getKey = obj =>
-    obj.code && obj.__typename && `${obj.__typename}:${obj.code}`;
+    // Function to find normalized key for each object in response data
+    const getKey = obj =>
+      obj.code && obj.__typename && `${obj.__typename}:${obj.code}`;
 
-  // Normalize the response data
-  const normMap = normalize(queryDoc, {}, data, getKey);
+    // Normalize the response data
+    const normMap = normalize(queryDoc, queryVars, data, getKey);
 
-  // In the normalized data, an ID was assigned to each object.
-  // References between objects are now using these IDs.
-  console.log("normMap", JSON.stringify(normMap));
-  /*
+    // In the normalized data, an ID was assigned to each object.
+    // References between objects are now using these IDs.
+    console.log("normMap", JSON.stringify(normMap));
+    /*
   {
     "ROOT_QUERY": {"country({\"code\":\"SE\"})": "Country:SE"},
     "Country:SE": {
@@ -105,25 +100,20 @@ request("https://countries.trevorblades.com/graphql", query).then(data => {
   }
   */
 
-  // Merge the normalized response into the cache
-  cache = merge(cache, normMap);
+    // Merge the normalized response into the cache
+    cache = merge(cache, normMap);
 
-  // Now we can use denormalize to read a query from the cache
-  const query2 = `
-  {
-    country(code: "SE") {
-      __typename
-      code
-      name
-    }
-  }
-  `;
-  const query2Doc = parse(query2);
-  const denormResult = denormalize(query2Doc, {}, cache);
+    // Now we can now use denormalize to read a query from the cache
+    const query2 = `
+    query GetCountry2($code: String!) {
+      country(code: $code) {__typename code name}
+    }`;
+    const query2Doc = parse(query2);
+    const denormResult = denormalize(query2Doc, { code: "SE" }, cache);
 
-  const setToJSON = (k, v) => (v instanceof Set ? Array.from(v) : v);
-  console.log("denormResult", JSON.stringify(denormResult, setToJSON));
-  /*
+    const setToJSON = (k, v) => (v instanceof Set ? Array.from(v) : v);
+    console.log("denormResult", JSON.stringify(denormResult, setToJSON));
+    /*
   {
     "partial": false,
     "data": {"country": {"__typename": "Country","code": "SE","name": "Sweden"}},
@@ -133,7 +123,8 @@ request("https://countries.trevorblades.com/graphql", query).then(data => {
     }
   }
   */
-});
+  }
+);
 ```
 
 ## API
