@@ -36,7 +36,7 @@ The goal of the package is only to perform normalization and denormalization of 
 
 ## Example usage
 
-You can also rune the below example [live at stackblitz](https://stackblitz.com/edit/typescript-pbmen8).
+You can also run the below example [live at stackblitz](https://stackblitz.com/edit/typescript-pbmen8).
 
 ```js
 import { normalize, denormalize, merge } from "graphql-norm";
