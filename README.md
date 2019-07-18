@@ -86,19 +86,19 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
     // References between objects are now using these IDs.
     console.log("normMap", JSON.stringify(normMap));
     /*
-  {
-    "ROOT_QUERY": {"country({\"code\":\"SE\"})": "Country:SE"},
-    "Country:SE": {
-      "__typename": "Country",
-      "code": "SE",
-      "name": "Sweden",
-      "languages": ["Language:sv"],
-      "continent": "Continent:EU"
-    },
-    "Language:sv": {"__typename": "Language", "code": "sv", "name": "Swedish"},
-    "Continent:EU": {"__typename": "Continent", "code": "EU", "name": "Europe"}
-  }
-  */
+    {
+      "ROOT_QUERY": {"country({\"code\":\"SE\"})": "Country:SE"},
+      "Country:SE": {
+        "__typename": "Country",
+        "code": "SE",
+        "name": "Sweden",
+        "languages": ["Language:sv"],
+        "continent": "Continent:EU"
+      },
+      "Language:sv": {"__typename": "Language", "code": "sv", "name": "Swedish"},
+      "Continent:EU": {"__typename": "Continent", "code": "EU", "name": "Europe"}
+    }
+    */
 
     // Merge the normalized response into the cache
     cache = merge(cache, normMap);
@@ -114,15 +114,15 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
     const setToJSON = (k, v) => (v instanceof Set ? Array.from(v) : v);
     console.log("denormResult", JSON.stringify(denormResult, setToJSON));
     /*
-  {
-    "partial": false,
-    "data": {"country": {"__typename": "Country","code": "SE","name": "Sweden"}},
-    "fields": {
-      "ROOT_QUERY": ["country({\"code\":\"SE\"})"],
-      "Country:SE": ["__typename", "code", "name"]
+    {
+      "partial": false,
+      "data": {"country": {"__typename": "Country","code": "SE","name": "Sweden"}},
+      "fields": {
+        "ROOT_QUERY": ["country({\"code\":\"SE\"})"],
+        "Country:SE": ["__typename", "code", "name"]
+      }
     }
-  }
-  */
+    */
   }
 );
 ```
