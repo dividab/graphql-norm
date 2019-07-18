@@ -39,9 +39,6 @@ The goal of the package is only to perform normalization and denormalization of 
 You can also rune the below example [live at stackblitz](https://stackblitz.com/edit/typescript-pbmen8).
 
 ```js
-const appDiv: HTMLElement = document.getElementById("app");
-appDiv.innerHTML = `<div>graphql-norm example, see console output</div>`;
-
 import { normalize, denormalize, merge } from "graphql-norm";
 import { request } from "graphql-request";
 import { parse } from "graphql";
