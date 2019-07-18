@@ -121,14 +121,15 @@ request("https://countries.trevorblades.com/graphql", query).then(data => {
   const query2Doc = parse(query2);
   const denormResult = denormalize(query2Doc, {}, cache);
 
-  console.log("denormResult", JSON.stringify(denormResult));
+  const setToJSON = (k, v) => (v instanceof Set ? Array.from(v) : v);
+  console.log("denormResult", JSON.stringify(denormResult, setToJSON));
   /*
   {
     "partial": false,
-    "data": {"country": {"__typename": "Country", "code": "SE", "name": "Sweden"}},
+    "data": {"country": {"__typename": "Country","code": "SE","name": "Sweden"}},
     "fields": {
-      "ROOT_QUERY": {},
-      "Country:SE": {}
+      "ROOT_QUERY": ["country({\"code\":\"SE\"})"],
+      "Country:SE": ["__typename", "code", "name"]
     }
   }
   */
