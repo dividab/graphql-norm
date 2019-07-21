@@ -184,7 +184,6 @@ export function denormalize(
   const data = (response as GraphQLResponse).data;
 
   return {
-    partial,
     data: !partial ? data : undefined,
     fields: usedFieldsMap
   };
