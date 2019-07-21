@@ -39,15 +39,13 @@
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "rollup": "^1.17.0",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-typescript2": "^0.22.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
   "scripts": {
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
-    "dist": "rollup -c",
+    "dist": "yarn build && rimraf dist && rollup -c",
     "build": "rimraf lib && tsc -p src",
     "build-test": "rimraf lib-test && tsc -p test",
     "performance": "ts-node performance-test/performance-test.ts",

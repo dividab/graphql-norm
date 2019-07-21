@@ -3,17 +3,8 @@
  */
 // @ts-check
 
-import rollupPluginCommonjs from "rollup-plugin-commonjs";
-import rollupPluginTypescript from "rollup-plugin-typescript2";
-
 const common = {
-  input: "src/index.ts",
-
-  treeshake: {
-    annotations: true,
-    moduleSideEffects: ["array.prototype.flatmap/auto.js"],
-    propertyReadSideEffects: false
-  }
+  input: "lib/index.js"
 };
 
 const cjs = {
@@ -27,12 +18,7 @@ const cjs = {
     sourcemap: false
   },
 
-  plugins: [
-    rollupPluginCommonjs(),
-    rollupPluginTypescript({
-      tsconfigOverride: { compilerOptions: { target: "es5" } }
-    })
-  ]
+  plugins: []
 };
 
 const esm = {
@@ -46,12 +32,7 @@ const esm = {
     sourcemap: false
   },
 
-  plugins: [
-    rollupPluginCommonjs(),
-    rollupPluginTypescript({
-      tsconfigOverride: { compilerOptions: { target: "es2017" } }
-    })
-  ]
+  plugins: []
 };
 
 export default [cjs, esm];
