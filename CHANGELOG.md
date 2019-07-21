@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/dividab/graphql-norm/compare/v0.14.0...master)
 
+## Changed
+
+- Removed the `partial` property from the `denormalize()` return object. Partial results was not implemented and instead we can check if the `data` is undefined instead. See issue [#47](https://github.com/dividab/graphql-norm/issues/47) and PR [#48](https://github.com/dividab/graphql-norm/pull/48).
+
 ## [0.14.0](https://github.com/dividab/graphql-norm/compare/v0.13.0...v0.14.0) - 2019-07-21
 
 ### Added
