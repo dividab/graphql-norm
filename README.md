@@ -169,11 +169,20 @@ This function returns an object with information about the denormalization resul
 
 ### merge()
 
-When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the merge() function is provided an optimized convenience to do the merging.
-
 ```ts
-merge(normMap: NormMap, newNormMap: NormMap): NormMap
+const normMap = merge(normMap, newNormMap);
 ```
+
+When you normalize the response of a query you probably want to merge the resulting normalized object map into a another, large normalized object map that is held by your application. Since the normalized object map is just a JS object you can do this merge any way you want but the `merge()` function is provided an optimized convenience to do the merging.
+
+#### Parameters
+
+- **normMap**: The normalized map to merge into. This object is not mutated.
+- **newNormMap**: The normalized map to merge into the first map. Any overlapping keys in the first map is overwritten by this map. This object is not mutated.
+
+#### Return value
+
+This function returns an object which is the merged normalized map. It has the same structure as the passed in maps but the keys/values from both of them.
 
 ## Related packages
 
