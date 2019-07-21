@@ -5,13 +5,10 @@
     "outDir": "../lib",
     "sourceMap": true,
     "declaration": true,
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es6",
+    "module": "es6",
     "moduleResolution": "node",
-    "jsx": "react",
-    "baseUrl": ".",
-    "paths": {},
-    "lib": ["es2015", "esnext.asynciterable"]
+    "lib": ["es6"]
   },
   "include": ["**/*"]
 }
