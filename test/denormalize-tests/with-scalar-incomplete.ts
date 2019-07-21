@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { DenormalizeTestDef } from "../denormalize-test-def";
 
 export const test: DenormalizeTestDef = {
-  name: "with data scalar returned",
+  name: "with scalar query incomplete",
   query: gql`
     query TestQuery {
       posts {
