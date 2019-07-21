@@ -129,7 +129,7 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
 ### normalize()
 
 ```ts
-normalize(query, variables, data, getObjectId);
+const normMap = normalize(query, variables, data, getObjectId);
 ```
 
 The normalize() function takes a GraphQL query with associated variables, and data from a GraphQL response. From those inputs it produces a normalized object map which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name to make them unique. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the normalized object map. This happens recursively until there are no nested objects left.
@@ -148,7 +148,7 @@ This function returns an object that is a map of keys and normalized objects.
 ### denormalize()
 
 ```ts
-denormalize(query, variables, normMap);
+const denormResult = denormalize(query, variables, normMap);
 ```
 
 The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
