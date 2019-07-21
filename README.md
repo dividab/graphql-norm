@@ -131,25 +131,19 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
 The normalize() function takes a GraphQL query with associated variables, and data from a GraphQL response. From those inputs it produces a normalized object map which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name to make them unique. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the normalized object map. This happens recursively until there are no nested objects left.
 
 ```ts
-normalize(
-  query: GraphQL.DocumentNode,
-  variables: Variables | undefined,
-  data: RootFields,
-  getObjectId: GetObjectId = defaultGetObjectId
-): NormMap
+normalize(query, variables, data, getObjectId);
 ```
 
-| Name        | Type                                                         | Description                              |
-| ----------- | ------------------------------------------------------------ | ---------------------------------------- |
-| query       | `GraphQL.DocumentNode`                                       | Graphql query parsed into an AST.        |
-| variables   | `interface Variables { readonly [name: string]: any;}`       | Variables associated with the query.     |
-| data        | `interface RootFields { readonly [rootField: string]: any;}` | Data returned by graphql server.         |
-| getObjectId | `(object: any) => string | undefined`                        | Callback to extract ID from each object. |
+#### Parameters
 
-- query: Graphql query parsed into an AST.
-- variables: Variables associated with the query. This is the exact same object that was used when querying the graphql server.
-- data: Data returned by a GraphQL server (the data property of the raw response).
-- getObjectId: A callback function that is called each time an object is normalized. It is passed the object as a single parameter and should return the ID of that object. If this function returns a falsy value (eg. undefined), a fallback ID will be used. Some objects may be value objects that have no ID and in that case it is OK to return falsy. The fallback ID will use the closest parent with an ID as a base (or ROOT_QUERY if there is no parent with ID).
+- **query**: Graphql query parsed into an AST.
+- **variables**: Variables associated with the query. This is the exact same object that was used when querying the graphql server.
+- **data**: Data returned by a GraphQL server (the data property of the raw response).
+- **getObjectId**: An optional callback function that is called each time an object is normalized. It is passed the object as a single parameter and should return the ID of that object. If this parameter is omitted, a default function that looks for `__typename` and `id` and combines them into a `__typename:id` string will be used. If this function returns a falsy value (eg. undefined), a fallback ID will be used. Some objects may be value objects that have no ID and in that case it is OK to return falsy. The fallback ID will use the closest parent with an ID as a base (or ROOT_QUERY if there is no parent with ID).
+
+#### Return value
+
+This function returns an object that is a Map of keys and normalized objects.
 
 ### denormalize()
 
