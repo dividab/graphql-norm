@@ -128,11 +128,11 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
 
 ### normalize()
 
-The normalize() function takes a GraphQL query with associated variables, and data from a GraphQL response. From those inputs it produces a normalized object map which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name to make them unique. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the normalized object map. This happens recursively until there are no nested objects left.
-
 ```ts
 normalize(query, variables, data, getObjectId);
 ```
+
+The normalize() function takes a GraphQL query with associated variables, and data from a GraphQL response. From those inputs it produces a normalized object map which is returned as a plain JS object. Each field in the query becomes a field in the normalized version of the object. If the field has variables they are included in the field name to make them unique. If the object has nested child objects they are exhanged for the ID of the nested object, and the nested objects becomes part of the normalized object map. This happens recursively until there are no nested objects left.
 
 #### Parameters
 
