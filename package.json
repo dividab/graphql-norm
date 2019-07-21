@@ -2,7 +2,7 @@
   "name": "graphql-norm",
   "version": "0.13.0",
   "description": "Normalization and denormalization of GraphQL responses",
-  "main": "dist/index.js",
+  "main": "dist/umd.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
@@ -46,7 +46,7 @@
   },
   "scripts": {
     "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
-    "dist": "yarn build && rimraf dist && rollup -c",
+    "dist": "yarn build && rimraf dist && rollup lib/index.js --file dist/umd.js --format umd --name GraphqlNorm",
     "build": "rimraf lib && tsc -p src",
     "build-test": "rimraf lib-test && tsc -p test",
     "performance": "ts-node performance-test/performance-test.ts",
