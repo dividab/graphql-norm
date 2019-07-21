@@ -139,10 +139,17 @@ normalize(
 ): NormMap
 ```
 
-| Name      | Type                                                   | Description                             |
-| --------- | ------------------------------------------------------ | --------------------------------------- |
-| query     | `GraphQL.DocumentNode`                                 | The graphql query parsed into an AST.   |
-| variables | `interface Variables { readonly [name: string]: any;}` | The variables associated with the query |
+| Name        | Type                                                         | Description                              |
+| ----------- | ------------------------------------------------------------ | ---------------------------------------- |
+| query       | `GraphQL.DocumentNode`                                       | Graphql query parsed into an AST.        |
+| variables   | `interface Variables { readonly [name: string]: any;}`       | Variables associated with the query.     |
+| data        | `interface RootFields { readonly [rootField: string]: any;}` | Data returned by graphql server.         |
+| getObjectId | `(object: any) => string | undefined`                        | Callback to extract ID from each object. |
+
+- query: Graphql query parsed into an AST.
+- variables: Variables associated with the query. This is the exact same object that was used when querying the graphql server.
+- data: Data returned by a GraphQL server (the data property of the raw response).
+- getObjectId: A callback function that is called each time an object is normalized. It is passed the object as a single parameter and should return the ID of that object. If this function returns a falsy value (eg. undefined), a fallback ID will be used. Some objects may be value objects that have no ID and in that case it is OK to return falsy. The fallback ID will use the closest parent with an ID as a base (or ROOT_QUERY if there is no parent with ID).
 
 ### denormalize()
 
