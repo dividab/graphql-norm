@@ -1,6 +1,6 @@
 {
   "name": "graphql-norm",
-  "version": "0.14.0",
+  "version": "1.0.0",
   "description": "Normalization and denormalization of GraphQL responses",
   "main": "dist/umd.js",
   "module": "lib/index.js",
