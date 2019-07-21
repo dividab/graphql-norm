@@ -181,6 +181,10 @@ merge(normMap: NormMap, newNormMap: NormMap): NormMap
 - [graphql-norm-patch](https://www.npmjs.com/package/graphql-norm-patch)
 - [graphql-norm-stale](https://www.npmjs.com/package/graphql-norm-stale)
 
+## Typescript support
+
+This project is developed using typescript and typescript types are distributed with the package.
+
 ## How to develop
 
 Node version >=12.6.0 is needed for development.
