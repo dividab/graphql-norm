@@ -139,6 +139,11 @@ normalize(
 ): NormMap
 ```
 
+| Name      | Type                                                   | Description                             |
+| --------- | ------------------------------------------------------ | --------------------------------------- |
+| query     | `GraphQL.DocumentNode`                                 | The graphql query parsed into an AST.   |
+| variables | `interface Variables { readonly [name: string]: any;}` | The variables associated with the query |
+
 ### denormalize()
 
 The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
