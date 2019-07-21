@@ -182,7 +182,7 @@ When you normalize the response of a query you probably want to merge the result
 
 #### Return value
 
-This function returns an object which is the merged normalized map. It has the same structure as the passed in maps but the keys/values from both of them.
+This function returns an object which is the merged normalized map. It has the same structure as the passed in objects but the keys/values from both of them.
 
 ## Related packages
 
