@@ -16,6 +16,14 @@
   ],
   "author": "Jonas Kello <jonas.kello@divid.se>",
   "license": "MIT",
+  "files": [
+    "/lib",
+    "/dist",
+    "package.json",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
   "peerDependencies": {
     "@types/graphql": "^0.13.0 || ^14.0.0",
     "graphql": "^0.13.0 || ^14.0.0"
