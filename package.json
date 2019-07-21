@@ -4,7 +4,7 @@
   "description": "Normalization and denormalization of GraphQL responses",
   "main": "dist/index.js",
   "module": "lib/index.js",
-  "types": "lib/index",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dividab/graphql-norm.git"
