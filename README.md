@@ -143,19 +143,29 @@ The normalize() function takes a GraphQL query with associated variables, and da
 
 #### Return value
 
-This function returns an object that is a Map of keys and normalized objects.
+This function returns an object that is a map of keys and normalized objects.
 
 ### denormalize()
 
 The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
 
 ```ts
-denormalize(
-  query: GraphQL.DocumentNode,
-  variables: Variables | undefined,
-  normMap: NormMap
-): DenormalizationResult
+denormalize(query, variables, normMap);
 ```
+
+#### Parameters
+
+- **query**: Graphql query parsed into an AST.
+- **variables**: Variables associated with the query. This is the exact same object that was used when querying the graphql server.
+- **normMap**: The map of normalized objects as returned by `normalize()` and/or `merge()`.
+
+#### Return value
+
+This function returns an object with information about the denormalization result. The following properties are available on the returned object:
+
+- **data**: This is the data for the query as it would have been returned from a GraphQL server.
+- **partial**: A boolean value indicating if the returned data is only a partial result (true), or the full result (false). A partial result may be returned if the `normMap` parameter does not contain enough data to fulfill the entiry query.
+- **fields**: An object where each property is an normlized object key, and the value is a `Set` of used fields. This can be useful for tracking which key/fields will affect this query data. If an tuple of this object and the data is stored, each time a new normalized result is merged a cache we can check if the new normalized data being merged contains any of the keys/fields of this query then it is affected by the merge, otherwise not. This is similar to the approach used [by relay](https://relay.dev/docs/en/thinking-in-graphql#achieving-view-consistency) for tracking changes.
 
 ### merge()
 
