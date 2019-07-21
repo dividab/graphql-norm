@@ -72,7 +72,7 @@ describe("merge()", () => {
 
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
-  test("partial value objects", () => {
+  test("merge value objects", () => {
     const itemA = {
       name: "",
       query: gql`

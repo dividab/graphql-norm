@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { DenormalizeTestDef } from "../denormalize-test-def";
 
 export const test: DenormalizeTestDef = {
-  name: "with partial true",
+  name: "with query data not completely fulfilled.",
   query: gql`
     query TestQuery {
       posts {
