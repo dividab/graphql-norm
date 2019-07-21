@@ -53,7 +53,7 @@
     "test-coverage": "jest",
     "test": "jest --no-coverage",
     "test:work": "jest --no-coverage ./test/denormalize.test.ts",
-    "verify": "yarn lint && yarn test-coverage && yarn build",
+    "verify": "yarn lint && yarn test-coverage && yarn dist",
     "precommit": "lint-staged",
     "report-coverage": "codecov -f coverage/lcov.info",
     "preversion": "yarn verify",
