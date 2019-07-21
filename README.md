@@ -218,6 +218,6 @@ yarn version --major
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier
 [types-image]: https://img.shields.io/npm/types/scrub-js.svg
-[types-url]: https://github.com/dividab/graphql-norm
+[types-url]: https://www.typescriptlang.org/
 [license-image]: https://img.shields.io/github/license/dividab/graphql-norm.svg?style=flat
 [license-url]: https://opensource.org/licenses/MIT
