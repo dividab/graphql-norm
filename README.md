@@ -4,6 +4,7 @@
 [![travis build][travis-image]][travis-url]
 [![Coverage Status][codecov-image]][codecov-url]
 [![code style: prettier][prettier-image]][prettier-url]
+[![types][types-image]][types-url]
 [![MIT license][license-image]][license-url]
 
 Normalization and denormalization of GraphQL responses
@@ -214,7 +215,9 @@ yarn version --major
 [travis-url]: https://travis-ci.com/dividab/graphql-norm
 [codecov-image]: https://codecov.io/gh/dividab/graphql-norm/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/dividab/graphql-norm
-[license-image]: https://img.shields.io/github/license/dividab/graphql-norm.svg?style=flat
-[license-url]: https://opensource.org/licenses/MIT
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
 [prettier-url]: https://github.com/prettier/prettier
+[types-image]: https://img.shields.io/npm/types/scrub-js.svg
+[types-url]: https://github.com/dividab/graphql-norm
+[license-image]: https://img.shields.io/github/license/dividab/graphql-norm.svg?style=flat
+[license-url]: https://opensource.org/licenses/MIT
