@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { DenormalizeTestDef } from "../denormalize-test-def";
 
 export const test: DenormalizeTestDef = {
-  name: "with partial false",
+  name: "with incomplete",
   query: gql`
     query TestQuery {
       posts {
@@ -26,22 +26,7 @@ export const test: DenormalizeTestDef = {
       }
     }
   `,
-  partial: false,
-  data: {
-    posts: [
-      {
-        id: "123",
-        __typename: "Post",
-        author: {
-          id: "1",
-          __typename: "Author",
-          name: "Paul"
-        },
-        title: "My awesome blog post",
-        comments: null
-      }
-    ]
-  },
+  data: undefined,
   normMap: {
     ROOT_QUERY: {
       posts: ["Post:123"]
@@ -52,12 +37,10 @@ export const test: DenormalizeTestDef = {
       author: "Author:1",
       title: "My awesome blog post",
       comments: null
-    },
-    "Author:1": { id: "1", __typename: "Author", name: "Paul" }
+    }
   },
   fields: {
     ROOT_QUERY: ["posts"],
-    "Post:123": ["id", "__typename", "author", "title", "comments"],
-    "Author:1": ["id", "__typename", "name"]
+    "Post:123": ["id", "__typename", "author", "title", "comments"]
   }
 };

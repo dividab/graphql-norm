@@ -41,7 +41,6 @@ export const test: DenormalizeTestDef = {
       }
     }
   `,
-  partial: false,
   data: {
     posts: [
       {

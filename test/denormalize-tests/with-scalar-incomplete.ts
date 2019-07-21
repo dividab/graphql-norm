@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { DenormalizeTestDef } from "../denormalize-test-def";
 
 export const test: DenormalizeTestDef = {
-  name: "with partial scalar true",
+  name: "with scalar query incomplete",
   query: gql`
     query TestQuery {
       posts {
@@ -12,7 +12,6 @@ export const test: DenormalizeTestDef = {
       }
     }
   `,
-  partial: true,
   data: undefined,
   normMap: {
     ROOT_QUERY: {

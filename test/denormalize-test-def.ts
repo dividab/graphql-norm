@@ -10,6 +10,5 @@ export interface DenormalizeTestDef {
   readonly variables?: Variables;
   readonly data: RootFields | undefined;
   readonly normMap: NormMap;
-  readonly partial: boolean;
   readonly fields: { readonly [key: string]: ReadonlyArray<string> };
 }

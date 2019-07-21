@@ -18,7 +18,6 @@ describe("denormalize() with specialized test data", () => {
     test(item.name, done => {
       const actual = denormalize(item.query, item.variables, item.normMap);
       expect(actual.data).toEqual(item.data);
-      expect(actual.partial).toBe(!!item.partial);
       expect(actual.fields).toEqual(
         Object.fromEntries(
           Object.entries(item.fields).map(([key, value]) => [

@@ -67,12 +67,12 @@ describe("merge()", () => {
     const normMapB = normalize(itemB.query, {}, itemB.response);
     const mergedNormMap = merge(normMapA, normMapB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedNormMap);
-    expect(denormalizedResult.partial).toBe(false);
+    expect(denormalizedResult.data).toBeTruthy();
   });
 
   // When a value-object (an object with no ID, owned by it's parent) is
   // used, you would expect it to be merged like any other.
-  test("partial value objects", () => {
+  test("merge value objects", () => {
     const itemA = {
       name: "",
       query: gql`
@@ -132,6 +132,6 @@ describe("merge()", () => {
     const mergedNormMaps = merge(normMapA, normMapB);
     const denormalizedResult = denormalize(itemA.query, {}, mergedNormMaps);
 
-    expect(denormalizedResult.partial).toBe(false);
+    expect(denormalizedResult.data).toBeTruthy();
   });
 });

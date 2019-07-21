@@ -113,7 +113,6 @@ request("https://countries.trevorblades.com/graphql", query, queryVars).then(
     console.log("denormResult", JSON.stringify(denormResult, setToJSON));
     /*
     {
-      "partial": false,
       "data": {"country": {"__typename": "Country","code": "SE","name": "Sweden"}},
       "fields": {
         "ROOT_QUERY": ["country({\"code\":\"SE\"})"],
@@ -152,7 +151,7 @@ This function returns an object that is a map of keys and normalized objects.
 const denormResult = denormalize(query, variables, normMap);
 ```
 
-The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `partial` will be set to `true`.
+The denormalize() function takes a GraphQL query with associated variables, and a normalized object map (as returned by normalize()). From those inputs it produces the data for a GraphQL JSON response. Note that the GraphQL query can be any query, it does not have to be one that was previously normalized. If the response cannot be fully created from the normalized object map then `undefined` will be returned.
 
 #### Parameters
 
@@ -164,8 +163,7 @@ The denormalize() function takes a GraphQL query with associated variables, and 
 
 This function returns an object with information about the denormalization result. The following properties are available on the returned object:
 
-- **data**: This is the data for the query as it would have been returned from a GraphQL server.
-- **partial**: A boolean value indicating if the returned data is only a partial result (true), or the full result (false). A partial result may be returned if the `normMap` parameter does not contain enough data to fulfill the entiry query.
+- **data**: This is the data for the query as it would have been returned from a GraphQL serverl, or `undefined` is the query could not be completely fulfilled from the data in `normMap`.
 - **fields**: An object where each property is an normlized object key, and the value is a `Set` of used fields. This can be useful for tracking which key/fields will affect this query data. If an tuple of this object and the data is stored, each time a new normalized result is merged a cache we can check if the new normalized data being merged contains any of the keys/fields of this query then it is affected by the merge, otherwise not. This is similar to the approach used [by relay](https://relay.dev/docs/en/thinking-in-graphql#achieving-view-consistency) for tracking changes.
 
 ### merge()
