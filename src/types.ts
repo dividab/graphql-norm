@@ -38,7 +38,10 @@ export interface FieldsMap {
 export interface FragmentMap {
   readonly [fragmentName: string]: GraphQL.FragmentDefinitionNode;
 }
-export type DocumentDefinitionTuple = [FragmentMap, FieldNodeWithSelectionSet];
+export type DocumentDefinitionTuple = readonly [
+  FragmentMap,
+  FieldNodeWithSelectionSet
+];
 
 export interface FieldNodeWithSelectionSet extends GraphQL.FieldNode {
   readonly selectionSet: GraphQL.SelectionSetNode;

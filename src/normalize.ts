@@ -25,8 +25,9 @@ type ResponseArray = ReadonlyArray<
 >;
 type ResponseObjectOrArray = ResponseObject | ResponseArray;
 type ParentNormObjOrArray = ParentNormObj | ParentArray;
+// eslint-disable-next-line functional/prefer-readonly-type
 type ParentArray = Array<NormFieldValue>;
-type StackWorkItem = [
+type StackWorkItem = readonly [
   FieldNodeWithSelectionSet,
   ParentNormObjOrArray | undefined /*parentNormObj*/,
   ResponseObjectOrArray,

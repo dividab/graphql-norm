@@ -39,7 +39,7 @@
     "codecov": "^3.5.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-ts-immutable": "^0.1.0",
+    "eslint-plugin-functional": "^1.0.0-rc.2",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "husky": "^2.4.1",

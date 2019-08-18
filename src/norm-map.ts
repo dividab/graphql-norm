@@ -34,7 +34,7 @@ export function merge(normMap: NormMap, newNormMap: NormMap): NormMap {
       return stateSoFar;
     },
     {} as {
-      // eslint-disable-next-line ts-immutable/readonly-keyword
+      // eslint-disable-next-line functional/prefer-readonly-type
       [key: string]: any;
     }
   );

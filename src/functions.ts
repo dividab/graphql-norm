@@ -16,7 +16,7 @@ export function getDocumentDefinitions(
     | undefined = undefined;
 
   const fragmentMap: {
-    // eslint-disable-next-line ts-immutable/readonly-keyword
+    // eslint-disable-next-line functional/prefer-readonly-type
     [fragmentName: string]: GraphQL.FragmentDefinitionNode;
   } = {};
   for (const definition of definitions) {
@@ -88,7 +88,6 @@ function resolveValueNode(
     case "ListValue":
       return valueNode.values.map(f => resolveValueNode(f, variables));
     case "ObjectValue":
-      // eslint-disable-next-line ts-immutable/readonly-keyword
       const valueObject: { [key: string]: any } = {};
       for (const field of valueNode.fields) {
         valueObject[field.name.value] = resolveValueNode(
@@ -106,9 +105,7 @@ export function fieldNameWithArguments(
   fieldNode: GraphQL.FieldNode,
   variables: Variables | undefined
 ): string {
-  // eslint-disable-next-line ts-immutable/readonly-keyword
   const argumentsObject: { [key: string]: any } = {};
-  // tslint:disable-next-line:no-arguments
   for (const argumentNode of fieldNode.arguments!) {
     argumentsObject[argumentNode.name.value] = resolveValueNode(
       argumentNode.value,

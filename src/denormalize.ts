@@ -19,12 +19,13 @@ import { NormMap, NormKey } from "./norm-map";
 type Mutable<T> = { -readonly [P in keyof T]: T[P] }; // Remove readonly
 
 type MutableResponseObject = Mutable<ResponseObject>;
+// eslint-disable-next-line functional/prefer-readonly-type
 type MutableResponseObjectArray = Array<MutableResponseObject>;
 type ParentResponseObjectOrArray =
   | Mutable<ResponseObject2>
   | ResponseObjectArray;
 type ParentResponseKey = string | number | undefined;
-type StackWorkItem = [
+type StackWorkItem = readonly [
   FieldNodeWithSelectionSet,
   NormKey | ReadonlyArray<NormKey>,
   ParentResponseObjectOrArray,
