@@ -60,7 +60,7 @@ export function expandFragments(
       case "Field":
         fieldNodes.push(selectionNode);
         break;
-      case "InlineFragment":
+      case "InlineFragment": {
         const fragmentTypeName =
           selectionNode.typeCondition && selectionNode.typeCondition.name.value;
         const objTypeName = resolveType(obj);
@@ -76,17 +76,26 @@ export function expandFragments(
           );
         }
         break;
-      case "FragmentSpread":
+      }
+      case "FragmentSpread": {
         const fragment = fragmentMap[selectionNode.name.value];
-        fieldNodes.push(
-          ...expandFragments(
-            resolveType,
-            obj,
-            fragment.selectionSet.selections,
-            fragmentMap
-          )
-        );
+        const fragmentTypeName =
+          fragment.typeCondition && fragment.typeCondition.name.value;
+        const objTypeName = resolveType(obj);
+        console.log(fragmentTypeName, objTypeName);
+        // Only include this fragment if the typename matches
+        if (fragmentTypeName === objTypeName) {
+          fieldNodes.push(
+            ...expandFragments(
+              resolveType,
+              obj,
+              fragment.selectionSet.selections,
+              fragmentMap
+            )
+          );
+        }
         break;
+      }
       default:
         throw new Error(
           "Unknown selection node field kind: " + (selectionNode as any).kind

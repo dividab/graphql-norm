@@ -3,19 +3,21 @@ import { SharedTestDef } from "../shared-test-def";
 
 export const test: SharedTestDef = {
   // only: true,
-  name: "with union type",
+  name: "with union type fragment spread",
   query: gql`
     query TestQuery {
       booksAndAuthors {
         id
         __typename
-        ... on Book {
-          title
-        }
-        ... on Author {
-          name
-        }
+        ...BookFragment
+        ...AuthorFragment
       }
+    }
+    fragment BookFragment on Book {
+      title
+    }
+    fragment AuthorFragment on Author {
+      name
     }
   `,
   data: {
