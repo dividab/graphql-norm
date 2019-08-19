@@ -6,13 +6,15 @@ import {
   ResponseObject,
   ResponseObject2,
   ResponseObjectArray,
-  RootFields
+  RootFields,
+  ResolveType
 } from "./types";
 import {
   expandFragments,
   getDocumentDefinitions,
   fieldNameWithArguments,
-  shouldIncludeField
+  shouldIncludeField,
+  defaultResolveType
 } from "./functions";
 import { NormMap, NormKey } from "./norm-map";
 
@@ -35,7 +37,8 @@ type StackWorkItem = readonly [
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  normMap: NormMap
+  normMap: NormMap,
+  resolveType: ResolveType = defaultResolveType
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -102,6 +105,7 @@ export function denormalize(
 
       // Expand fragments and loop all fields
       const expandedSelections = expandFragments(
+        resolveType,
         normObj,
         fieldNode.selectionSet.selections,
         fragmentMap

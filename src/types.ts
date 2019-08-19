@@ -53,3 +53,5 @@ export type GetObjectId = (object: {
   readonly id?: string;
   readonly __typename?: string;
 }) => GetObjectToIdResult;
+
+export type ResolveType = (object: { readonly __typename?: string }) => string;

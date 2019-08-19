@@ -5,14 +5,16 @@ import {
   GetObjectId,
   RootFields,
   Variables,
-  ResponseObject
+  ResponseObject,
+  ResolveType
 } from "./types";
 import {
   defaultGetObjectId,
   expandFragments,
   getDocumentDefinitions,
   fieldNameWithArguments,
-  shouldIncludeField
+  shouldIncludeField,
+  defaultResolveType
 } from "./functions";
 import { NormMap, NormObj, NormKey, NormFieldValue } from "./norm-map";
 
@@ -45,7 +47,8 @@ export function normalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
   data: RootFields,
-  getObjectId: GetObjectId = defaultGetObjectId
+  getObjectId: GetObjectId = defaultGetObjectId,
+  resolveType: ResolveType = defaultResolveType
 ): NormMap {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -88,6 +91,7 @@ export function normalize(
       }
       // Expand any fragments
       const expandedSelections = expandFragments(
+        resolveType,
         responseObjectOrArray,
         fieldNode.selectionSet.selections,
         fragmentMap

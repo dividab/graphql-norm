@@ -6,7 +6,8 @@ import {
   GetObjectId,
   Variables,
   GetObjectToIdResult,
-  ResponseObject
+  ResponseObject,
+  ResolveType
 } from "./types";
 
 export function getDocumentDefinitions(
@@ -47,7 +48,8 @@ export function getDocumentDefinitions(
 }
 
 export function expandFragments(
-  obj: ResponseObject | null,
+  resolveType: ResolveType,
+  obj: ResponseObject,
   selectionNodes: ReadonlyArray<GraphQL.SelectionNode>,
   fragmentMap: FragmentMap
 ): ReadonlyArray<GraphQL.FieldNode> {
@@ -59,11 +61,17 @@ export function expandFragments(
         fieldNodes.push(selectionNode);
         break;
       case "InlineFragment":
-        const typeName =
+        const fragmentTypeName =
           selectionNode.typeCondition && selectionNode.typeCondition.name.value;
-        console.log("Expanding inline fragment!!! typeName", typeName, obj);
+        const objTypeName = resolveType(obj);
+        console.log(
+          "Expanding inline fragment!!! fragmentTypeName",
+          fragmentTypeName,
+          objTypeName
+        );
         fieldNodes.push(
           ...expandFragments(
+            resolveType,
             obj,
             selectionNode.selectionSet.selections,
             fragmentMap
@@ -73,7 +81,12 @@ export function expandFragments(
       case "FragmentSpread":
         const fragment = fragmentMap[selectionNode.name.value];
         fieldNodes.push(
-          ...expandFragments(obj, fragment.selectionSet.selections, fragmentMap)
+          ...expandFragments(
+            resolveType,
+            obj,
+            fragment.selectionSet.selections,
+            fragmentMap
+          )
         );
         break;
       default:
@@ -132,6 +145,15 @@ export const defaultGetObjectId: GetObjectId = (object: {
   return object.id === undefined
     ? undefined
     : `${object.__typename}:${object.id}`;
+};
+
+export const defaultResolveType: ResolveType = (object: {
+  readonly __typename?: string;
+}): string => {
+  if (object.__typename === undefined) {
+    throw new Error("__typename cannot be undefined.");
+  }
+  return object.__typename;
 };
 
 /**
