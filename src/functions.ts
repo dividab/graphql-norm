@@ -64,19 +64,17 @@ export function expandFragments(
         const fragmentTypeName =
           selectionNode.typeCondition && selectionNode.typeCondition.name.value;
         const objTypeName = resolveType(obj);
-        console.log(
-          "Expanding inline fragment!!! fragmentTypeName",
-          fragmentTypeName,
-          objTypeName
-        );
-        fieldNodes.push(
-          ...expandFragments(
-            resolveType,
-            obj,
-            selectionNode.selectionSet.selections,
-            fragmentMap
-          )
-        );
+        // Only include this fragment if the typename matches
+        if (fragmentTypeName === objTypeName) {
+          fieldNodes.push(
+            ...expandFragments(
+              resolveType,
+              obj,
+              selectionNode.selectionSet.selections,
+              fragmentMap
+            )
+          );
+        }
         break;
       case "FragmentSpread":
         const fragment = fragmentMap[selectionNode.name.value];
