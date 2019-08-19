@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 import { SharedTestDef } from "../shared-test-def";
 
 export const test: SharedTestDef = {
+  // only: true,
   name: "with union type",
   query: gql`
     query TestQuery {

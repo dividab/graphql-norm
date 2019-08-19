@@ -5,7 +5,8 @@ import {
   FieldNodeWithSelectionSet,
   GetObjectId,
   Variables,
-  GetObjectToIdResult
+  GetObjectToIdResult,
+  ResponseObject
 } from "./types";
 
 export function getDocumentDefinitions(
@@ -46,6 +47,7 @@ export function getDocumentDefinitions(
 }
 
 export function expandFragments(
+  obj: ResponseObject | null,
   selectionNodes: ReadonlyArray<GraphQL.SelectionNode>,
   fragmentMap: FragmentMap
 ): ReadonlyArray<GraphQL.FieldNode> {
@@ -57,14 +59,21 @@ export function expandFragments(
         fieldNodes.push(selectionNode);
         break;
       case "InlineFragment":
+        const typeName =
+          selectionNode.typeCondition && selectionNode.typeCondition.name.value;
+        console.log("Expanding inline fragment!!! typeName", typeName, obj);
         fieldNodes.push(
-          ...expandFragments(selectionNode.selectionSet.selections, fragmentMap)
+          ...expandFragments(
+            obj,
+            selectionNode.selectionSet.selections,
+            fragmentMap
+          )
         );
         break;
       case "FragmentSpread":
         const fragment = fragmentMap[selectionNode.name.value];
         fieldNodes.push(
-          ...expandFragments(fragment.selectionSet.selections, fragmentMap)
+          ...expandFragments(obj, fragment.selectionSet.selections, fragmentMap)
         );
         break;
       default:

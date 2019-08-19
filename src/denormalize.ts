@@ -57,11 +57,6 @@ export function denormalize(
       parentResponseKey
     ] = stack.pop()!;
 
-    const expandedSelections = expandFragments(
-      fieldNode.selectionSet.selections,
-      fragmentMap
-    );
-
     // The stack has work items, depending on the work item we have four different cases to handle:
     // field + id      + parentObject = denormalize(ID) => [responseObject, workitems] and parentObject[field] = responseObject
     // field + id      + parentArray  = denormalize(ID) => [responseObject, workitems] and parentArray.push(responseObject)
@@ -105,6 +100,12 @@ export function denormalize(
           ] || Object.create(null);
       }
 
+      // Expand fragments and loop all fields
+      const expandedSelections = expandFragments(
+        normObj,
+        fieldNode.selectionSet.selections,
+        fragmentMap
+      );
       for (const field of expandedSelections) {
         // Check if this field should be skipped according to @skip and @include directives
         const include = field.directives

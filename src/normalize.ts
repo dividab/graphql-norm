@@ -72,11 +72,6 @@ export function normalize(
       fallbackId
     ] = stack.pop()!;
 
-    const expandedSelections = expandFragments(
-      fieldNode.selectionSet.selections,
-      fragmentMap
-    );
-
     let keyOrNewParentArray: NormKey | ParentArray | null = null;
     if (responseObjectOrArray === null) {
       keyOrNewParentArray = null;
@@ -91,6 +86,12 @@ export function normalize(
         normObj = Object.create(null);
         normMap[keyOrNewParentArray] = normObj;
       }
+      // Expand any fragments
+      const expandedSelections = expandFragments(
+        responseObjectOrArray,
+        fieldNode.selectionSet.selections,
+        fragmentMap
+      );
       // For each field in the selection-set that has a sub-selection-set we push a work item.
       // For primtivies fields we set them directly on the normalized object.
       for (const field of expandedSelections) {
