@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Include an UMD bundle. See issue [#37](https://github.com/dividab/graphql-norm/issues/37) and PR [#46](https://github.com/dividab/graphql-norm/pull/46).
 
-## [0.13.0](https://github.com/dividab/graphql-norm/compare/v0.12.1...v0.13.0) - 2019-07-18
+## [0.13.0](https://github.com/dividab/graphql-norm/compare/v0.12.2...v0.13.0) - 2019-07-18
 
 ### Changed
 
@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Removed staleness checking from denormalize(). See issue [#38](https://github.com/dividab/graphql-norm/issues/38) and PR [#40](https://github.com/dividab/graphql-norm/pull/40). Staleness checking is now available in the external package [graphql-norm-stale](https://github.com/dividab/graphql-norm-stale).
 
-## [0.12.2] - 2019-07-16
+## [0.12.2](https://github.com/dividab/graphql-norm/compare/v0.12.1...v0.12.2) - 2019-07-16
 
 ### Fixed
 
@@ -85,7 +85,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Remove console.log.
 
-## [0.9.1]https://github.com/dividab/graphql-norm/compare/v0.9.0...v0.9.1 - 2019-01-16
+## [0.9.1](https://github.com/dividab/graphql-norm/compare/v0.9.0...v0.9.1) - 2019-01-16
 
 ### Fixed
 
