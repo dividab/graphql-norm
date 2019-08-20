@@ -6,13 +6,15 @@ import {
   ResponseObject,
   ResponseObject2,
   ResponseObjectArray,
-  RootFields
+  RootFields,
+  ResolveType
 } from "./types";
 import {
   expandFragments,
   getDocumentDefinitions,
   fieldNameWithArguments,
-  shouldIncludeField
+  shouldIncludeField,
+  defaultResolveType
 } from "./functions";
 import { NormMap, NormKey } from "./norm-map";
 
@@ -32,10 +34,18 @@ type StackWorkItem = readonly [
   ParentResponseKey
 ];
 
+/**
+ * Creates a graphql response by denormalizing.
+ * @param query The graphql query document
+ * @param variables The graphql query variables
+ * @param normMap The map of normalized objects
+ * @param resolveType Function get get typeName from an object
+ */
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
-  normMap: NormMap
+  normMap: NormMap,
+  resolveType: ResolveType = defaultResolveType
 ): DenormalizationResult {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -56,11 +66,6 @@ export function denormalize(
       parentObjectOrArray,
       parentResponseKey
     ] = stack.pop()!;
-
-    const expandedSelections = expandFragments(
-      fieldNode.selectionSet.selections,
-      fragmentMap
-    );
 
     // The stack has work items, depending on the work item we have four different cases to handle:
     // field + id      + parentObject = denormalize(ID) => [responseObject, workitems] and parentObject[field] = responseObject
@@ -105,6 +110,13 @@ export function denormalize(
           ] || Object.create(null);
       }
 
+      // Expand fragments and loop all fields
+      const expandedSelections = expandFragments(
+        resolveType,
+        normObj,
+        fieldNode.selectionSet.selections,
+        fragmentMap
+      );
       for (const field of expandedSelections) {
         // Check if this field should be skipped according to @skip and @include directives
         const include = field.directives

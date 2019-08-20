@@ -5,14 +5,16 @@ import {
   GetObjectId,
   RootFields,
   Variables,
-  ResponseObject
+  ResponseObject,
+  ResolveType
 } from "./types";
 import {
   defaultGetObjectId,
   expandFragments,
   getDocumentDefinitions,
   fieldNameWithArguments,
-  shouldIncludeField
+  shouldIncludeField,
+  defaultResolveType
 } from "./functions";
 import { NormMap, NormObj, NormKey, NormFieldValue } from "./norm-map";
 
@@ -40,12 +42,14 @@ type StackWorkItem = readonly [
  * @param variables The graphql query variables
  * @param response The graphql response
  * @param getObjectId Function to get normalized map key from an object
+ * @param resolveType Function get get typeName from an object
  */
 export function normalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,
   data: RootFields,
-  getObjectId: GetObjectId = defaultGetObjectId
+  getObjectId: GetObjectId = defaultGetObjectId,
+  resolveType: ResolveType = defaultResolveType
 ): NormMap {
   const [fragmentMap, rootFieldNode] = getDocumentDefinitions(
     query.definitions
@@ -72,11 +76,6 @@ export function normalize(
       fallbackId
     ] = stack.pop()!;
 
-    const expandedSelections = expandFragments(
-      fieldNode.selectionSet.selections,
-      fragmentMap
-    );
-
     let keyOrNewParentArray: NormKey | ParentArray | null = null;
     if (responseObjectOrArray === null) {
       keyOrNewParentArray = null;
@@ -91,6 +90,13 @@ export function normalize(
         normObj = Object.create(null);
         normMap[keyOrNewParentArray] = normObj;
       }
+      // Expand any fragments
+      const expandedSelections = expandFragments(
+        resolveType,
+        responseObjectOrArray,
+        fieldNode.selectionSet.selections,
+        fragmentMap
+      );
       // For each field in the selection-set that has a sub-selection-set we push a work item.
       // For primtivies fields we set them directly on the normalized object.
       for (const field of expandedSelections) {

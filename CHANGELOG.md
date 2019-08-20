@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.0.0...master)
 
+### Added
+
+- Fix for union types. Introduces new optional argument `typeResolver` to `normalize()` and `denormalize()` functions. See issue [#49](https://github.com/dividab/graphql-norm/issues/49) and PR [#50](https://github.com/dividab/graphql-norm/pull/50).
+
 ## [1.0.0](https://github.com/dividab/graphql-norm/compare/v0.14.0...v1.0.0) - 2019-07-21
 
-## Changed
+### Changed
 
 - Removed the `partial` property from the `denormalize()` return object. Partial results was not implemented and instead we can check if the `data` is undefined instead. See issue [#47](https://github.com/dividab/graphql-norm/issues/47) and PR [#48](https://github.com/dividab/graphql-norm/pull/48).
 

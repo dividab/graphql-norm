@@ -5,7 +5,9 @@ import {
   FieldNodeWithSelectionSet,
   GetObjectId,
   Variables,
-  GetObjectToIdResult
+  GetObjectToIdResult,
+  ResponseObject,
+  ResolveType
 } from "./types";
 
 export function getDocumentDefinitions(
@@ -46,6 +48,8 @@ export function getDocumentDefinitions(
 }
 
 export function expandFragments(
+  resolveType: ResolveType,
+  obj: ResponseObject,
   selectionNodes: ReadonlyArray<GraphQL.SelectionNode>,
   fragmentMap: FragmentMap
 ): ReadonlyArray<GraphQL.FieldNode> {
@@ -56,17 +60,41 @@ export function expandFragments(
       case "Field":
         fieldNodes.push(selectionNode);
         break;
-      case "InlineFragment":
-        fieldNodes.push(
-          ...expandFragments(selectionNode.selectionSet.selections, fragmentMap)
-        );
+      case "InlineFragment": {
+        const fragmentTypeName =
+          selectionNode.typeCondition && selectionNode.typeCondition.name.value;
+        const objTypeName = resolveType(obj);
+        // Only include this fragment if the typename matches
+        if (fragmentTypeName === objTypeName) {
+          fieldNodes.push(
+            ...expandFragments(
+              resolveType,
+              obj,
+              selectionNode.selectionSet.selections,
+              fragmentMap
+            )
+          );
+        }
         break;
-      case "FragmentSpread":
+      }
+      case "FragmentSpread": {
         const fragment = fragmentMap[selectionNode.name.value];
-        fieldNodes.push(
-          ...expandFragments(fragment.selectionSet.selections, fragmentMap)
-        );
+        const fragmentTypeName =
+          fragment.typeCondition && fragment.typeCondition.name.value;
+        const objTypeName = resolveType(obj);
+        // Only include this fragment if the typename matches
+        if (fragmentTypeName === objTypeName) {
+          fieldNodes.push(
+            ...expandFragments(
+              resolveType,
+              obj,
+              fragment.selectionSet.selections,
+              fragmentMap
+            )
+          );
+        }
         break;
+      }
       default:
         throw new Error(
           "Unknown selection node field kind: " + (selectionNode as any).kind
@@ -123,6 +151,15 @@ export const defaultGetObjectId: GetObjectId = (object: {
   return object.id === undefined
     ? undefined
     : `${object.__typename}:${object.id}`;
+};
+
+export const defaultResolveType: ResolveType = (object: {
+  readonly __typename?: string;
+}): string => {
+  if (object.__typename === undefined) {
+    throw new Error("__typename cannot be undefined.");
+  }
+  return object.__typename;
 };
 
 /**

@@ -30,8 +30,7 @@ export const test: DenormalizeTestDef = {
         ...TestFragment
       }
     }
-
-    fragment TestFragment on PostType {
+    fragment TestFragment on Post {
       id
       title
       author {
