@@ -34,6 +34,13 @@ type StackWorkItem = readonly [
   ParentResponseKey
 ];
 
+/**
+ * Creates a graphql response by denormalizing.
+ * @param query The graphql query document
+ * @param variables The graphql query variables
+ * @param normMap The map of normalized objects
+ * @param resolveType Function get get typeName from an object
+ */
 export function denormalize(
   query: GraphQL.DocumentNode,
   variables: Variables | undefined,

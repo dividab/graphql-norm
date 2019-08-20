@@ -42,6 +42,7 @@ type StackWorkItem = readonly [
  * @param variables The graphql query variables
  * @param response The graphql response
  * @param getObjectId Function to get normalized map key from an object
+ * @param resolveType Function get get typeName from an object
  */
 export function normalize(
   query: GraphQL.DocumentNode,
