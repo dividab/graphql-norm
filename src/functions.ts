@@ -82,7 +82,6 @@ export function expandFragments(
         const fragmentTypeName =
           fragment.typeCondition && fragment.typeCondition.name.value;
         const objTypeName = resolveType(obj);
-        console.log(fragmentTypeName, objTypeName);
         // Only include this fragment if the typename matches
         if (fragmentTypeName === objTypeName) {
           fieldNodes.push(
