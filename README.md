@@ -140,7 +140,7 @@ The normalize() function takes a GraphQL query with associated variables, and da
 - **variables**: Variables associated with the query. This is the exact same object that was used when querying the graphql server.
 - **data**: Data returned by a GraphQL server (the data property of the raw response).
 - **getObjectId**: An optional callback function that is called each time an object is normalized. It is passed the object as a single parameter and should return the ID of that object. If this parameter is omitted, a default function that looks for `__typename` and `id` and combines them into a `__typename:id` string will be used. If this function returns a falsy value (eg. undefined), a fallback ID will be used. Some objects may be value objects that have no ID and in that case it is OK to return falsy. The fallback ID will use the closest parent with an ID as a base (or ROOT_QUERY if there is no parent with ID).
-- **resolveType**: An optional callback function that is called each time a fragment is encountered. To check if a fragment should apply, we need to know the type of the object. For example an inline fragment `... on Bar` should only apply to objects of type `Bar`. This becomes extra useful when graphql union types are used.
+- **resolveType**: An optional callback function that is called each time a fragment is encountered. To check if a fragment should apply, we need to know the type of the object. For example an inline fragment `... on Bar` should only apply to objects of type `Bar`. This becomes extra useful when graphql union types are used. The default implementation will look for `__typename` of the object.
 
 #### Return value
 
