@@ -40,8 +40,6 @@ export const test: DenormalizeTestDef = {
     }
   },
   fields: {
-    // ROOT_QUERY: ["posts"],
-    // "Post:123": ["id", "__typename", "author", "title", "comments"]
     "Post:123": ["author"]
   }
 };

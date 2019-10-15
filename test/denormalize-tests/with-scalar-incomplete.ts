@@ -22,6 +22,5 @@ export const test: DenormalizeTestDef = {
       __typename: "Post"
     }
   },
-  // fields: { ROOT_QUERY: ["posts"], "Post:123": ["id", "__typename", "title"] }
   fields: { "Post:123": ["title"] }
 };

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.2.0...master)
 
+- If denormalize() could not be fulfill a query, data will be `undefined` and `fields` will contain the first field that could not be resolved.
+
 ## [1.2.0](https://github.com/dividab/graphql-norm/compare/v1.1.0...v1.2.0) - 2019-10-20
 
 ### Added
