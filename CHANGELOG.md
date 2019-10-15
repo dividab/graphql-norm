@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.2.0...master)
+## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.3.1...master)
+
+## [1.3.1](https://github.com/dividab/graphql-norm/compare/v1.3.0...v1.3.1) - 2019-10-15
 
 - Include typescript source from `src/` in published npm package. See PR [#52](https://github.com/dividab/graphql-norm/pull/52) for more info.
 
