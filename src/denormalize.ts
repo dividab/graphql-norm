@@ -53,7 +53,7 @@ export function denormalize(
 
   const stack: Array<StackWorkItem> = [];
   const response = {};
-  let partial = false;
+  // let partial = false;
   const usedFieldsMap: {
     // eslint-disable-next-line
     [key: string]: Set<string>;
@@ -87,8 +87,12 @@ export function denormalize(
 
       // Does not exist in normalized map. We can't fully resolve query
       if (normObj === undefined) {
-        partial = true;
-        break;
+        // partial = true;
+        // break;
+        return {
+          data: undefined,
+          fields: { [key]: new Set() }
+        };
       }
 
       let usedFields = usedFieldsMap[key];
@@ -124,13 +128,13 @@ export function denormalize(
           : true;
         if (include) {
           // Build key according to any arguments
-          const key =
+          const fieldName =
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
           // Add this to used fields
-          usedFields.add(key);
-          const normObjValue = normObj[key];
+          usedFields.add(fieldName);
+          const normObjValue = normObj[fieldName];
           if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
@@ -148,7 +152,11 @@ export function denormalize(
                 (field.alias && field.alias.value) || field.name.value
               ] = normObjValue;
             } else {
-              partial = true;
+              // partial = true;
+              return {
+                data: undefined,
+                fields: { [key]: new Set([fieldName]) }
+              };
             }
           }
         }
@@ -197,7 +205,8 @@ export function denormalize(
   const data = (response as GraphQLResponse).data;
 
   return {
-    data: !partial ? data : undefined,
+    // data: !partial ? data : undefined,
+    data: data,
     fields: usedFieldsMap
   };
 }
