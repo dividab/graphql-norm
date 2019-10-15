@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.2.0...master)
 
+## [1.3.5](https://github.com/dividab/graphql-norm/compare/v1.3.0...v1.3.5) - 2019-10-15
+
+### Added
+
 - Include typescript source from `src/` in published npm package. See PR [#52](https://github.com/dividab/graphql-norm/pull/52) for more info.
+- Versions 1.3.1 to 1.3.4 are unsuccessful attememtps to publish and have been unpublished.
 
 ## [1.3.0](https://github.com/dividab/graphql-norm/compare/v1.2.0...v1.3.0) - 2019-10-15
 
