@@ -31,7 +31,9 @@ type StackWorkItem = readonly [
   FieldNodeWithSelectionSet,
   NormKey | ReadonlyArray<NormKey>,
   ParentResponseObjectOrArray,
-  ParentResponseKey
+  ParentResponseKey,
+  NormKey,
+  string
 ];
 
 /**
@@ -53,18 +55,26 @@ export function denormalize(
 
   const stack: Array<StackWorkItem> = [];
   const response = {};
-  let partial = false;
   const usedFieldsMap: {
     // eslint-disable-next-line
     [key: string]: Set<string>;
   } = {};
-  stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
+  stack.push([
+    rootFieldNode,
+    "ROOT_QUERY",
+    response,
+    undefined,
+    "ROOT_QUERY",
+    "ROOT_QUERY"
+  ]);
   while (stack.length > 0) {
     const [
       fieldNode,
       idOrIdArray,
       parentObjectOrArray,
-      parentResponseKey
+      parentResponseKey,
+      parentNormKey,
+      fieldNameInParent
     ] = stack.pop()!;
 
     // The stack has work items, depending on the work item we have four different cases to handle:
@@ -87,8 +97,10 @@ export function denormalize(
 
       // Does not exist in normalized map. We can't fully resolve query
       if (normObj === undefined) {
-        partial = true;
-        break;
+        return {
+          data: undefined,
+          fields: { [parentNormKey]: new Set([fieldNameInParent]) }
+        };
       }
 
       let usedFields = usedFieldsMap[key];
@@ -124,13 +136,13 @@ export function denormalize(
           : true;
         if (include) {
           // Build key according to any arguments
-          const key =
+          const fieldName =
             field.arguments && field.arguments.length > 0
               ? fieldNameWithArguments(field, variables)
               : field.name.value;
           // Add this to used fields
-          usedFields.add(key);
-          const normObjValue = normObj[key];
+          usedFields.add(fieldName);
+          const normObjValue = normObj[fieldName];
           if (normObjValue !== null && field.selectionSet) {
             // Put a work-item on the stack to build this field and set it on the response object
             stack.push([
@@ -139,7 +151,9 @@ export function denormalize(
               responseObjectOrNewParentArray as
                 | MutableResponseObject
                 | MutableResponseObjectArray,
-              (field.alias && field.alias.value) || field.name.value
+              (field.alias && field.alias.value) || field.name.value,
+              key,
+              fieldName
             ]);
           } else {
             // This field is a primitive (not a array or object)
@@ -148,7 +162,10 @@ export function denormalize(
                 (field.alias && field.alias.value) || field.name.value
               ] = normObjValue;
             } else {
-              partial = true;
+              return {
+                data: undefined,
+                fields: { [key]: new Set([fieldName]) }
+              };
             }
           }
         }
@@ -167,7 +184,9 @@ export function denormalize(
           responseObjectOrNewParentArray as
             | MutableResponseObject
             | MutableResponseObjectArray,
-          i
+          i,
+          parentNormKey,
+          fieldNameInParent
         ]);
       }
     }
@@ -197,7 +216,7 @@ export function denormalize(
   const data = (response as GraphQLResponse).data;
 
   return {
-    data: !partial ? data : undefined,
+    data: data,
     fields: usedFieldsMap
   };
 }

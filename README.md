@@ -166,7 +166,7 @@ The denormalize() function takes a GraphQL query with associated variables, and 
 This function returns an object with information about the denormalization result. The following properties are available on the returned object:
 
 - **data**: This is the data for the query as it would have been returned from a GraphQL serverl, or `undefined` is the query could not be completely fulfilled from the data in `normMap`.
-- **fields**: An object where each property is an normlized object key, and the value is a `Set` of used fields. This can be useful for tracking which key/fields will affect this query data. If an tuple of this object and the data is stored, each time a new normalized result is merged a cache we can check if the new normalized data being merged contains any of the keys/fields of this query then it is affected by the merge, otherwise not. This is similar to the approach used [by relay](https://relay.dev/docs/en/thinking-in-graphql#achieving-view-consistency) for tracking changes.
+- **fields**: An object where each property is an normlized object key, and the value is a `Set` of used fields. This can be useful for tracking which key/fields will affect this query data. If an tuple of this object and the data is stored, each time a new normalized result is merged a cache we can check if the new normalized data being merged contains any of the keys/fields of this query then it is affected by the merge, otherwise not. This is similar to the approach used [by relay](https://relay.dev/docs/en/thinking-in-graphql#achieving-view-consistency) for tracking changes. If the query could not be fulfilled from cache, data will be `undefined` and `fields` will contain the first field that could not be resolved.
 
 ### merge()
 
