@@ -17,6 +17,7 @@ describe("denormalize() with specialized test data", () => {
   onlySkip(TestDataDenormalization.tests).forEach(item => {
     test(item.name, done => {
       const actual = denormalize(item.query, item.variables, item.normMap);
+      console.log("actual.fields", actual.fields);
       expect(actual.data).toEqual(item.data);
       expect(actual.fields).toEqual(
         Object.fromEntries(

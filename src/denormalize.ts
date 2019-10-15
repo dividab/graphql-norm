@@ -31,7 +31,9 @@ type StackWorkItem = readonly [
   FieldNodeWithSelectionSet,
   NormKey | ReadonlyArray<NormKey>,
   ParentResponseObjectOrArray,
-  ParentResponseKey
+  ParentResponseKey,
+  NormKey,
+  string
 ];
 
 /**
@@ -58,13 +60,22 @@ export function denormalize(
     // eslint-disable-next-line
     [key: string]: Set<string>;
   } = {};
-  stack.push([rootFieldNode, "ROOT_QUERY", response, undefined]);
+  stack.push([
+    rootFieldNode,
+    "ROOT_QUERY",
+    response,
+    undefined,
+    "ROOT_QUERY",
+    "ROOT_QUERY"
+  ]);
   while (stack.length > 0) {
     const [
       fieldNode,
       idOrIdArray,
       parentObjectOrArray,
-      parentResponseKey
+      parentResponseKey,
+      parentNormKey,
+      fieldNameInParent
     ] = stack.pop()!;
 
     // The stack has work items, depending on the work item we have four different cases to handle:
@@ -91,7 +102,7 @@ export function denormalize(
         // break;
         return {
           data: undefined,
-          fields: { [key]: new Set() }
+          fields: { [parentNormKey]: new Set([fieldNameInParent]) }
         };
       }
 
@@ -143,7 +154,9 @@ export function denormalize(
               responseObjectOrNewParentArray as
                 | MutableResponseObject
                 | MutableResponseObjectArray,
-              (field.alias && field.alias.value) || field.name.value
+              (field.alias && field.alias.value) || field.name.value,
+              key,
+              fieldName
             ]);
           } else {
             // This field is a primitive (not a array or object)
@@ -175,7 +188,9 @@ export function denormalize(
           responseObjectOrNewParentArray as
             | MutableResponseObject
             | MutableResponseObjectArray,
-          i
+          i,
+          parentNormKey,
+          fieldNameInParent
         ]);
       }
     }
