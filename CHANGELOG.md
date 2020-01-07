@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.3.5...master)
+## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.3.6...master)
+
+## [1.3.6](https://github.com/dividab/graphql-norm/compare/v1.3.5...v1.3.6) - 2020-01-07
 
 ### Fixed
 
