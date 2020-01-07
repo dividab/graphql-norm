@@ -107,7 +107,7 @@ export function expandFragments(
 function resolveValueNode(
   valueNode: GraphQL.ValueNode,
   variables: Variables | undefined
-): string | boolean | number | Array<any> | object | null {
+): string | boolean | number | ReadonlyArray<any> | object | null {
   switch (valueNode.kind) {
     case "Variable":
       return variables![valueNode.name.value];
@@ -189,7 +189,7 @@ export function shouldIncludeField(
                 `The if argument must be of type Boolean!, found '${arg.value.kind}'`
               );
             }
-            let argInclude =
+            const argInclude =
               directive.name.value === "include" ? argValue : !argValue;
             directiveInclude = directiveInclude && argInclude;
           }

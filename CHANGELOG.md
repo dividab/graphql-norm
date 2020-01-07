@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.2.0...master)
+## [Unreleased](https://github.com/dividab/graphql-norm/compare/v1.3.5...master)
+
+### Fixed
+
+- Type `NormalizedObject` should support plain objects, see issue [#55](https://github.com/dividab/graphql-norm/issues/55).
 
 ## [1.3.5](https://github.com/dividab/graphql-norm/compare/v1.3.0...v1.3.5) - 2019-10-15
 

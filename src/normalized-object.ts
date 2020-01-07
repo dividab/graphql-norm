@@ -19,6 +19,8 @@ export type NormalizedField<T> = T extends string
   ? number
   : T extends boolean
   ? boolean
+  : T extends {}
+  ? string
   : T extends ReadonlyArray<string>
   ? ReadonlyArray<string>
   : T extends ReadonlyArray<boolean>
