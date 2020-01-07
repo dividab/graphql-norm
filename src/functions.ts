@@ -189,7 +189,7 @@ export function shouldIncludeField(
                 `The if argument must be of type Boolean!, found '${arg.value.kind}'`
               );
             }
-            let argInclude =
+            const argInclude =
               directive.name.value === "include" ? argValue : !argValue;
             directiveInclude = directiveInclude && argInclude;
           }
